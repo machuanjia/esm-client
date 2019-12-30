@@ -12,6 +12,21 @@
           @change="themeChange"
         />
       </div>
+      <div class="drawer-item">
+        <span>{{ $t('route.i18n') }}</span>
+        <lang-select
+          class=""
+          style="display:block;padding-top:10px;height: 26px;margin: -3px 8px 0 0;"
+        />
+      </div>
+
+      <div class="drawer-item">
+        <span>{{ $t('navbar.size') }}</span>
+        <size-select
+          class=""
+          style="display:block;padding-top:10px;height: 26px;margin: -3px 8px 0 0;"
+        />
+      </div>
 
       <!-- <div class="drawer-item">
         <span>{{ $t('settings.showTagsView') }}</span>
@@ -52,11 +67,15 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { SettingsModule } from '@/store/modules/settings'
 import ThemePicker from '@/components/ThemePicker/index.vue'
+import LangSelect from '@/components/LangSelect/index.vue'
+import SizeSelect from '@/components/SizeSelect/index.vue'
 
 @Component({
   name: 'Settings',
   components: {
-    ThemePicker
+    ThemePicker,
+    LangSelect,
+    SizeSelect
   }
 })
 export default class extends Vue {

@@ -1,42 +1,22 @@
 <template>
-  <el-dropdown
-    trigger="click"
-    class="international"
-    @command="handleSetLanguage"
+  <el-radio-group
+    v-model="value"
+    size="small"
+    @change="handleSetLanguage"
   >
-    <div>
-      <svg-icon
-        name="language"
-        class="international-icon"
-      />
-    </div>
-    <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item
-        :disabled="language==='zh'"
-        command="zh"
-      >
-        中文
-      </el-dropdown-item>
-      <el-dropdown-item
-        :disabled="language==='en'"
-        command="en"
-      >
-        English
-      </el-dropdown-item>
-      <el-dropdown-item
-        :disabled="language==='es'"
-        command="es"
-      >
-        Español
-      </el-dropdown-item>
-      <el-dropdown-item
-        :disabled="language==='ja'"
-        command="ja"
-      >
-        日本語
-      </el-dropdown-item>
-    </el-dropdown-menu>
-  </el-dropdown>
+    <el-radio-button label="zh">
+      中文
+    </el-radio-button>
+    <el-radio-button label="en">
+      English
+    </el-radio-button>
+    <el-radio-button label="es">
+      Español
+    </el-radio-button>
+    <el-radio-button label="ja">
+      日语
+    </el-radio-button>
+  </el-radio-group>
 </template>
 
 <script lang="ts">
@@ -47,6 +27,8 @@ import { AppModule } from '@/store/modules/app'
   name: 'Login'
 })
 export default class extends Vue {
+  private value = ''
+
   get language() {
     return AppModule.language
   }

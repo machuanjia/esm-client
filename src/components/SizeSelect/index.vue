@@ -1,27 +1,22 @@
 <template>
-  <el-dropdown
-    id="size-select"
-    trigger="click"
-    @command="handleSetSize"
+  <el-radio-group
+    v-model="value"
+    size="small"
+    @change="handleSetSize"
   >
-    <div>
-      <svg-icon
-        class="size-icon"
-        name="size"
-      />
-    </div>
-    <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item
-        v-for="item of sizeOptions"
-        :key="item.value"
-        :disabled="size===item.value"
-        :command="item.value"
-      >
-        {{
-          item.label }}
-      </el-dropdown-item>
-    </el-dropdown-menu>
-  </el-dropdown>
+    <el-radio-button label="Default">
+      Default
+    </el-radio-button>
+    <el-radio-button label="Medium">
+      Medium
+    </el-radio-button>
+    <el-radio-button label="Small">
+      Small
+    </el-radio-button>
+    <el-radio-button label="Mini">
+      Mini
+    </el-radio-button>
+  </el-radio-group>
 </template>
 
 <script lang="ts">
@@ -33,20 +28,15 @@ import { TagsViewModule } from '@/store/modules/tags-view'
   name: 'SizeSelect'
 })
 export default class extends Vue {
-  private sizeOptions = [
-    { label: 'Default', value: 'default' },
-    { label: 'Medium', value: 'medium' },
-    { label: 'Small', value: 'small' },
-    { label: 'Mini', value: 'mini' }
-  ]
+  private value = 'Medium'
 
   get size() {
     return AppModule.size
   }
 
-  private handleSetSize(size: string) {
-    (this as any).$ELEMENT.size = size
-    AppModule.SetSize(size)
+  private handleSetSize() {
+    (this as any).$ELEMENT.size = this.value
+    AppModule.SetSize(this.value)
     this.refreshView()
     this.$message({
       message: 'Switch Size Success',
