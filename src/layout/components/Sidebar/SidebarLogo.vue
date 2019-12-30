@@ -11,7 +11,7 @@
         to="/"
       >
         <img
-          src="favicon.ico"
+          src="../../../assets/logo-rs.png"
           class="sidebar-logo"
         >
       </router-link>
@@ -70,8 +70,7 @@ export default class extends Vue {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      height: 40px;
       vertical-align: middle;
       margin-right: 12px;
     }

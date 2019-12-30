@@ -14,9 +14,9 @@ interface ISettings {
 const settings: ISettings = {
   title: 'Vue Typescript Admin',
   showSettings: true,
-  showTagsView: true,
-  fixedHeader: false,
-  showSidebarLogo: false,
+  showTagsView: false,
+  fixedHeader: true,
+  showSidebarLogo: true,
   errorLog: ['production'],
   sidebarTextTheme: true,
   devServerPort: 9527,

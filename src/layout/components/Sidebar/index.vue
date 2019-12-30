@@ -24,6 +24,37 @@
         />
       </el-menu>
     </el-scrollbar>
+    <div
+      class="sidebar-avatar"
+      :style="{backgroundColor: variables.menuBg}"
+    >
+      <el-popover
+        placement="right"
+        width="200"
+        trigger="click"
+      >
+        <el-menu>
+          <router-link to="/profile/">
+            <el-menu-item index="1">
+              <i class="el-icon-setting" />
+              <span slot="title">{{ $t('navbar.profile') }}</span>
+            </el-menu-item>
+          </router-link>
+          <el-menu-item
+            index="2"
+            @click="logout"
+          >
+            <i class="el-icon-switch-button" />
+            <span slot="title">{{ $t('navbar.logOut') }}</span>
+          </el-menu-item>
+        </el-menu>
+        <el-avatar
+          slot="reference"
+          icon="el-icon-user-solid"
+          :size="30"
+        />
+      </el-popover>
+    </div>
   </div>
 </template>
 
@@ -35,6 +66,7 @@ import { SettingsModule } from '@/store/modules/settings'
 import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
 import variables from '@/styles/_variables.scss'
+import { UserModule } from '@/store/modules/user'
 
 @Component({
   name: 'SideBar',
@@ -81,6 +113,10 @@ export default class extends Vue {
   get isCollapse() {
     return !this.sidebar.opened
   }
+  private async logout() {
+    await UserModule.LogOut()
+    this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+  }
 }
 </script>
 
@@ -108,6 +144,15 @@ export default class extends Vue {
       display: none;
     }
   }
+
+  .sidebar-avatar{
+    // background: rgb(48, 65, 86);//#2b2f3a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    cursor: pointer;
+  }
 }
 </style>
 
@@ -118,7 +163,7 @@ export default class extends Vue {
 
 .has-logo {
   .el-scrollbar {
-    height: calc(100% - 50px);
+    height: calc(100% - 130px);
   }
 }
 
