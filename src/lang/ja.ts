@@ -70,7 +70,8 @@ export default {
     logOut: 'ログアウト',
     profile: 'プロフィール',
     theme: 'テーマ変更',
-    size: '画面サイズ'
+    size: '画面サイズ',
+    setting: '系统设置'
   },
   login: {
     title: 'ユーザログイン',

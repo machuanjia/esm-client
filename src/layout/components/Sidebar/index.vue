@@ -36,12 +36,19 @@
         <el-menu>
           <router-link to="/profile/">
             <el-menu-item index="1">
-              <i class="el-icon-setting" />
+              <i class="el-icon-user" />
               <span slot="title">{{ $t('navbar.profile') }}</span>
             </el-menu-item>
           </router-link>
           <el-menu-item
             index="2"
+            @click="setting"
+          >
+            <i class="el-icon-setting" />
+            <span slot="title">{{ $t('navbar.setting') }}</span>
+          </el-menu-item>
+          <el-menu-item
+            index="3"
             @click="logout"
           >
             <i class="el-icon-switch-button" />
@@ -112,6 +119,9 @@ export default class extends Vue {
 
   get isCollapse() {
     return !this.sidebar.opened
+  }
+  private setting() {
+    AppModule.setRightPanel(true)
   }
   private async logout() {
     await UserModule.LogOut()

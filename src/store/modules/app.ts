@@ -15,7 +15,8 @@ export interface IAppState {
     withoutAnimation: boolean
   }
   language: string
-  size: string
+  size: string,
+  rightPanel: boolean
 }
 
 @Module({ dynamic: true, store, name: 'app' })
@@ -27,6 +28,7 @@ class App extends VuexModule implements IAppState {
   public device = DeviceType.Desktop
   public language = getLocale()
   public size = getSize() || 'medium'
+  public rightPanel = false
 
   @Mutation
   private TOGGLE_SIDEBAR(withoutAnimation: boolean) {
@@ -44,6 +46,11 @@ class App extends VuexModule implements IAppState {
     this.sidebar.opened = false
     this.sidebar.withoutAnimation = withoutAnimation
     setSidebarStatus('closed')
+  }
+
+  @Mutation
+  private SET_RIGHTPANEL(rightPanel: boolean) {
+    this.rightPanel = rightPanel
   }
 
   @Mutation
@@ -66,6 +73,11 @@ class App extends VuexModule implements IAppState {
   @Action
   public ToggleSideBar(withoutAnimation: boolean) {
     this.TOGGLE_SIDEBAR(withoutAnimation)
+  }
+
+  @Action
+  public setRightPanel(rightPanel: boolean) {
+    this.SET_RIGHTPANEL(rightPanel)
   }
 
   @Action

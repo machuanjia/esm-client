@@ -7,6 +7,7 @@
     <div class="rightPanel-background" />
     <div class="rightPanel">
       <div
+        v-if="show"
         class="handle-button"
         :style="{'top': buttonTop+'px','background-color': theme}"
         @click="show=!show"
@@ -24,6 +25,7 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { addClass, removeClass } from '@/utils'
 import { SettingsModule } from '@/store/modules/settings'
+import { AppModule } from '@/store/modules/app'
 
 @Component({
   name: 'RightPanel'
@@ -38,16 +40,26 @@ export default class extends Vue {
     return SettingsModule.theme
   }
 
-  @Watch('show')
+  get rightPanel() {
+    return AppModule.rightPanel
+  }
+
+  @Watch('rightPanel')
   private onShowChange(value: boolean) {
     if (value && !this.clickNotClose) {
       this.addEventClick()
     }
     if (value) {
+      this.show = true
       addClass(document.body, 'showRightPanel')
     } else {
+      this.show = false
       removeClass(document.body, 'showRightPanel')
     }
+  }
+
+  closeRightPanel() {
+    this.show = false
   }
 
   mounted() {
@@ -67,6 +79,7 @@ export default class extends Vue {
     const parent = (ev.target as HTMLElement).closest('.rightPanel')
     if (!parent) {
       this.show = false
+      AppModule.setRightPanel(false)
       window.removeEventListener('click', this.closeSidebar)
     }
   }
