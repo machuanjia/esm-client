@@ -99,7 +99,7 @@ import { Route } from 'vue-router'
 import { Form as ElForm, Input } from 'element-ui'
 import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
-import LangSelect from '@/components/LangSelect/index.vue'
+import LangSelect from '@/components/LangSelectDropdown/index.vue'
 import SocialSign from './components/SocialSignin.vue'
 import { Dictionary } from 'vue-router/types/router'
 
