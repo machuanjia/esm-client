@@ -1,0 +1,16 @@
+{
+  "id": "1592425",
+  "name": "esm",
+  "font_family": "iconfont",
+  "css_prefix_text": "esm",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1472570",
+      "name": "配置数据源",
+      "font_class": "data-source",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    }
+  ]
+}

@@ -12,8 +12,13 @@
           :index="resolvePath(theOnlyOneChild.path)"
           :class="{'submenu-title-noDropdown': isFirstLevel}"
         >
+          <i
+            v-if="theOnlyOneChild.meta.iconClass"
+            class="ml20"
+            :class="theOnlyOneChild.meta.iconClass"
+          />
           <svg-icon
-            v-if="theOnlyOneChild.meta.icon"
+            v-if="!theOnlyOneChild.meta.iconClass && theOnlyOneChild.meta.icon"
             :name="theOnlyOneChild.meta.icon"
           />
           <span

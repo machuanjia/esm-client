@@ -62,7 +62,13 @@ export default {
     clipboard: '粘贴板',
     i18n: '国际化',
     externalLink: '外链',
-    profile: '个人中心'
+    profile: '个人中心',
+    datasource:'数据源',
+    organization:'组织架构',
+    members:'人员',
+    roles:'角色',
+    permissions:'权限',
+    recent:'在线状态'
   },
   navbar: {
     logOut: '退出登录',

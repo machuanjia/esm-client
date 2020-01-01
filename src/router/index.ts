@@ -1,16 +1,16 @@
-import Vue from 'vue'
-import Router, { RouteConfig } from 'vue-router'
+import Vue from "vue";
+import Router, { RouteConfig } from "vue-router";
 
 /* Layout */
-import Layout from '@/layout/index.vue'
+import Layout from "@/layout/index.vue";
 
 /* Router modules */
-import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
-import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
+import componentsRouter from "./modules/components";
+import chartsRouter from "./modules/charts";
+import tableRouter from "./modules/table";
+import nestedRouter from "./modules/nested";
 
-Vue.use(Router)
+Vue.use(Router);
 
 /*
   Note: sub-menu only appear when children.length>=1
@@ -42,48 +42,60 @@ Vue.use(Router)
 */
 export const constantRoutes: RouteConfig[] = [
   {
-    path: '/redirect',
+    path: "/redirect",
     component: Layout,
     meta: { hidden: true },
     children: [
       {
-        path: '/redirect/:path*',
-        component: () => import(/* webpackChunkName: "redirect" */ '@/views/redirect/index.vue')
+        path: "/redirect/:path*",
+        component: () =>
+          import(
+            /* webpackChunkName: "redirect" */ "@/views/redirect/index.vue"
+          )
       }
     ]
   },
   {
-    path: '/login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
+    path: "/login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "@/views/login/index.vue"),
     meta: { hidden: true }
   },
   {
-    path: '/auth-redirect',
-    component: () => import(/* webpackChunkName: "auth-redirect" */ '@/views/login/auth-redirect.vue'),
+    path: "/auth-redirect",
+    component: () =>
+      import(
+        /* webpackChunkName: "auth-redirect" */ "@/views/login/auth-redirect.vue"
+      ),
     meta: { hidden: true }
   },
   {
-    path: '/404',
-    component: () => import(/* webpackChunkName: "404" */ '@/views/error-page/404.vue'),
+    path: "/404",
+    component: () =>
+      import(/* webpackChunkName: "404" */ "@/views/error-page/404.vue"),
     meta: { hidden: true }
   },
   {
-    path: '/401',
-    component: () => import(/* webpackChunkName: "401" */ '@/views/error-page/401.vue'),
+    path: "/401",
+    component: () =>
+      import(/* webpackChunkName: "401" */ "@/views/error-page/401.vue"),
     meta: { hidden: true }
   },
   {
-    path: '/',
+    path: "/",
     component: Layout,
-    redirect: '/dashboard',
+    redirect: "/dashboard",
     children: [
       {
-        path: 'dashboard',
-        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
-        name: 'Dashboard',
+        path: "dashboard",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard" */ "@/views/dashboard/index.vue"
+          ),
+        name: "Dashboard",
         meta: {
-          title: 'dashboard',
-          icon: 'dashboard',
+          title: "dashboard",
+          icon: "dashboard",
           affix: true
         }
       }
@@ -107,91 +119,188 @@ export const constantRoutes: RouteConfig[] = [
   //   ]
   // },
   {
-    path: '/profile',
+    path: "/profile",
     component: Layout,
-    redirect: '/profile/index',
+    redirect: "/profile/index",
     meta: { hidden: true },
     children: [
       {
-        path: 'index',
-        component: () => import(/* webpackChunkName: "profile" */ '@/views/profile/index.vue'),
-        name: 'Profile',
+        path: "index",
+        component: () =>
+          import(/* webpackChunkName: "profile" */ "@/views/profile/index.vue"),
+        name: "Profile",
         meta: {
-          title: 'profile',
-          icon: 'user',
+          title: "profile",
+          icon: "user",
           noCache: true
         }
       }
     ]
   }
-]
+];
 
 /**
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
-*/
+ */
 export const asyncRoutes: RouteConfig[] = [
   {
-    path: '/permission',
+    path: "/recent",
     component: Layout,
-    redirect: '/permission/directive',
-    meta: {
-      title: 'permission',
-      icon: 'lock',
-      roles: ['admin', 'editor'], // you can set roles in root nav
-      alwaysShow: true // will always show the root menu
-    },
     children: [
       {
-        path: 'page',
-        component: () => import(/* webpackChunkName: "permission-page" */ '@/views/permission/page.vue'),
-        name: 'PagePermission',
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "roles" */ "@/views/recent/recent.view.vue"
+          ),
+        name: "recent",
         meta: {
-          title: 'pagePermission',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'directive',
-        component: () => import(/* webpackChunkName: "permission-directive" */ '@/views/permission/directive.vue'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'directivePermission'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
-      {
-        path: 'role',
-        component: () => import(/* webpackChunkName: "permission-role" */ '@/views/permission/role.vue'),
-        name: 'RolePermission',
-        meta: {
-          title: 'rolePermission',
-          roles: ['admin']
+          title: "recent",
+          noCache: true,
+          iconClass: "ml18 font-size-20 el-icon-timer"
         }
       }
     ]
   },
   {
-    path: '/icon',
+    path: "/history",
     component: Layout,
     children: [
       {
-        path: 'index',
-        component: () => import(/* webpackChunkName: "icons" */ '@/views/icons/index.vue'),
-        name: 'Icons',
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "history" */ "@/views/history/history.view.vue"
+          ),
+        name: "history",
         meta: {
-          title: 'icons',
-          icon: 'icon',
-          noCache: true
+          title: "history",
+          noCache: true,
+          iconClass: "ml18 font-size-18 el-icon-date"
         }
       }
     ]
   },
+  // {
+  //   path: "/icon",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () =>
+  //         import(/* webpackChunkName: "icons" */ "@/views/icons/index.vue"),
+  //       name: "Icons",
+  //       meta: {
+  //         title: "icons",
+  //         icon: "icon",
+  //         noCache: true
+  //       }
+  //     }
+  //   ]
+  // },
   /** when your routing map is too long, you can split it into small modules **/
-  componentsRouter,
+  // componentsRouter,
   // chartsRouter,
   // nestedRouter,
-  tableRouter,
+  // tableRouter,
+  {
+    path: "/datasource",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "icons" */ "@/views/data-source/data-source.view.vue"
+          ),
+        name: "datasource",
+        meta: {
+          title: "datasource",
+          icon: "icon",
+          noCache: true,
+          iconClass: "iconfont esmdata-source"
+        }
+      }
+    ]
+  },
+
+  {
+    path: "/organizations",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "organization" */ "@/views/organizations/organizations.view.vue"
+          ),
+        name: "Organization",
+        meta: {
+          title: "organization",
+          noCache: true,
+          icon: "tree"
+        }
+      }
+    ]
+  },
+  {
+    path: "/members",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "members" */ "@/views/members/members.view.vue"
+          ),
+        name: "Members",
+        meta: {
+          title: "members",
+          noCache: true,
+          icon: "peoples"
+        }
+      }
+    ]
+  },
+  {
+    path: "/roles",
+    component: Layout,
+    children: [
+      {
+        path: "roles",
+        component: () =>
+          import(
+            /* webpackChunkName: "roles" */ "@/views/roles/roles.view.vue"
+          ),
+        name: "Roles",
+        meta: {
+          title: "roles",
+          noCache: true,
+          icon: "user"
+        }
+      }
+    ]
+  },
+  {
+    path: "/permissions",
+    component: Layout,
+    children: [
+      {
+        path: "permissions",
+        component: () =>
+          import(
+            /* webpackChunkName: "roles" */ "@/views/permissions/permissions.view.vue"
+          ),
+        name: "Permissions",
+        meta: {
+          title: "permissions",
+          noCache: true,
+          icon: "education"
+        }
+      }
+    ]
+  },
   // {
   //   path: '/example',
   //   component: Layout,
@@ -414,31 +523,32 @@ export const asyncRoutes: RouteConfig[] = [
   //   ]
   // },
   {
-    path: '*',
-    redirect: '/404',
+    path: "*",
+    redirect: "/404",
     meta: { hidden: true }
   }
-]
+];
 
-const createRouter = () => new Router({
-  // mode: 'history',  // Disabled due to Github Pages doesn't support this, enable this if you need.
-  scrollBehavior: (to, from, savedPosition) => {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { x: 0, y: 0 }
-    }
-  },
-  base: process.env.BASE_URL,
-  routes: constantRoutes
-})
+const createRouter = () =>
+  new Router({
+    // mode: 'history',  // Disabled due to Github Pages doesn't support this, enable this if you need.
+    scrollBehavior: (to, from, savedPosition) => {
+      if (savedPosition) {
+        return savedPosition;
+      } else {
+        return { x: 0, y: 0 };
+      }
+    },
+    base: process.env.BASE_URL,
+    routes: constantRoutes
+  });
 
-const router = createRouter()
+const router = createRouter();
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter();
-  (router as any).matcher = (newRouter as any).matcher // reset router
+  (router as any).matcher = (newRouter as any).matcher; // reset router
 }
 
-export default router
+export default router;

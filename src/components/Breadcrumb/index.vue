@@ -3,8 +3,21 @@
     class="app-breadcrumb"
     separator="/"
   >
-    <transition-group name="breadcrumb">
-      <el-breadcrumb-item
+    <el-breadcrumb-item v-if="currentRoute">
+      <i
+        v-if="currentRoute.meta.iconClass"
+        class="current-icon"
+        :class="currentRoute.meta.iconClass"
+      />
+      <svg-icon
+        v-if="!currentRoute.meta.iconClass && currentRoute.meta.icon"
+        class="current-icon"
+        :name="currentRoute.meta.icon"
+      />
+      <span class="no-redirect">{{ $t('route.' + currentRoute.meta.title) }}</span>
+    </el-breadcrumb-item>
+    <!-- <transition-group name="breadcrumb">
+       <el-breadcrumb-item
         v-for="(item, index) in breadcrumbs"
         :key="item.path"
       >
@@ -17,7 +30,7 @@
           @click.prevent="handleLink(item)"
         >{{ $t('route.' + item.meta.title) }}</a>
       </el-breadcrumb-item>
-    </transition-group>
+    </transition-group> -->
   </el-breadcrumb>
 </template>
 
@@ -31,6 +44,7 @@ import { RouteRecord, Route } from 'vue-router'
 })
 export default class extends Vue {
   private breadcrumbs: RouteRecord[] = []
+  private currentRoute:any = null
 
   @Watch('$route')
   private onRouteChange(route: Route) {
@@ -38,7 +52,8 @@ export default class extends Vue {
     if (route.path.startsWith('/redirect/')) {
       return
     }
-    this.getBreadcrumb()
+    this.currentRoute = route
+    // this.getBreadcrumb()
   }
 
   created() {
@@ -83,6 +98,11 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.current-icon{
+  margin-right: 5px;
+  color:$blue;
+  font-size: 16px;
+}
 .el-breadcrumb__inner,
 .el-breadcrumb__inner a {
   font-weight: 400 !important;

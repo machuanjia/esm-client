@@ -18,6 +18,7 @@ import '@/utils/error-log'
 import '@/pwa/register-service-worker'
 import * as directives from '@/directives'
 import * as filters from '@/filters'
+import '@/assets/iconfont/iconfont.css'
 
 Vue.use(ElementUI, {
   size: AppModule.size, // Set element-ui default size
