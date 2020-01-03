@@ -1,7 +1,65 @@
 <template>
-  <div class="">
-    sss
-  </div>
+  <app-content
+    :is-flex-header="true"
+    :is-hright="true"
+    :is-hcenter="true"
+  >
+    <template v-slot:hcenter>
+      <el-input
+        v-model="searchText"
+        class="search-container"
+        placeholder="请输入搜索内容"
+        prefix-icon="el-icon-search"
+      />
+    </template>
+    <template v-slot:hright>
+      <el-button
+        type="primary"
+        icon="el-icon-plus"
+      >
+        部门
+      </el-button>
+    </template>
+    <template v-slot:body>
+      <el-table
+        :data="tableData"
+        style="width: 100%;margin-bottom: 20px;"
+        row-key="id"
+        border
+        default-expand-all
+        fit
+        highlight-current-row
+        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      >
+        <el-table-column
+          prop="name"
+          label="名称"
+          sortable
+          width="180"
+        />
+        <el-table-column
+          prop="description"
+          label="描述"
+        />
+        <el-table-column
+          width="120"
+          align="center"
+          label="操作"
+        >
+          <template slot-scope="{row}">
+            <i
+              class="el-icon-edit-outline table-icon-action"
+              @click="edit(row)"
+            />
+            <i
+              class="el-icon-delete table-icon-action"
+              @click="remove(row)"
+            />
+          </template>
+        </el-table-column>
+      </el-table>
+    </template>
+  </app-content>
 </template>
 
 <script lang="ts">
@@ -11,23 +69,48 @@ import { Form as ElForm, Input } from 'element-ui'
 import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
 import { Dictionary } from 'vue-router/types/router'
+import AppContent from '@/components/Content/index.vue'
 
 @Component({
   name: 'organization',
   components: {
+    AppContent
   }
 })
 export default class extends Vue {
-  @Watch('$route', { immediate: true })
-  private onRouteChange(route: Route) {
-    // const query = route.query as Dictionary<string>
-    // if (query) {
-    //   this.redirect = query.redirect
-    //   this.otherQuery = this.getOtherQuery(query)
-    // }
-  }
+  private searchText = ''
+
+  private tableData = [{
+    id: 1,
+    description: '这个是架构部',
+    name: '架构部'
+  }, {
+    id: 2,
+    description: '这个是测试部',
+    name: '测试部'
+  }, {
+    id: 3,
+    description: '这个是销售部',
+    name: '销售部',
+    children: [{
+      id: 31,
+      description: '这个是人力资源部',
+      name: '人力资源部'
+    }, {
+      id: 32,
+      description: '这个是市场部',
+      name: '市场部'
+    }]
+  }]
 
   mounted() {
+
+  }
+
+  edit(row:any) {
+
+  }
+  remove(row:any) {
 
   }
 }

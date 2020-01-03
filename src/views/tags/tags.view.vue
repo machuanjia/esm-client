@@ -17,13 +17,7 @@
         type="primary"
         icon="el-icon-plus"
       >
-        角色
-      </el-button>
-      <el-button
-        type="primary"
-        icon="el-icon-plus"
-      >
-        分组
+        标签
       </el-button>
     </template>
     <template v-slot:body>
@@ -32,10 +26,8 @@
         style="width: 100%;margin-bottom: 20px;"
         row-key="id"
         border
-        default-expand-all
         fit
         highlight-current-row
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
       >
         <el-table-column
           prop="name"
@@ -43,17 +35,22 @@
           sortable
           width="180"
         />
-
-        <el-table-column
-          prop="permissions"
-          label="权限"
-          sortable
-          width="180"
-        />
         <el-table-column
           prop="description"
           label="描述"
         />
+        <el-table-column
+          width="100"
+          align="center"
+          label="颜色"
+        >
+          <template slot-scope="{row}">
+            <el-color-picker
+              v-model="row.color"
+              :size="'mini'"
+            />
+          </template>
+        </el-table-column>
         <el-table-column
           width="120"
           align="center"
@@ -85,7 +82,7 @@ import { Dictionary } from 'vue-router/types/router'
 import AppContent from '@/components/Content/index.vue'
 
 @Component({
-  name: 'roles',
+  name: 'tags',
   components: {
     AppContent
   }
@@ -95,37 +92,14 @@ export default class extends Vue {
 
   private rolesData = [{
     id: 1,
-    type: 0,
-    permissions: '管理员',
-    description: '这个是管理员',
-    name: '管理员'
+    color: '#f00',
+    description: '这个是成员在线状态',
+    name: '标签一'
   }, {
     id: 2,
-    type: 0,
-    permissions: '普通成员',
-    description: '这个是普通成员',
-    name: '普通成员'
-  }, {
-    id: 3,
-    type: 0,
-    permissions: '只读成员',
-    description: '这个是只读成员',
-    name: '只读成员'
-  }, {
-    id: 4,
-    type: 1,
-    name: '华北大区',
-    children: [{
-      id: 41,
-      permissions: '华北销售总监',
-      description: '这个是销售总监',
-      name: '销售总监'
-    }, {
-      id: 42,
-      permissions: '华北销售经理',
-      description: '这个是华北销售经理',
-      name: '华北销售经理'
-    }]
+    color: '#f00',
+    description: '这个是标签二',
+    name: '标签二'
   }]
 
   mounted() {

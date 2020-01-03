@@ -205,6 +205,63 @@ export const asyncRoutes: RouteConfig[] = [
   // nestedRouter,
   // tableRouter,
   {
+    path: "/boards",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "icons" */ "@/views/boards/boards.view.vue"
+          ),
+        name: "boards",
+        meta: {
+          title: "boards",
+          icon: "tab",
+          noCache: true,
+        }
+      }
+    ]
+  },
+  {
+    path: "/widgets",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "icons" */ "@/views/widgets/widgets.view.vue"
+          ),
+        name: "widgets",
+        meta: {
+          title: "widgets",
+          icon: "component",
+          noCache: true,
+        }
+      }
+    ]
+  },
+  {
+    path: "/tags",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "icons" */ "@/views/tags/tags.view.vue"
+          ),
+        name: "tags",
+        meta: {
+          title: "tags",
+          icon: "nested",
+          noCache: true,
+        }
+      }
+    ]
+  },
+  {
     path: "/datasource",
     component: Layout,
     children: [

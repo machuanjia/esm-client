@@ -1,6 +1,22 @@
 <template>
   <div class="">
-    recent
+    <app-content
+      :is-flex-header="true"
+      :is-footer="true"
+    >
+      <template v-slot:hleft>
+        sss
+      </template>
+      <template v-slot:hright>
+        sss
+      </template>
+      <template v-slot:body>
+        sss
+      </template>
+      <template v-slot:footer>
+        sss
+      </template>
+    </app-content>
   </div>
 </template>
 
@@ -11,10 +27,12 @@ import { Form as ElForm, Input } from 'element-ui'
 import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
 import { Dictionary } from 'vue-router/types/router'
+import AppContent from '@/components/Content/index.vue'
 
 @Component({
   name: 'recent',
   components: {
+    AppContent
   }
 })
 export default class extends Vue {

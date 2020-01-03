@@ -1,0 +1,44 @@
+.app-content-wrap{
+  padding: 40px;
+  height: 100%;
+  .app-content-header {
+    margin-bottom: 10px;
+  }
+  .app-content-flex-header{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 10px;
+    .hleft{
+
+    }
+    .hcenter{
+      flex-grow: 1
+    }
+    .hright{
+
+    }
+  }
+  .app-content-body {
+    padding: 10px;
+    background: #fff;
+  }
+  .app-content-footer {
+  }
+
+}
+
+.search-container{
+  width: 260px;
+}
+.table-icon-action{
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0 5px;
+  color: $darkGray;
+  &:hover{
+    color: $blue;
+  }
+}
+
