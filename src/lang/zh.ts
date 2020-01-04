@@ -82,7 +82,8 @@ export default {
     theme: '换肤',
     size: '布局大小',
     profile: '个人中心',
-    setting: '系统设置'
+    setting: '系统设置',
+    preference:'偏好设置'
   },
   login: {
     title: '系统登录',

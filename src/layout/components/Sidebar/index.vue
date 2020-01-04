@@ -42,13 +42,22 @@
           </router-link>
           <el-menu-item
             index="2"
-            @click="setting"
+            @click="preference"
+          >
+            <i class="iconfont esmpreference mr5 w24 iblock text-center" />
+            <span slot="title">{{ $t('navbar.preference') }}</span>
+          </el-menu-item>
+
+          <el-menu-item
+            index="3"
+            @click="preference"
           >
             <i class="el-icon-setting" />
             <span slot="title">{{ $t('navbar.setting') }}</span>
           </el-menu-item>
+
           <el-menu-item
-            index="3"
+            index="4"
             @click="logout"
           >
             <i class="el-icon-switch-button" />
@@ -120,7 +129,7 @@ export default class extends Vue {
   get isCollapse() {
     return !this.sidebar.opened
   }
-  private setting() {
+  private preference() {
     AppModule.setRightPanel(true)
   }
   private async logout() {

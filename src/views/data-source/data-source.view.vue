@@ -50,6 +50,21 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="状态"
+          align="center"
+          width="100"
+        >
+          <template slot-scope="{row}">
+            <el-switch
+              v-model="row.status"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              active-value="1"
+              inactive-value="0"
+            />
+          </template>
+        </el-table-column>
+        <el-table-column
           width="120"
           align="center"
           label="操作"
@@ -93,16 +108,19 @@ private searchText = ''
   private rolesData = [{
     id: 1,
     type: 0,
+    status: '1',
     description: '这个是成员在线状态',
     name: '成员在线状态'
   }, {
     id: 2,
     type: 0,
+    status: '1',
     description: '这个是历史状态查看',
     name: '历史状态'
   }, {
     id: 3,
     type: 1,
+    status: '1',
     description: '这个是xxx考勤机',
     name: 'xxx考勤机'
   }]
