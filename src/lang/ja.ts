@@ -62,7 +62,18 @@ export default {
     clipboard: 'Clipboard',
     i18n: '多言語',
     externalLink: '外部リンク',
-    profile: 'プロフィール'
+    profile: 'プロフィール',
+    datasource:'数据源',
+    organization:'组织架构',
+    members:'人员',
+    roles:'角色',
+    permissions:'权限',
+    recent:'在线状态',
+    history: '在线历史',
+    boards:'Boards',
+    widgets:'Widgets',
+    tags:'Tags',
+    bills:'Billes'
   },
   navbar: {
     dashboard: 'トップ',

@@ -83,23 +83,23 @@ export const constantRoutes: RouteConfig[] = [
   },
   {
     path: "/",
-    component: Layout,
-    redirect: "/dashboard",
-    children: [
-      {
-        path: "dashboard",
-        component: () =>
-          import(
-            /* webpackChunkName: "dashboard" */ "@/views/dashboard/index.vue"
-          ),
-        name: "Dashboard",
-        meta: {
-          title: "dashboard",
-          icon: "dashboard",
-          affix: true
-        }
-      }
-    ]
+    // component: Layout,
+    redirect: "/recent",
+    // children: [
+      // {
+      //   path: "dashboard",
+      //   component: () =>
+      //     import(
+      //       /* webpackChunkName: "dashboard" */ "@/views/dashboard/index.vue"
+      //     ),
+      //   name: "Dashboard",
+      //   meta: {
+      //     title: "dashboard",
+      //     icon: "dashboard",
+      //     affix: true
+      //   }
+      // }
+    // ]
   },
   // {
   //   path: '/guide',
@@ -158,7 +158,8 @@ export const asyncRoutes: RouteConfig[] = [
         meta: {
           title: "recent",
           noCache: true,
-          iconClass: "ml18 font-size-20 el-icon-timer"
+          iconClass: "el-icon-timer",
+          otherClass: "ml18 font-size-20 "
         }
       }
     ]
@@ -177,7 +178,8 @@ export const asyncRoutes: RouteConfig[] = [
         meta: {
           title: "history",
           noCache: true,
-          iconClass: "ml18 font-size-18 el-icon-date"
+          iconClass: "el-icon-date",
+          otherClass: "ml18 font-size-18"
         }
       }
     ]
@@ -354,6 +356,25 @@ export const asyncRoutes: RouteConfig[] = [
           title: "permissions",
           noCache: true,
           icon: "education"
+        }
+      }
+    ]
+  },
+  {
+    path: "/bills",
+    component: Layout,
+    children: [
+      {
+        path: "bills",
+        component: () =>
+          import(
+            /* webpackChunkName: "roles" */ "@/views/bills/bills.view.vue"
+          ),
+        name: "bills",
+        meta: {
+          title: "bills",
+          noCache: true,
+          icon: "money"
         }
       }
     ]

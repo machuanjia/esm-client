@@ -15,7 +15,7 @@
           <i
             v-if="theOnlyOneChild.meta.iconClass"
             class="ml20"
-            :class="theOnlyOneChild.meta.iconClass"
+            :class="theOnlyOneChild.meta.otherClass +' '+ theOnlyOneChild.meta.iconClass"
           />
           <svg-icon
             v-if="!theOnlyOneChild.meta.iconClass && theOnlyOneChild.meta.icon"

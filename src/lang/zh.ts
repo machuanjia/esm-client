@@ -68,7 +68,12 @@ export default {
     members:'人员',
     roles:'角色',
     permissions:'权限',
-    recent:'在线状态'
+    recent:'在线状态',
+    history: '在线历史',
+    boards:'看板',
+    widgets:'部件',
+    tags:'标签',
+    bills:'账单'
   },
   navbar: {
     logOut: '退出登录',
