@@ -12,6 +12,7 @@ import nestedRouter from "./modules/nested";
 import orgRouter from './modules/org'
 import applicationRouter from './modules/application'
 import accountRouter from './modules/account'
+import statisticsRouter from './modules/statistics'
 
 Vue.use(Router);
 
@@ -161,8 +162,7 @@ export const asyncRoutes: RouteConfig[] = [
         meta: {
           title: "recent",
           noCache: true,
-          iconClass: "el-icon-timer",
-          otherClass: "ml18 font-size-20 "
+          icon: "recent",
         }
       }
     ]
@@ -181,8 +181,45 @@ export const asyncRoutes: RouteConfig[] = [
         meta: {
           title: "history",
           noCache: true,
-          iconClass: "el-icon-date",
-          otherClass: "ml18 font-size-18"
+          icon: "history"
+        }
+      }
+    ]
+  },
+  {
+    path: "/calendar",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "history" */ "@/views/calendar/calendar.view.vue"
+          ),
+        name: "calendar",
+        meta: {
+          title: "calendar",
+          noCache: true,
+          icon: "calendar"
+        }
+      }
+    ]
+  },
+  {
+    path: "/resource",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "history" */ "@/views/resource/resource.view.vue"
+          ),
+        name: "resource",
+        meta: {
+          title: "resource",
+          noCache: true,
+          icon: "resource"
         }
       }
     ]
@@ -209,6 +246,7 @@ export const asyncRoutes: RouteConfig[] = [
   // chartsRouter,
   // nestedRouter,
   // tableRouter,
+  statisticsRouter,
   applicationRouter,
   orgRouter,
   accountRouter,

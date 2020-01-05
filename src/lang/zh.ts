@@ -73,7 +73,8 @@ export default {
     boards:'看板',
     widgets:'部件',
     tags:'标签',
-    bills:'账单'
+    bills:'账单',
+    account:'企业设置'
   },
   navbar: {
     logOut: '退出登录',

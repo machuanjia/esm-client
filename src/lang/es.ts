@@ -73,7 +73,8 @@ export default {
     boards:'Boards',
     widgets:'Widgets',
     tags:'Tags',
-    bills:'Bills'
+    bills:'Bills',
+    account:'Account setting'
   },
   navbar: {
     logOut: 'Salir',

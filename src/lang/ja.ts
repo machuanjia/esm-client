@@ -73,7 +73,8 @@ export default {
     boards:'Boards',
     widgets:'Widgets',
     tags:'Tags',
-    bills:'Billes'
+    bills:'Billes',
+    account:'Account setting'
   },
   navbar: {
     dashboard: 'トップ',

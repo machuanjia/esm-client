@@ -30,7 +30,7 @@ const accountRouter: RouteConfig = {
       meta: {
         title: "account",
         noCache: true,
-        icon: "money"
+        icon: "setting"
       }
     }
   ]
