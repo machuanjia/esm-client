@@ -9,6 +9,9 @@ import componentsRouter from "./modules/components";
 import chartsRouter from "./modules/charts";
 import tableRouter from "./modules/table";
 import nestedRouter from "./modules/nested";
+import orgRouter from './modules/org'
+import applicationRouter from './modules/application'
+import accountRouter from './modules/account'
 
 Vue.use(Router);
 
@@ -83,23 +86,23 @@ export const constantRoutes: RouteConfig[] = [
   },
   {
     path: "/",
-    // component: Layout,
-    redirect: "/recent",
-    // children: [
-      // {
-      //   path: "dashboard",
-      //   component: () =>
-      //     import(
-      //       /* webpackChunkName: "dashboard" */ "@/views/dashboard/index.vue"
-      //     ),
-      //   name: "Dashboard",
-      //   meta: {
-      //     title: "dashboard",
-      //     icon: "dashboard",
-      //     affix: true
-      //   }
-      // }
-    // ]
+    component: Layout,
+    redirect: "/dashboard",
+    children: [
+      {
+        path: "dashboard",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard" */ "@/views/dashboard/index.vue"
+          ),
+        name: "Dashboard",
+        meta: {
+          title: "dashboard",
+          icon: "dashboard",
+          affix: true
+        }
+      }
+    ]
   },
   // {
   //   path: '/guide',
@@ -184,201 +187,31 @@ export const asyncRoutes: RouteConfig[] = [
       }
     ]
   },
-  // {
-  //   path: "/icon",
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: "index",
-  //       component: () =>
-  //         import(/* webpackChunkName: "icons" */ "@/views/icons/index.vue"),
-  //       name: "Icons",
-  //       meta: {
-  //         title: "icons",
-  //         icon: "icon",
-  //         noCache: true
-  //       }
-  //     }
-  //   ]
-  // },
+  {
+    path: "/icon",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(/* webpackChunkName: "icons" */ "@/views/icons/index.vue"),
+        name: "Icons",
+        meta: {
+          title: "icons",
+          icon: "icon",
+          noCache: true
+        }
+      }
+    ]
+  },
   /** when your routing map is too long, you can split it into small modules **/
   // componentsRouter,
   // chartsRouter,
   // nestedRouter,
   // tableRouter,
-  {
-    path: "/boards",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "icons" */ "@/views/boards/boards.view.vue"
-          ),
-        name: "boards",
-        meta: {
-          title: "boards",
-          icon: "tab",
-          noCache: true,
-        }
-      }
-    ]
-  },
-  {
-    path: "/widgets",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "icons" */ "@/views/widgets/widgets.view.vue"
-          ),
-        name: "widgets",
-        meta: {
-          title: "widgets",
-          icon: "component",
-          noCache: true,
-        }
-      }
-    ]
-  },
-  {
-    path: "/tags",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "icons" */ "@/views/tags/tags.view.vue"
-          ),
-        name: "tags",
-        meta: {
-          title: "tags",
-          icon: "nested",
-          noCache: true,
-        }
-      }
-    ]
-  },
-  {
-    path: "/datasource",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "icons" */ "@/views/data-source/data-source.view.vue"
-          ),
-        name: "datasource",
-        meta: {
-          title: "datasource",
-          icon: "icon",
-          noCache: true,
-          iconClass: "iconfont esmdata-source"
-        }
-      }
-    ]
-  },
-
-  {
-    path: "/organizations",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "organization" */ "@/views/organizations/organizations.view.vue"
-          ),
-        name: "Organization",
-        meta: {
-          title: "organization",
-          noCache: true,
-          icon: "tree"
-        }
-      }
-    ]
-  },
-  {
-    path: "/members",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "members" */ "@/views/members/members.view.vue"
-          ),
-        name: "Members",
-        meta: {
-          title: "members",
-          noCache: true,
-          icon: "peoples"
-        }
-      }
-    ]
-  },
-  {
-    path: "/roles",
-    component: Layout,
-    children: [
-      {
-        path: "roles",
-        component: () =>
-          import(
-            /* webpackChunkName: "roles" */ "@/views/roles/roles.view.vue"
-          ),
-        name: "Roles",
-        meta: {
-          title: "roles",
-          noCache: true,
-          icon: "user"
-        }
-      }
-    ]
-  },
-  {
-    path: "/permissions",
-    component: Layout,
-    children: [
-      {
-        path: "permissions",
-        component: () =>
-          import(
-            /* webpackChunkName: "roles" */ "@/views/permissions/permissions.view.vue"
-          ),
-        name: "Permissions",
-        meta: {
-          title: "permissions",
-          noCache: true,
-          icon: "education"
-        }
-      }
-    ]
-  },
-  {
-    path: "/bills",
-    component: Layout,
-    children: [
-      {
-        path: "bills",
-        component: () =>
-          import(
-            /* webpackChunkName: "roles" */ "@/views/bills/bills.view.vue"
-          ),
-        name: "bills",
-        meta: {
-          title: "bills",
-          noCache: true,
-          icon: "money"
-        }
-      }
-    ]
-  },
+  applicationRouter,
+  orgRouter,
+  accountRouter,
   // {
   //   path: '/example',
   //   component: Layout,

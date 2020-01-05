@@ -47,15 +47,6 @@
             <i class="iconfont esmpreference mr5 w24 iblock text-center" />
             <span slot="title">{{ $t('navbar.preference') }}</span>
           </el-menu-item>
-
-          <el-menu-item
-            index="3"
-            @click="preference"
-          >
-            <i class="el-icon-setting" />
-            <span slot="title">{{ $t('navbar.setting') }}</span>
-          </el-menu-item>
-
           <el-menu-item
             index="4"
             @click="logout"
