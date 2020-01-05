@@ -25,3 +25,48 @@ export const dataSourceType = (type: number) => {
   }
   return typeMap[type]
 }
+
+export const billType = (type: number) => {
+  const typeMap:any = {
+    0 : {
+      label:'未购买',
+      type:''
+    },
+    1 : {
+      label: '购买中',
+      type: 'success'
+    },
+    2 : {
+      label: '失败',
+      type: 'danger'
+    },
+    3 : {
+      label: '已完成',
+      type: 'info'
+    }
+  }
+  return typeMap[type]['type']
+}
+
+export const billTypeLabel = (type: number) => {
+  const typeMap:any = {
+    0 : {
+      label:'未购买',
+      type:''
+    },
+    1 : {
+      label: '购买中',
+      type: 'success'
+    },
+    2 : {
+      label: '失败',
+      type: 'danger'
+    },
+    3 : {
+      label: '已完成',
+      type: 'info'
+    }
+  }
+  return typeMap[type]['label']
+}
+
