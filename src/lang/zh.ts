@@ -74,7 +74,15 @@ export default {
     widgets:'部件',
     tags:'标签',
     bills:'账单',
-    account:'企业设置'
+    account:'企业设置',
+    calendar:'日程',
+    resource:'资源',
+    status:'成员状态',
+    companyStatusEvent:'企业状态设置',
+    resourceStatus:'资源状态',
+    resourceType:'资源类型',
+    calendarManagement:'日历管理',
+    calendarEventManagement:'日程类型设置'
   },
   navbar: {
     logOut: '退出登录',

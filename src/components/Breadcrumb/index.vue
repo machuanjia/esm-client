@@ -3,18 +3,18 @@
     class="app-breadcrumb"
     separator="/"
   >
-    <el-breadcrumb-item v-if="currentRoute">
+    <el-breadcrumb-item v-if="currentRouter">
       <i
-        v-if="currentRoute.meta.iconClass"
+        v-if="currentRouter.meta.iconClass"
         class="current-icon"
-        :class="currentRoute.meta.iconClass"
+        :class="currentRouter.meta.iconClass"
       />
       <svg-icon
-        v-if="!currentRoute.meta.iconClass && currentRoute.meta.icon"
+        v-if="!currentRouter.meta.iconClass && currentRouter.meta.icon"
         class="current-icon"
-        :name="currentRoute.meta.icon"
+        :name="currentRouter.meta.icon"
       />
-      <span class="no-redirect">{{ $t('route.' + currentRoute.meta.title) }}</span>
+      <span class="no-redirect">{{ $t('route.' + currentRouter.meta.title) }}</span>
     </el-breadcrumb-item>
     <!-- <transition-group name="breadcrumb">
        <el-breadcrumb-item
@@ -44,17 +44,21 @@ import { RouteRecord, Route } from 'vue-router'
 })
 export default class extends Vue {
   private breadcrumbs: RouteRecord[] = []
-  private currentRoute:any = null
+  // private currentRoute:any = null
 
-  @Watch('$route')
-  private onRouteChange(route: Route) {
-    // if you go to the redirect page, do not update the breadcrumbs
-    if (route.path.startsWith('/redirect/')) {
-      return
-    }
-    this.currentRoute = route
-    // this.getBreadcrumb()
+  get currentRouter() {
+    return this.$route
   }
+
+  // @Watch('$route')
+  // private onRouteChange(route: Route) {
+  //   // if you go to the redirect page, do not update the breadcrumbs
+  //   if (route.path.startsWith('/redirect/')) {
+  //     return
+  //   }
+  //   this.currentRoute = route
+  //   // this.getBreadcrumb()
+  // }
 
   created() {
     this.getBreadcrumb()
