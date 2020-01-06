@@ -74,7 +74,15 @@ export default {
     widgets:'Widgets',
     tags:'Tags',
     bills:'Bills',
-    account:'Account setting'
+    account:'Account setting',
+    calendar:'日程',
+    resource:'资源',
+    status:'成员状态',
+    companyStatusEvent:'企业状态设置',
+    resourceStatus:'资源状态',
+    resourceType:'资源类型',
+    calendarManagement:'日历管理',
+    calendarEventManagement:'日程类型设置'
   },
   navbar: {
     logOut: 'Salir',
