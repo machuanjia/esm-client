@@ -17,7 +17,7 @@
         type="primary"
         icon="el-icon-plus"
       >
-        看板
+        类型
       </el-button>
     </template>
     <template v-slot:body>
@@ -41,26 +41,6 @@
           prop="description"
           label="描述"
         />
-        <el-table-column
-          prop="scope"
-          label="可见范围"
-          width="300"
-        />
-        <el-table-column
-          label="状态"
-          align="center"
-          width="100"
-        >
-          <template slot-scope="{row}">
-            <el-switch
-              v-model="row.status"
-              active-color="#13ce66"
-              inactive-color="#ff4949"
-              active-value="1"
-              inactive-value="0"
-            />
-          </template>
-        </el-table-column>
         <el-table-column
           width="120"
           align="center"
@@ -102,16 +82,14 @@ export default class extends Vue {
 
   private rolesData = [{
     id: 1,
-    scope: '管理员',
     status: '1',
-    description: '这个是管理员',
-    name: '在线状态'
+    description: '这个是会议室',
+    name: '会议室'
   }, {
     id: 2,
-    scope: '普通成员',
     status: '1',
-    description: '这个是状态查看',
-    name: '状态查看'
+    description: '这个是显示器',
+    name: '显示器'
   }]
 
   mounted() {

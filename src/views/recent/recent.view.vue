@@ -1,20 +1,8 @@
 <template>
   <div class="">
-    <app-content
-      :is-flex-header="true"
-      :is-footer="true"
-    >
-      <template v-slot:hleft>
-        sss
-      </template>
-      <template v-slot:hright>
-        sss
-      </template>
+    <app-content>
       <template v-slot:body>
-        sss
-      </template>
-      <template v-slot:footer>
-        sss
+        <recent-card />
       </template>
     </app-content>
   </div>
@@ -28,23 +16,16 @@ import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
 import { Dictionary } from 'vue-router/types/router'
 import AppContent from '@/components/Content/index.vue'
+import RecentCard from '@/views/recent/recent.card.vue'
 
 @Component({
   name: 'recent',
   components: {
-    AppContent
+    AppContent,
+    RecentCard
   }
 })
 export default class extends Vue {
-  @Watch('$route', { immediate: true })
-  private onRouteChange(route: Route) {
-    // const query = route.query as Dictionary<string>
-    // if (query) {
-    //   this.redirect = query.redirect
-    //   this.otherQuery = this.getOtherQuery(query)
-    // }
-  }
-
   mounted() {
 
   }

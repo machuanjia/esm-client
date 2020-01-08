@@ -13,7 +13,24 @@
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <header-search class="right-menu-item" />
-        <error-log class="errLog-container right-menu-item hover-effect" />
+        <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
+
+        <el-radio-group
+          v-model="recentView"
+          size="mini"
+          class="right-menu-item right-menu-item-actions"
+        >
+          <el-radio-button label="0">
+            卡片
+          </el-radio-button>
+          <el-radio-button label="1">
+            列表
+          </el-radio-button>
+          <el-radio-button label="2">
+            看板
+          </el-radio-button>
+        </el-radio-group>
+
         <screenfull class="right-menu-item hover-effect" />
         <!-- <el-tooltip
           :content="$t('navbar.size')"
@@ -53,6 +70,7 @@ import SizeSelect from '@/components/SizeSelect/index.vue'
   }
 })
 export default class extends Vue {
+  private recentView = '0'
   get sidebar() {
     return AppModule.sidebar
   }
@@ -133,6 +151,10 @@ export default class extends Vue {
           background: rgba(0, 0, 0, .025)
         }
       }
+    }
+
+    .right-menu-item-actions{
+      vertical-align: 16px;
     }
 
     .avatar-container {

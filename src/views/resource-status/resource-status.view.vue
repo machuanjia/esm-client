@@ -17,7 +17,7 @@
         type="primary"
         icon="el-icon-plus"
       >
-        看板
+        状态
       </el-button>
     </template>
     <template v-slot:body>
@@ -26,10 +26,8 @@
         style="width: 100%;margin-bottom: 20px;"
         row-key="id"
         border
-        default-expand-all
         fit
         highlight-current-row
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
       >
         <el-table-column
           prop="name"
@@ -42,22 +40,14 @@
           label="描述"
         />
         <el-table-column
-          prop="scope"
-          label="可见范围"
-          width="300"
-        />
-        <el-table-column
-          label="状态"
-          align="center"
           width="100"
+          align="center"
+          label="颜色"
         >
           <template slot-scope="{row}">
-            <el-switch
-              v-model="row.status"
-              active-color="#13ce66"
-              inactive-color="#ff4949"
-              active-value="1"
-              inactive-value="0"
+            <el-color-picker
+              v-model="row.color"
+              :size="'mini'"
             />
           </template>
         </el-table-column>
@@ -102,16 +92,14 @@ export default class extends Vue {
 
   private rolesData = [{
     id: 1,
-    scope: '管理员',
-    status: '1',
-    description: '这个是管理员',
-    name: '在线状态'
+    color: '#f00',
+    description: '正在使用',
+    name: '使用中'
   }, {
     id: 2,
-    scope: '普通成员',
-    status: '1',
-    description: '这个是状态查看',
-    name: '状态查看'
+    color: '#f00',
+    description: '未使用',
+    name: '闲置'
   }]
 
   mounted() {

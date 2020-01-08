@@ -18,6 +18,7 @@
       remote
       placeholder="Search"
       class="header-search-select"
+      size="mini"
       @change="change"
     >
       <el-option

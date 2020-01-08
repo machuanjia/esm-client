@@ -17,7 +17,7 @@
         type="primary"
         icon="el-icon-plus"
       >
-        账单
+        日历
       </el-button>
     </template>
     <template v-slot:body>
@@ -39,20 +39,21 @@
         />
         <el-table-column
           prop="description"
-          label="购买项目"
+          label="描述"
         />
         <el-table-column
-          width="120"
-          align="center"
           label="状态"
+          align="center"
+          width="100"
         >
           <template slot-scope="{row}">
-            <el-tag
-              :type="row.status | billType"
-              effect="dark"
-            >
-              {{ row.status | billTypeLabel }}
-            </el-tag>
+            <el-switch
+              v-model="row.status"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              active-value="1"
+              inactive-value="0"
+            />
           </template>
         </el-table-column>
         <el-table-column
@@ -96,14 +97,14 @@ export default class extends Vue {
 
   private rolesData = [{
     id: 1,
-    description: '新购人员100',
+    description: '研发日历',
     status: '1',
-    name: '新购人员'
+    name: '研发日历'
   }, {
     id: 2,
-    description: '新购插件钉钉',
+    description: '销售日历',
     status: '0',
-    name: '新购插件'
+    name: '销售日历'
   }]
 
   mounted() {
