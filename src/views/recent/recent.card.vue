@@ -28,7 +28,7 @@
             2020-01-07 10:20:20
           </div>
           <div class="card-body-footer">
-            <i class="el-icon-s-comment" />
+            <i class="card-comment el-icon-s-comment" />
           </div>
         </div>
       </el-card>
@@ -62,7 +62,7 @@
             2020-01-07 10:20:20
           </div>
           <div class="card-body-footer">
-            <i class="el-icon-s-comment" />
+            <i class="card-comment el-icon-s-comment" />
           </div>
         </div>
       </el-card>
@@ -96,7 +96,7 @@
             2020-01-07 10:20:20
           </div>
           <div class="card-body-footer">
-            <i class="el-icon-s-comment" />
+            <i class="card-comment el-icon-s-comment" />
           </div>
         </div>
       </el-card>
@@ -130,7 +130,7 @@
             2020-01-07 10:20:20
           </div>
           <div class="card-body-footer">
-            <i class="el-icon-s-comment" />
+            <i class="card-comment el-icon-s-comment" />
           </div>
         </div>
       </el-card>
@@ -164,7 +164,7 @@
             2020-01-07 10:20:20
           </div>
           <div class="card-body-footer">
-            <i class="el-icon-s-comment" />
+            <i class="card-comment el-icon-s-comment" />
           </div>
         </div>
       </el-card>
@@ -198,7 +198,7 @@
             2020-01-07 10:20:20
           </div>
           <div class="card-body-footer">
-            <i class="el-icon-s-comment" />
+            <i class="card-comment el-icon-s-comment" />
           </div>
         </div>
       </el-card>
@@ -232,7 +232,7 @@
             2020-01-07 10:20:20
           </div>
           <div class="card-body-footer">
-            <i class="el-icon-s-comment" />
+            <i class="card-comment el-icon-s-comment" />
           </div>
         </div>
       </el-card>
@@ -266,7 +266,13 @@ export default class extends Vue {
 .cards-container-wrap{
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
+}
+.item{
+  .el-badge__content.is-fixed{
+      top: 12px;
+      right: 30px;
+  }
 }
 .card-wrap{
   width: 300px;
@@ -320,7 +326,10 @@ export default class extends Vue {
         background: #e4e5ee;
         display: flex;
         justify-content: flex-end;
-        padding: 0 10px
+        padding: 0 10px;
+        .card-comment{
+          cursor: pointer;
+        }
       }
     }
   }
