@@ -167,25 +167,25 @@ export const asyncRoutes: RouteConfig[] = [
       }
     ]
   },
-  {
-    path: "/history",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "history" */ "@/views/history/history.view.vue"
-          ),
-        name: "history",
-        meta: {
-          title: "history",
-          noCache: true,
-          icon: "history"
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/history",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () =>
+  //         import(
+  //           /* webpackChunkName: "history" */ "@/views/history/history.view.vue"
+  //         ),
+  //       name: "history",
+  //       meta: {
+  //         title: "history",
+  //         noCache: true,
+  //         icon: "history"
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/calendar",
     component: Layout,

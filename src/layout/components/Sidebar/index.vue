@@ -5,10 +5,10 @@
       :collapse="isCollapse"
     />
     <el-scrollbar wrap-class="scrollbar-wrapper">
+      <!-- :background-color="variables.menuBg" -->
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="variables.menuBg"
         :text-color="variables.menuText"
         :active-text-color="menuActiveTextColor"
         :unique-opened="false"

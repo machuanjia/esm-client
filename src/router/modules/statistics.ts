@@ -12,6 +12,19 @@ const statisticsRouter: RouteConfig = {
   },
   children: [
     {
+      path: "history",
+      component: () =>
+        import(
+          /* webpackChunkName: "history" */ "@/views/history/history.view.vue"
+        ),
+      name: "history",
+      meta: {
+        title: "history",
+        noCache: true,
+        icon: "history"
+      }
+    },
+    {
       path: "boards",
       component: () =>
         import(

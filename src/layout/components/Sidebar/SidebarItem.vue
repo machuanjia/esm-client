@@ -11,6 +11,7 @@
         <el-menu-item
           :index="resolvePath(theOnlyOneChild.path)"
           :class="{'submenu-title-noDropdown': isFirstLevel}"
+          class="nav-menu-item"
         >
           <i
             v-if="theOnlyOneChild.meta.iconClass"
@@ -129,6 +130,12 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
+.nav-menu-item.is-active{
+  border-right: 2px $menuActiveText solid;
+}
+.el-submenu.is-active{
+   border-right: 2px $menuActiveText solid;
+}
 .el-submenu.is-active > .el-submenu__title {
   color: $subMenuActiveText !important;
 }
