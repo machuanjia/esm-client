@@ -29,7 +29,10 @@
         <slot name="hright" />
       </div>
     </header>
-    <main class="app-content-body">
+    <main
+      class="app-content-body"
+      :class="bodyClass"
+    >
       <slot name="body" />
     </main>
     <footer
@@ -54,6 +57,8 @@ export default class extends Vue {
   @Prop({ default: false }) private isHleft!: boolean
   @Prop({ default: false }) private isHcenter!: boolean
   @Prop({ default: false }) private isHright!: boolean
+
+  @Prop({ default: '' }) private bodyClass!: string
 
   @Prop({ default: false }) private isFooter!: boolean
 

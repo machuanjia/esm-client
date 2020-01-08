@@ -23,6 +23,9 @@
   .app-content-body {
     padding: 10px;
     background: #fff;
+    &.app-content-body-transparent{
+      background: transparent;
+    }
   }
   .app-content-footer {
   }

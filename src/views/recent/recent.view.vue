@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <app-content>
+    <app-content :body-class="'app-content-body-transparent'">
       <template v-slot:body>
         <recent-card />
       </template>
