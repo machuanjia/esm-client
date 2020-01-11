@@ -9,6 +9,7 @@
       name="search"
       @click.stop="click"
     />
+    <!-- <i class="el-icon-search" @click.stop="click"></i> -->
     <el-select
       ref="headerSearchSelect"
       v-model="search"

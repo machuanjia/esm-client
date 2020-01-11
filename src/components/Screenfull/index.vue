@@ -1,7 +1,7 @@
 <template>
   <div id="screenfull">
-    <svg-icon
-      :name="isFullscreen? 'exit-fullscreen': 'fullscreen'"
+    <i
+      :class="{'el-icon-full-screen': !isFullscreen, 'el-icon-copy-document': isFullscreen}"
       @click="click"
     />
   </div>
