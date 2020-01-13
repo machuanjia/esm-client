@@ -1,77 +1,20 @@
 <template>
-  <app-content
-    :is-flex-header="true"
-    :is-hright="true"
-    :is-hcenter="true"
-  >
-    <template v-slot:hcenter>
-      <el-input
-        v-model="searchText"
-        class="search-container"
-        placeholder="请输入搜索内容"
-        prefix-icon="el-icon-search"
-      />
-    </template>
-    <template v-slot:hright>
-      <el-button
-        type="primary"
-        icon="el-icon-plus"
-      >
-        账单
-      </el-button>
-    </template>
+  <app-content>
     <template v-slot:body>
-      <el-table
-        :data="rolesData"
-        style="width: 100%;margin-bottom: 20px;"
-        row-key="id"
-        border
-        default-expand-all
-        fit
-        highlight-current-row
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-      >
-        <el-table-column
-          prop="name"
-          label="名称"
-          sortable
-          width="180"
-        />
-        <el-table-column
-          prop="description"
-          label="购买项目"
-        />
-        <el-table-column
-          width="120"
-          align="center"
-          label="状态"
-        >
-          <template slot-scope="{row}">
-            <el-tag
-              :type="row.status | billType"
-              effect="dark"
-            >
-              {{ row.status | billTypeLabel }}
-            </el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column
-          width="120"
-          align="center"
-          label="操作"
-        >
-          <template slot-scope="{row}">
-            <i
-              class="el-icon-edit-outline table-icon-action"
-              @click="edit(row)"
-            />
-            <i
-              class="el-icon-delete table-icon-action"
-              @click="remove(row)"
-            />
-          </template>
-        </el-table-column>
-      </el-table>
+      <FullCalendar
+        ref="fullCalendar"
+        class="demo-app-calendar"
+        default-view="dayGridMonth"
+        :header="{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        }"
+        :plugins="calendarPlugins"
+        :weekends="calendarWeekends"
+        :events="calendarEvents"
+        @dateClick="handleDateClick"
+      />
     </template>
   </app-content>
 </template>
@@ -84,27 +27,28 @@ import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
 import { Dictionary } from 'vue-router/types/router'
 import AppContent from '@/components/Content/index.vue'
+import FullCalendar from '@fullcalendar/vue'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
 
 @Component({
   name: 'calendar',
   components: {
-    AppContent
+    AppContent,
+    FullCalendar
   }
 })
 export default class extends Vue {
-  private searchText = ''
-
-  private rolesData = [{
-    id: 1,
-    description: '新购人员100',
-    status: '1',
-    name: '新购人员'
-  }, {
-    id: 2,
-    description: '新购插件钉钉',
-    status: '0',
-    name: '新购插件'
-  }]
+  private calendarPlugins = [ // plugins must be defined in the JS
+    dayGridPlugin,
+    timeGridPlugin,
+    interactionPlugin // needed for dateClick
+  ]
+  private calendarWeekends = true
+  private calendarEvents = [ // initial event data
+    { title: 'Event Now', start: new Date() }
+  ]
 
   mounted() {
 
@@ -116,8 +60,28 @@ export default class extends Vue {
   remove(row:any) {
 
   }
+
+  toggleWeekends() {
+    this.calendarWeekends = !this.calendarWeekends // update a property
+  }
+  // gotoPast() {
+  //   let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
+  //   calendarApi.gotoDate('2000-01-01') // call a method on the Calendar object
+  // }
+  // handleDateClick(arg:any) {
+  //   if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
+  //     this.calendarEvents.push({ // add new event data
+  //       title: 'New Event',
+  //       start: arg.date,
+  //       allDay: arg.allDay
+  //     })
+  //   }
+  // }
 }
 </script>
 
 <style lang="scss">
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
 </style>

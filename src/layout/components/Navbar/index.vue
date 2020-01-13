@@ -14,23 +14,7 @@
       <template v-if="device!=='mobile'">
         <!-- <header-search class="right-menu-item" /> -->
         <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
-
-        <el-radio-group
-          v-model="recentView"
-          size="mini"
-          class="right-menu-item right-menu-item-actions"
-        >
-          <el-radio-button label="0">
-            卡片
-          </el-radio-button>
-          <el-radio-button label="1">
-            列表
-          </el-radio-button>
-          <el-radio-button label="2">
-            看板
-          </el-radio-button>
-        </el-radio-group>
-
+        <RecentToolbar v-if="currentRouter.name === 'recent'" />
         <screenfull class="right-menu-item hover-effect" />
         <!-- <el-tooltip
           :content="$t('navbar.size')"
@@ -56,6 +40,7 @@ import HeaderSearch from '@/components/HeaderSearch/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 import SizeSelect from '@/components/SizeSelect/index.vue'
+import RecentToolbar from '@/components/RecentToolbar/index.vue'
 
 @Component({
   name: 'Navbar',
@@ -66,11 +51,15 @@ import SizeSelect from '@/components/SizeSelect/index.vue'
     HeaderSearch,
     LangSelect,
     Screenfull,
-    SizeSelect
+    SizeSelect,
+    RecentToolbar
   }
 })
 export default class extends Vue {
-  private recentView = '0'
+  get currentRouter() {
+    return this.$route
+  }
+
   get sidebar() {
     return AppModule.sidebar
   }
