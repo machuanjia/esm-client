@@ -9,10 +9,11 @@ import componentsRouter from "./modules/components";
 import chartsRouter from "./modules/charts";
 import tableRouter from "./modules/table";
 import nestedRouter from "./modules/nested";
-import orgRouter from './modules/org'
-import applicationRouter from './modules/application'
-import accountRouter from './modules/account'
-import statisticsRouter from './modules/statistics'
+import orgRouter from "./modules/org";
+import applicationRouter from "./modules/application";
+import accountRouter from "./modules/account";
+import statisticsRouter from "./modules/statistics";
+import scheduleRouter from "./modules/schedule";
 
 Vue.use(Router);
 
@@ -162,7 +163,7 @@ export const asyncRoutes: RouteConfig[] = [
         meta: {
           title: "recent",
           noCache: true,
-          icon: "recent",
+          icon: "recent"
         }
       }
     ]
@@ -186,25 +187,26 @@ export const asyncRoutes: RouteConfig[] = [
   //     }
   //   ]
   // },
-  {
-    path: "/calendar",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "history" */ "@/views/calendar/calendar.view.vue"
-          ),
-        name: "calendar",
-        meta: {
-          title: "calendar",
-          noCache: true,
-          icon: "calendar"
-        }
-      }
-    ]
-  },
+  scheduleRouter,
+  // {
+  //   path: "/calendar",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () =>
+  //         import(
+  //           /* webpackChunkName: "history" */ "@/views/calendar/calendar-my.view.vue"
+  //         ),
+  //       name: "calendar",
+  //       meta: {
+  //         title: "calendar",
+  //         noCache: true,
+  //         icon: "calendar"
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/resource",
     component: Layout,
@@ -224,23 +226,23 @@ export const asyncRoutes: RouteConfig[] = [
       }
     ]
   },
-  // {
-  //   path: "/icon",
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: "index",
-  //       component: () =>
-  //         import(/* webpackChunkName: "icons" */ "@/views/icons/index.vue"),
-  //       name: "Icons",
-  //       meta: {
-  //         title: "icons",
-  //         icon: "icon",
-  //         noCache: true
-  //       }
-  //     }
-  //   ]
-  // },
+  {
+    path: "/icon",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(/* webpackChunkName: "icons" */ "@/views/icons/index.vue"),
+        name: "Icons",
+        meta: {
+          title: "icons",
+          icon: "icon",
+          noCache: true
+        }
+      }
+    ]
+  },
   /** when your routing map is too long, you can split it into small modules **/
   // componentsRouter,
   // chartsRouter,
