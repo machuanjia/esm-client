@@ -65,7 +65,7 @@ export default {
     profile: "プロフィール",
     datasource: "数据源",
     organization: "组织架构",
-    members: "人员",
+    members: "成员",
     roles: "角色",
     permissions: "权限",
     recent: "在线状态",

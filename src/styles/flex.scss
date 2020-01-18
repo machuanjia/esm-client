@@ -9,3 +9,9 @@
 .flex-grow{
   flex-grow: 1;
 }
+.flex-r-center{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

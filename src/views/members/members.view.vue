@@ -10,8 +10,10 @@
         <template slot="paneL">
           <div class="left-container">
             <el-tree
+              class="org-tree"
               :data="orgs"
               :props="orgProps"
+              :expand-on-click-node="false"
               default-expand-all
               @node-click="handleNodeClick"
             />
@@ -63,11 +65,19 @@
                     label="手机"
                   />
                   <el-table-column
-                    width="120"
+                    width="160"
                     align="center"
                     label="操作"
                   >
                     <template slot-scope="{row}">
+                      <span
+                        class="setting-icon mr5"
+                        @click="setting"
+                      >
+                        <span class="flex-r-center">
+                          <i class="el-icon-setting" /> 设置
+                        </span>
+                      </span>
                       <i
                         class="el-icon-edit-outline table-icon-action"
                         @click="edit(row)"
@@ -89,14 +99,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Route } from 'vue-router'
-import { Form as ElForm, Input } from 'element-ui'
-import { UserModule } from '@/store/modules/user'
-import { isValidUsername } from '@/utils/validate'
-import { Dictionary } from 'vue-router/types/router'
-import SplitPane from 'vue-splitpane'
-import AppContent from '@/components/Content/index.vue'
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Route } from 'vue-router';
+import { Form as ElForm, Input } from 'element-ui';
+import { UserModule } from '@/store/modules/user';
+import { isValidUsername } from '@/utils/validate';
+import { Dictionary } from 'vue-router/types/router';
+import SplitPane from 'vue-splitpane';
+import AppContent from '@/components/Content/index.vue';
 
 @Component({
   name: 'member',
@@ -106,73 +116,87 @@ import AppContent from '@/components/Content/index.vue'
   }
 })
 export default class extends Vue {
-  private orgs = [{
-    label: '北京华阳云正科技有限公司',
-    children: [{
-      label: '研发部',
-      children: [{
-        label: '架构部'
-      }, {
-        label: '研发一部'
-      }, {
-        label: '研发二部'
-      }]
-    }, {
-      label: '销售部',
-      children: [{
-        label: '北京销售部'
-      }, {
-        label: '上海销售部'
-      }]
-    }, {
-      label: '未分组'
-    }]
-  }]
+  private searchText = '';
+
+  private orgs = [
+    {
+      label: '北京华阳云正科技有限公司',
+      children: [
+        {
+          label: '研发部',
+          children: [
+            {
+              label: '架构部'
+            },
+            {
+              label: '研发一部'
+            },
+            {
+              label: '研发二部'
+            }
+          ]
+        },
+        {
+          label: '销售部',
+          children: [
+            {
+              label: '北京销售部'
+            },
+            {
+              label: '上海销售部'
+            }
+          ]
+        },
+        {
+          label: '未分组'
+        }
+      ]
+    }
+  ];
 
   private orgProps = {
     children: 'children',
     label: 'label'
-  }
+  };
 
-  private tableData = [{
-    name: '王小虎',
-    role: '管理员',
-    phone: '18401125500'
-  }, {
-    name: '王小虎',
-    role: '普通成员',
-    phone: '18401125500'
-  }, {
-    name: '王小虎',
-    role: '只读成员',
-    phone: '18401125500'
-  }]
+  private tableData = [
+    {
+      name: '王小虎',
+      role: '管理员',
+      phone: '18401125500'
+    },
+    {
+      name: '王小虎',
+      role: '普通成员',
+      phone: '18401125500'
+    },
+    {
+      name: '王小虎',
+      role: '只读成员',
+      phone: '18401125500'
+    }
+  ];
 
   resize() {
     // Handle resize
   }
 
-  handleNodeClick(node:any) {
+  handleNodeClick(node: any) {}
 
-  }
+  mounted() {}
 
-  edit(row:any) {
+  edit(row: any) {}
 
-  }
-  remove(row:any) {
+  remove(row: any) {}
 
-  }
-
-  mounted() {
-
-  }
+  setting() {}
 }
 </script>
 
 <style lang="scss">
 .split-container {
   height: 100%;
-  .splitter-pane-resizer{
+  .splitter-pane-resizer {
     background: none;
   }
 }
