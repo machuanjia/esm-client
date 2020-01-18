@@ -86,7 +86,8 @@ export default {
     my: "我的日程",
     team: "团队日程",
     timeline: "Timeline",
-    message: "消息"
+    message: "消息",
+    application: "应用"
   },
   navbar: {
     logOut: "Salir",
