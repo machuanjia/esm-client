@@ -16,6 +16,7 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
+        @click="openCollectionAction"
       >
         应用
       </el-button>
@@ -42,17 +43,18 @@
           label="描述"
         />
         <el-table-column
-          width="120"
-          align="center"
           label="状态"
+          align="center"
+          width="100"
         >
           <template slot-scope="{row}">
-            <el-tag
-              :type="row.status | billType"
-              effect="dark"
-            >
-              {{ row.status | billTypeLabel }}
-            </el-tag>
+            <el-switch
+              v-model="row.status"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              active-value="1"
+              inactive-value="0"
+            />
           </template>
         </el-table-column>
         <el-table-column
@@ -63,59 +65,67 @@
           <template slot-scope="{row}">
             <i
               class="el-icon-edit-outline table-icon-action"
-              @click="edit(row)"
+              @click="editCollectionAction(row)"
             />
             <i
               class="el-icon-delete table-icon-action"
-              @click="remove(row)"
+              @click="removeAction(row)"
             />
           </template>
         </el-table-column>
       </el-table>
+      <el-dialog
+        v-if="collectionVisible"
+        :title="collectionTitle"
+        :visible.sync="collectionVisible"
+        :width="collectionSize"
+      >
+        <applicationCollection
+          :entity="entity"
+          @saveAction="collectionSaveAction"
+          @cancelAction="collectionCancelAction"
+        />
+      </el-dialog>
     </template>
   </app-content>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Route } from 'vue-router'
-import { Form as ElForm, Input } from 'element-ui'
-import { UserModule } from '@/store/modules/user'
-import { isValidUsername } from '@/utils/validate'
-import { Dictionary } from 'vue-router/types/router'
-import AppContent from '@/components/Content/index.vue'
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Route } from 'vue-router';
+import { Form as ElForm, Input } from 'element-ui';
+import { UserModule } from '@/store/modules/user';
+import { isValidUsername } from '@/utils/validate';
+import { Dictionary } from 'vue-router/types/router';
+import AppContent from '@/components/Content/index.vue';
+import { mixins } from 'vue-class-component';
+import ViewMixin from '@/components/Mixin';
+import applicationCollection from '@/views/application/application-collection.vue';
 
 @Component({
   name: 'application',
   components: {
-    AppContent
+    AppContent,
+    applicationCollection
   }
 })
-export default class extends Vue {
-  private searchText = ''
+export default class extends mixins(ViewMixin) {
+  private rolesData = [
+    {
+      id: 1,
+      description: '智能看板',
+      status: '1',
+      name: '智能看板'
+    },
+    {
+      id: 2,
+      description: '日程',
+      status: '0',
+      name: '日程'
+    }
+  ];
 
-  private rolesData = [{
-    id: 1,
-    description: '新购人员100',
-    status: '1',
-    name: '新购人员'
-  }, {
-    id: 2,
-    description: '新购插件钉钉',
-    status: '0',
-    name: '新购插件'
-  }]
-
-  mounted() {
-
-  }
-
-  edit(row:any) {
-
-  }
-  remove(row:any) {
-
-  }
+  mounted() {}
 }
 </script>
 

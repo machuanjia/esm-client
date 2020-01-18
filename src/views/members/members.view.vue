@@ -5,7 +5,6 @@
         split="vertical"
         :min-percent="15"
         :default-percent="20"
-        @resize="resize"
       >
         <template slot="paneL">
           <div class="left-container">
@@ -39,6 +38,7 @@
                 <el-button
                   type="primary"
                   icon="el-icon-plus"
+                  @click="openCollectionAction"
                 >
                   成员
                 </el-button>
@@ -72,7 +72,7 @@
                     <template slot-scope="{row}">
                       <span
                         class="setting-icon mr5"
-                        @click="setting"
+                        @click="openDetailAction(row)"
                       >
                         <span class="flex-r-center">
                           <i class="el-icon-setting" /> 设置
@@ -80,15 +80,37 @@
                       </span>
                       <i
                         class="el-icon-edit-outline table-icon-action"
-                        @click="edit(row)"
+                        @click="editCollectionAction(row)"
                       />
                       <i
                         class="el-icon-delete table-icon-action"
-                        @click="remove(row)"
+                        @click="removeAction(row)"
                       />
                     </template>
                   </el-table-column>
                 </el-table>
+                <el-dialog
+                  v-if="collectionVisible"
+                  :title="collectionTitle"
+                  :visible.sync="collectionVisible"
+                  :width="collectionSize"
+                >
+                  <membersCollection
+                    :entity="entity"
+                    @saveAction="saveAction"
+                    @cancelAction="cancelAction"
+                  />
+                </el-dialog>
+                <el-drawer
+                  v-if="detailVisible"
+                  title="设置"
+                  :append-to-body="true"
+                  :visible.sync="detailVisible"
+                  :direction="'rtl'"
+                  :size="drawerSize"
+                >
+                  <membersDetail :entity="entity" />
+                </el-drawer>
               </template>
             </app-content>
           </div>
@@ -107,17 +129,22 @@ import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import SplitPane from 'vue-splitpane';
 import AppContent from '@/components/Content/index.vue';
+import membersCollection from '@/views/members/members-collection.vue';
+import { dialogSize, drawerSize } from '@/constant/common';
+import membersDetail from '@/views/members/members-detail.vue';
+import { mixins } from 'vue-class-component';
+import ViewMixin from '@/components/Mixin';
 
 @Component({
   name: 'member',
   components: {
     SplitPane,
-    AppContent
+    AppContent,
+    membersCollection,
+    membersDetail
   }
 })
-export default class extends Vue {
-  private searchText = '';
-
+export default class extends mixins(ViewMixin) {
   private orgs = [
     {
       label: '北京华阳云正科技有限公司',
@@ -177,19 +204,17 @@ export default class extends Vue {
     }
   ];
 
-  resize() {
-    // Handle resize
-  }
-
   handleNodeClick(node: any) {}
 
   mounted() {}
 
-  edit(row: any) {}
+  saveAction() {
+    this.closeCollectionaction();
+  }
 
-  remove(row: any) {}
-
-  setting() {}
+  cancelAction() {
+    this.closeCollectionaction();
+  }
 }
 </script>
 
