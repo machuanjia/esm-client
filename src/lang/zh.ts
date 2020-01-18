@@ -85,7 +85,9 @@ export default {
     calendarEventManagement: "日程类型设置",
     my: "我的日程",
     team: "团队日程",
-    timeline: "Timeline"
+    timeline: "Timeline",
+    message: "消息",
+    application: "应用"
   },
   navbar: {
     logOut: "退出登录",

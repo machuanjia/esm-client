@@ -60,6 +60,19 @@ const orgRouter: RouteConfig = {
         noCache: true,
         icon: "education"
       }
+    },
+    {
+      path: "application",
+      component: () =>
+        import(
+          /* webpackChunkName: "roles" */ "@/views/application/application.view.vue"
+        ),
+      name: "Application",
+      meta: {
+        title: "application",
+        noCache: true,
+        icon: "component"
+      }
     }
   ]
 };

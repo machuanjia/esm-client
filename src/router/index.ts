@@ -14,6 +14,8 @@ import applicationRouter from "./modules/application";
 import accountRouter from "./modules/account";
 import statisticsRouter from "./modules/statistics";
 import scheduleRouter from "./modules/schedule";
+import resourceRouter from "./modules/resource";
+import statusRouter from "./modules/status";
 
 Vue.use(Router);
 
@@ -87,6 +89,25 @@ export const constantRoutes: RouteConfig[] = [
     meta: { hidden: true }
   },
   {
+    path: "/message",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard" */ "@/views/message/message.view.vue"
+          ),
+        name: "message",
+        meta: {
+          title: "message",
+          icon: "wechat",
+          affix: true
+        }
+      }
+    ]
+  },
+  {
     path: "/",
     component: Layout,
     redirect: "/dashboard",
@@ -106,6 +127,7 @@ export const constantRoutes: RouteConfig[] = [
       }
     ]
   },
+
   // {
   //   path: '/guide',
   //   component: Layout,
@@ -149,83 +171,9 @@ export const constantRoutes: RouteConfig[] = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes: RouteConfig[] = [
-  {
-    path: "/recent",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "roles" */ "@/views/recent/recent.view.vue"
-          ),
-        name: "recent",
-        meta: {
-          title: "recent",
-          noCache: true,
-          icon: "recent"
-        }
-      }
-    ]
-  },
-  // {
-  //   path: "/history",
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: "index",
-  //       component: () =>
-  //         import(
-  //           /* webpackChunkName: "history" */ "@/views/history/history.view.vue"
-  //         ),
-  //       name: "history",
-  //       meta: {
-  //         title: "history",
-  //         noCache: true,
-  //         icon: "history"
-  //       }
-  //     }
-  //   ]
-  // },
+  statusRouter,
   scheduleRouter,
-  // {
-  //   path: "/calendar",
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: "index",
-  //       component: () =>
-  //         import(
-  //           /* webpackChunkName: "history" */ "@/views/calendar/calendar-my.view.vue"
-  //         ),
-  //       name: "calendar",
-  //       meta: {
-  //         title: "calendar",
-  //         noCache: true,
-  //         icon: "calendar"
-  //       }
-  //     }
-  //   ]
-  // },
-  {
-    path: "/resource",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "history" */ "@/views/resource/resource.view.vue"
-          ),
-        name: "resource",
-        meta: {
-          title: "resource",
-          noCache: true,
-          icon: "resource"
-        }
-      }
-    ]
-  },
+  resourceRouter,
   {
     path: "/icon",
     component: Layout,
@@ -243,13 +191,11 @@ export const asyncRoutes: RouteConfig[] = [
       }
     ]
   },
-  /** when your routing map is too long, you can split it into small modules **/
   // componentsRouter,
   // chartsRouter,
   // nestedRouter,
   // tableRouter,
   statisticsRouter,
-  applicationRouter,
   orgRouter,
   accountRouter,
   // {
