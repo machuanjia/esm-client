@@ -27,3 +27,5 @@ declare module 'vue-image-crop-upload'
 declare module 'vue-splitpane'
 
 declare module '@fullcalendar/vue'
+
+declare module '@fullcalendar/list'
