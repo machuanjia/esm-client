@@ -16,6 +16,7 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
+        @click="addAction"
       >
         部门
       </el-button>
@@ -58,60 +59,111 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-dialog
+        v-if="orgCollectionVisible"
+        :title="collectionTitle"
+        :visible.sync="orgCollectionVisible"
+        :width="collectionSize"
+      >
+        <organizationCollection
+          @saveAction="saveAction"
+          @cancelAction="cancelAction"
+        />
+      </el-dialog>
     </template>
   </app-content>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Route } from 'vue-router'
-import { Form as ElForm, Input } from 'element-ui'
-import { UserModule } from '@/store/modules/user'
-import { isValidUsername } from '@/utils/validate'
-import { Dictionary } from 'vue-router/types/router'
-import AppContent from '@/components/Content/index.vue'
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Route } from 'vue-router';
+import { Form as ElForm, Input } from 'element-ui';
+import { UserModule } from '@/store/modules/user';
+import { isValidUsername } from '@/utils/validate';
+import { Dictionary } from 'vue-router/types/router';
+import AppContent from '@/components/Content/index.vue';
+import organizationCollection from '@/views/organizations/organizations-collection.vue';
+import { dialogSize } from '@/constant/common';
 
 @Component({
   name: 'organization',
   components: {
-    AppContent
+    AppContent,
+    organizationCollection
   }
 })
 export default class extends Vue {
-  private searchText = ''
+  private searchText = '';
 
-  private tableData = [{
-    id: 1,
-    description: '这个是架构部',
-    name: '架构部'
-  }, {
-    id: 2,
-    description: '这个是测试部',
-    name: '测试部'
-  }, {
-    id: 3,
-    description: '这个是销售部',
-    name: '销售部',
-    children: [{
-      id: 31,
-      description: '这个是人力资源部',
-      name: '人力资源部'
-    }, {
-      id: 32,
-      description: '这个是市场部',
-      name: '市场部'
-    }]
-  }]
+  private collectionTitle = '新建';
 
-  mounted() {
+  private collectionSize = dialogSize.md;
 
+  private orgCollectionVisible = false;
+
+  private tableData = [
+    {
+      id: 1,
+      description: '这个是架构部',
+      name: '架构部'
+    },
+    {
+      id: 2,
+      description: '这个是测试部',
+      name: '测试部'
+    },
+    {
+      id: 3,
+      description: '这个是销售部',
+      name: '销售部',
+      children: [
+        {
+          id: 31,
+          description: '这个是人力资源部',
+          name: '人力资源部'
+        },
+        {
+          id: 32,
+          description: '这个是市场部',
+          name: '市场部'
+        }
+      ]
+    }
+  ];
+
+  mounted() {}
+
+  addAction() {
+    this.collectionTitle = '新建';
+    this.orgCollectionVisible = true;
   }
 
-  edit(row:any) {
-
+  saveAction() {
+    this.orgCollectionVisible = false;
   }
-  remove(row:any) {
 
+  cancelAction() {
+    this.orgCollectionVisible = false;
+  }
+
+  edit(row: any) {
+    this.collectionTitle = '编辑';
+    this.orgCollectionVisible = true;
+  }
+
+  remove(row: any) {
+    this.$confirm('此操作将永久删除该部门, 是否继续?', '删除', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'error'
+    })
+      .then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      })
+      .catch(() => {});
   }
 }
 </script>

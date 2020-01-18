@@ -174,23 +174,23 @@ export const asyncRoutes: RouteConfig[] = [
   statusRouter,
   scheduleRouter,
   resourceRouter,
-  {
-    path: "/icon",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(/* webpackChunkName: "icons" */ "@/views/icons/index.vue"),
-        name: "Icons",
-        meta: {
-          title: "icons",
-          icon: "icon",
-          noCache: true
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/icon",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () =>
+  //         import(/* webpackChunkName: "icons" */ "@/views/icons/index.vue"),
+  //       name: "Icons",
+  //       meta: {
+  //         title: "icons",
+  //         icon: "icon",
+  //         noCache: true
+  //       }
+  //     }
+  //   ]
+  // },
   // componentsRouter,
   // chartsRouter,
   // nestedRouter,
