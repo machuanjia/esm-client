@@ -8,9 +8,16 @@
       autocomplete="on"
       label-position="left"
     >
+      <div class="logo-container">
+        <img
+          class="logo"
+          src="../../assets/logo-rs.png"
+        >
+      </div>
       <div class="title-container">
         <h3 class="title">
-          {{ $t('login.title') }}
+          ESM
+          <!-- {{ $t('login.logIn') }} -->
         </h3>
         <lang-select class="set-language" />
       </div>
@@ -54,7 +61,7 @@
       <el-button
         :loading="loading"
         type="primary"
-        style="width:100%; margin-bottom:30px;"
+        class="login-btn"
         @click.native.prevent="handleLogin"
       >
         {{ $t('login.logIn') }}
@@ -62,21 +69,21 @@
 
       <div style="position:relative">
         <div class="tips">
-          <span>{{ $t('login.username') }} : admin </span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }} </span>
+          <!-- <span>{{ $t('login.username') }} : admin </span>
+          <span>{{ $t('login.password') }} : {{ $t('login.any') }} </span> -->
         </div>
         <div class="tips">
-          <span>{{ $t('login.username') }} : editor </span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }} </span>
+          <!-- <span>{{ $t('login.username') }} : editor </span>
+          <span>{{ $t('login.password') }} : {{ $t('login.any') }} </span> -->
         </div>
 
-        <el-button
+        <!-- <el-button
           class="thirdparty-button"
           type="primary"
           @click="showDialog=true"
         >
           {{ $t('login.thirdparty') }}
-        </el-button>
+        </el-button> -->
       </div>
     </el-form>
 
@@ -246,14 +253,31 @@ export default class extends Vue {
   width: 100%;
   overflow: hidden;
   background-color: $loginBg;
+  display: flex;
+  align-items: center;
 
   .login-form {
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 35px 35px 0;
     margin: 0 auto;
     overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(255, 255, 255, .4);
+  }
+
+  .logo-container{
+    text-align: center;
+     .logo{
+        width: 100px;
+      }
+      margin-bottom: 20px;
+  }
+
+  .login-btn{
+    padding: 15px 20px;
+    width: 100%;
+    margin-bottom: 30px;
   }
 
   .tips {

@@ -62,6 +62,7 @@ import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
+import { getOrganizations } from '@/api/organizations';
 
 @Component({
   name: 'organizationCollection',
@@ -84,7 +85,12 @@ export default class extends Vue {
     parent: [{ required: true, message: '请选择活动区域', trigger: 'change' }],
     description: []
   };
-  mounted() {}
+  mounted() {
+    this.getOrgs();
+  }
+  private async getOrgs() {
+    const { data } = await getOrganizations({});
+  }
   submitForm(formName: any) {
     const form: any = this.$refs[formName];
     form.validate((valid: any) => {

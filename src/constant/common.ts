@@ -1,5 +1,5 @@
 export const dialogSize = {
-  md: 880
+  md: '880px'
 };
 
 export const drawerSize = {

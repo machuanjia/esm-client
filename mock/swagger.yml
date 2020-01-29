@@ -9,7 +9,7 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
 servers:
-  - url: /mock-api/v1
+  - url: /api/v1
 tags:
   - name: articles
     description: Articles data related api.
@@ -20,6 +20,12 @@ tags:
   - name: users
     description: Users related api.
 paths:
+  /organizations:
+    get:
+      operationId: getOrganizations
+      responses:
+        200:
+          description: OK
   /articles:
     get:
       tags:
