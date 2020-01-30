@@ -101,6 +101,55 @@ paths:
       responses:
         200:
           description: OK
+  /roles:
+    get:
+      operationId: getRoles
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addRole
+      responses:
+        200:
+          description: OK
+  /roles/role/{id}:
+    get:
+      operationId: getRole
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateRole
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteRole
+      responses:
+        200:
+          description: OK
+  /roles/group:
+    post:
+      operationId: addGroup
+      responses:
+        200:
+          description: OK
+  /roles/group/{id}:
+    get:
+      operationId: getGroup
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateGroup
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteGroup
+      responses:
+        200:
+          description: OK
   /articles:
     get:
       tags:

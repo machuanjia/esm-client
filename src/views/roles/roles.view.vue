@@ -16,7 +16,7 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
-        @click="openCollectionAction"
+        @click="openAction"
       >
         角色
       </el-button>
@@ -47,11 +47,14 @@
         />
 
         <el-table-column
-          prop="permissions"
           label="权限"
           sortable
-          width="180"
-        />
+          width="260"
+        >
+          <template slot-scope="{row}">
+            {{ row.permissions | rolesPermissions }}
+          </template>
+        </el-table-column>
         <el-table-column
           prop="description"
           label="描述"
@@ -74,7 +77,7 @@
             <i
               v-if="!row.type"
               class="el-icon-edit-outline table-icon-action"
-              @click="editCollectionAction(row)"
+              @click="editAction(row)"
             />
             <i
               v-if="row.type"
@@ -132,6 +135,7 @@ import rolesCollection from '@/views/roles/roles-collection.vue';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
 import rolesDetail from '@/views/roles/roles-detail.vue';
+import { getRoles } from '@/api/roles';
 
 @Component({
   name: 'roles',
@@ -142,56 +146,35 @@ import rolesDetail from '@/views/roles/roles-detail.vue';
   }
 })
 export default class extends mixins(ViewMixin) {
-  private rolesData = [
-    {
-      id: 1,
-      type: 0,
-      permissions: '管理员',
-      description: '这个是管理员',
-      name: '管理员'
-    },
-    {
-      id: 2,
-      type: 0,
-      permissions: '普通成员',
-      description: '这个是普通成员',
-      name: '普通成员'
-    },
-    {
-      id: 3,
-      type: 0,
-      permissions: '只读成员',
-      description: '这个是只读成员',
-      name: '只读成员'
-    },
-    {
-      id: 4,
-      type: 1,
-      name: '华北大区',
-      children: [
-        {
-          id: 41,
-          permissions: '华北销售总监',
-          description: '这个是销售总监',
-          name: '销售总监'
-        },
-        {
-          id: 42,
-          permissions: '华北销售经理',
-          description: '这个是华北销售经理',
-          name: '华北销售经理'
-        }
-      ]
-    }
-  ];
+  private rolesData = [];
+
+  created() {
+    this.getRoles();
+  }
 
   mounted() {}
+
+  openAction() {
+    this.entity = null;
+    this.openCollectionAction();
+  }
+
+  async editAction(row: any) {}
+
+  removeAction(row: any) {}
 
   addGroup() {}
 
   editGroup(row: any) {}
 
   removeGroup(row: any) {}
+
+  private async getRoles() {
+    const { data } = await getRoles({});
+    if (data) {
+      this.rolesData = data;
+    }
+  }
 }
 </script>
 
