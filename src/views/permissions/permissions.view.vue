@@ -1,14 +1,21 @@
 <template>
   <div class="app-content-wrap">
     <el-tabs
+      v-if="apps && apps.length > 0"
+      v-model="activeName"
       :tab-position="'left'"
       class="permissions-wrap"
     >
-      <el-tab-pane label="智慧看板">
-        <permissionsApp />
-      </el-tab-pane>
-      <el-tab-pane label="日程">
-        <permissionsApp />
+      <el-tab-pane
+        v-for="app of apps"
+        :key="app.id"
+        :label="app.name"
+        :name="app.id.toString()"
+      >
+        <permissionsApp
+          v-if="activeName === app.id.toString()"
+          :app="app"
+        />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -22,6 +29,7 @@ import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import permissionsApp from '@/views/permissions/permissions-app.vue';
+import { getApplications } from '@/api/applications';
 
 @Component({
   name: 'permissions',
@@ -30,39 +38,21 @@ import permissionsApp from '@/views/permissions/permissions-app.vue';
   }
 })
 export default class extends Vue {
-  private searchText = '';
-
-  private rolesData = [
-    {
-      id: 1,
-      type: 0,
-      description: '这个是管理员',
-      name: '管理员'
-    },
-    {
-      id: 2,
-      type: 0,
-      description: '这个是普通成员',
-      name: '普通成员'
-    },
-    {
-      id: 3,
-      type: 0,
-      description: '这个是只读成员',
-      name: '只读成员'
-    },
-    {
-      id: 4,
-      type: 1,
-      description: '这个是自定义权限',
-      name: '自定义权限'
-    }
-  ];
-
+  private apps: any = [];
+  private activeName: any = '';
+  created() {
+    this.getApplications();
+  }
   mounted() {}
-
-  edit(row: any) {}
-  remove(row: any) {}
+  private async getApplications() {
+    const { data } = await getApplications({});
+    if (data) {
+      this.apps = data;
+      if (this.apps.length > 0) {
+        this.activeName = this.apps[0].id + '';
+      }
+    }
+  }
 }
 </script>
 

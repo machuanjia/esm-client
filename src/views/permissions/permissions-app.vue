@@ -17,14 +17,14 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
+        @click="openAction"
       >
         权限
       </el-button>
     </template>
     <template v-slot:body>
       <el-table
-        :data="rolesData"
-        style="width: 100%;margin-bottom: 20px;"
+        :data="permissionsData"
         row-key="id"
         border
         fit
@@ -60,69 +60,127 @@
             <i
               v-if="row.type"
               class="el-icon-edit-outline table-icon-action"
-              @click="edit(row)"
+              @click="editAction(row)"
             />
             <i
               v-if="row.type"
               class="el-icon-delete table-icon-action"
-              @click="remove(row)"
+              @click="removeAction(row)"
             />
           </template>
         </el-table-column>
       </el-table>
+      <el-dialog
+        v-if="collectionVisible"
+        :title="collectionTitle"
+        :visible.sync="collectionVisible"
+        :width="collectionSize"
+      >
+        <permissionAppCollection
+          :entity="entity"
+          @saveAction="saveAction"
+          @cancelAction="cancelAction"
+        />
+      </el-dialog>
     </template>
   </app-content>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue, Watch, Prop } from 'vue-property-decorator';
 import { Route } from 'vue-router';
 import { Form as ElForm, Input } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
+import {
+  getApplicationPermissions,
+  addApplicationPermission,
+  getApplicationPermission,
+  updateApplicationPermission,
+  deleteApplicationPermission
+} from '@/api/permissions';
+import { mixins } from 'vue-class-component';
+import ViewMixin from '@/components/Mixin';
+import permissionAppCollection from '@/views/permissions/permissions-app-collection.vue';
+import { updateApplication } from '../../api/applications';
 
 @Component({
   name: 'permissionsApp',
   components: {
-    AppContent
+    AppContent,
+    permissionAppCollection
   }
 })
-export default class extends Vue {
-  private searchText = '';
+export default class extends mixins(ViewMixin) {
+  @Prop({ required: true }) private app!: any;
 
-  private rolesData = [
-    {
-      id: 1,
-      type: 0,
-      description: '这个是管理员',
-      name: '管理员'
-    },
-    {
-      id: 2,
-      type: 0,
-      description: '这个是普通成员',
-      name: '普通成员'
-    },
-    {
-      id: 3,
-      type: 0,
-      description: '这个是只读成员',
-      name: '只读成员'
-    },
-    {
-      id: 4,
-      type: 1,
-      description: '这个是自定义权限',
-      name: '自定义权限'
+  private permissionsData: any = [];
+
+  mounted() {
+    this.getApplicationPermissions();
+  }
+
+  openAction() {
+    this.entity = null;
+    this.openCollectionAction();
+  }
+  async editAction(row: any) {
+    const { data } = await getApplicationPermission(this.app.id, row.id, {});
+    if (data) {
+      this.entity = data;
     }
-  ];
+    this.openCollectionAction();
+  }
 
-  mounted() {}
+  removeAction(row: any) {
+    this.removeCollectionAction(async(successFn: any) => {
+      const { data } = await deleteApplicationPermission(this.app.id, row.id);
+      this.deleteCollection(this.permissionsData, row);
+      if (successFn) {
+        successFn();
+      }
+    });
+  }
 
-  edit(row: any) {}
-  remove(row: any) {}
+  saveAction(data: any) {
+    if (this.entity) {
+      this.updateApplicationPermission(this.entity.id, data);
+    } else {
+      this.addApplicationPermission(data);
+    }
+    this.closeCollectionaction();
+  }
+
+  cancelAction() {
+    this.closeCollectionaction();
+  }
+
+  private async getApplicationPermissions() {
+    const { data } = await getApplicationPermissions(this.app.id, {});
+    if (data) {
+      this.permissionsData = data;
+    }
+  }
+
+  private async addApplicationPermission(payload: any) {
+    const { data } = await addApplicationPermission(this.app.id, payload);
+    if (data) {
+      this.pushCollection(this.permissionsData, data);
+    }
+  }
+
+  private async updateApplicationPermission(id: number, payload: any) {
+    const { data } = await updateApplicationPermission(
+      this.app.id,
+      id,
+      payload
+    );
+    if (data) {
+      this.updateCollection(this.permissionsData, data);
+    }
+  }
 }
 </script>
 

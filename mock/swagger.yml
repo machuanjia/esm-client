@@ -74,6 +74,33 @@ paths:
       responses:
         200:
           description: OK
+  /permissions/{appId}:
+    get:
+      operationId: getApplicationPermissions
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addApplicationPermission
+      responses:
+        200:
+          description: OK
+  /permissions/{appId}/{id}:
+    get:
+      operationId: getApplicationPermission
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateApplicationPermission
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteApplicationPermission
+      responses:
+        200:
+          description: OK
   /articles:
     get:
       tags:
