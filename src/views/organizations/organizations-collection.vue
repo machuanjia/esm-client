@@ -19,17 +19,18 @@
         <div>
           <el-popover
             placement="bottom"
-            width="400"
+            width="460"
             trigger="click"
           >
             <el-tree
+              class="org-tree"
               :data="orgs"
               :props="defaultProps"
               @node-click="selectParent"
             />
             <el-input
               slot="reference"
-              v-model="ruleForm.parentName"
+              v-model="ruleForm.parent.name"
             />
           </el-popover>
         </div>
@@ -79,7 +80,6 @@ export default class extends Vue {
   private orgs = [];
   private ruleForm = {
     name: '',
-    parentName: '',
     parent: {},
     description: ''
   };
@@ -99,10 +99,11 @@ export default class extends Vue {
   };
   mounted() {
     if (this.entity) {
-      this.ruleForm = { ...this.entity };
-      if (this.entity.parent) {
-        this.ruleForm.parentName = this.entity.parent.name;
-      }
+      this.ruleForm = {
+        name: this.entity.name,
+        parent: this.entity.parent || {},
+        description: this.entity.description
+      };
     }
     this.getOrgs();
   }
@@ -114,7 +115,6 @@ export default class extends Vue {
   }
   selectParent(data: any) {
     this.ruleForm.parent = data;
-    this.ruleForm.parentName = data.name;
   }
   submitForm(formName: any) {
     const form: any = this.$refs[formName];

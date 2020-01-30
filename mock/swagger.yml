@@ -27,23 +27,51 @@ paths:
         200:
           description: OK
     post:
-      operationId: addOrganizations
+      operationId: addOrganization
       responses:
         200:
           description: OK
   /organizations/{id}:
     get:
-      operationId: getOrganizationsDetail
+      operationId: getOrganization
       responses:
         200:
           description: OK
     put:
-      operationId: updateOrganizations
+      operationId: updateOrganization
       responses:
         200:
           description: OK
     delete:
-      operationId: deleteOrganizations
+      operationId: deleteOrganization
+      responses:
+        200:
+          description: OK
+
+  /aplications:
+    get:
+      operationId: getApplications
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addAplication
+      responses:
+        200:
+          description: OK
+  /aplications/{id}:
+    get:
+      operationId: getAplication
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateAplication
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteAplication
       responses:
         200:
           description: OK

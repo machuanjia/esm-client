@@ -87,10 +87,10 @@ import organizationCollection from '@/views/organizations/organizations-collecti
 import { dialogSize } from '@/constant/common';
 import {
   getOrganizations,
-  addOrganizations,
-  getOrganizationsDetail,
-  updateOrganizationsDetail,
-  deleteOrganizations
+  addOrganization,
+  getOrganization,
+  updateOrganization,
+  deleteOrganization
 } from '@/api/organizations';
 
 @Component({
@@ -124,14 +124,14 @@ export default class extends Vue {
     }
   }
   private async addOrgs(org: any) {
-    const { data } = await addOrganizations(org);
+    const { data } = await addOrganization(org);
     if (data) {
       this.getOrgs();
     }
   }
 
   private async updateOrgs(org: any) {
-    const { data } = await updateOrganizationsDetail(this.entity.id, org);
+    const { data } = await updateOrganization(this.entity.id, org);
     if (data) {
       this.getOrgs();
     }
@@ -139,6 +139,7 @@ export default class extends Vue {
 
   addAction() {
     this.collectionTitle = '新建';
+    this.entity = null;
     this.orgCollectionVisible = true;
   }
 
@@ -163,7 +164,7 @@ export default class extends Vue {
 
   async edit(row: any) {
     this.collectionTitle = '编辑';
-    const { data } = await getOrganizationsDetail(row.id, {});
+    const { data } = await getOrganization(row.id, {});
     if (data) {
       this.entity = data;
       this.orgCollectionVisible = true;
@@ -177,7 +178,7 @@ export default class extends Vue {
       type: 'error'
     })
       .then(async() => {
-        const { data } = await deleteOrganizations(row.id);
+        const { data } = await deleteOrganization(row.id);
         if (data) {
           this.$message({
             type: 'success',

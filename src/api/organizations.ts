@@ -25,26 +25,26 @@ export const getOrganizations = (params: any) =>
     method: "get",
     params
   });
-export const addOrganizations = (data: any) =>
+export const addOrganization = (data: any) =>
   request({
     url: "/organizations",
     method: "post",
     data
   });
-export const getOrganizationsDetail = (id: number, params: any) =>
+export const getOrganization = (id: number, params: any) =>
   request({
     url: `/organizations/${id}`,
     method: "get",
     params
   });
-export const updateOrganizationsDetail = (id: number, data: any) =>
+export const updateOrganization = (id: number, data: any) =>
   request({
     url: `/organizations/${id}`,
     method: "put",
     data
   });
 
-export const deleteOrganizations = (id: number) =>
+export const deleteOrganization = (id: number) =>
   request({
     url: `/organizations/${id}`,
     method: "delete"
