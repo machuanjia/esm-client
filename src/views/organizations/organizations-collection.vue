@@ -68,6 +68,8 @@ import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
 import { getOrganizations } from '@/api/organizations';
+import { mixins } from 'vue-class-component';
+import CollectionMixin from '@/components/Mixin/collection';
 
 @Component({
   name: 'organizationCollection',
@@ -75,28 +77,31 @@ import { getOrganizations } from '@/api/organizations';
     AppContent
   }
 })
-export default class extends Vue {
+export default class extends mixins(CollectionMixin) {
   @Prop({ required: true }) private entity!: any;
   private orgs = [];
-  private ruleForm = {
-    name: '',
-    parent: {},
-    description: ''
-  };
 
   private defaultProps = {
     children: 'children',
     label: 'name'
   };
 
-  private rules = {
-    name: [
-      { required: true, message: '请输入部门名称', trigger: 'blur' },
-      { min: 3, max: 100, message: '长度在 3 到 100 个字符', trigger: 'blur' }
-    ],
-    parent: [],
-    description: []
-  };
+  created() {
+    this.ruleForm = {
+      name: '',
+      parent: {},
+      description: ''
+    };
+    this.rules = {
+      name: [
+        { required: true, message: '请输入部门名称', trigger: 'blur' },
+        { min: 3, max: 100, message: '长度在 3 到 100 个字符', trigger: 'blur' }
+      ],
+      parent: [],
+      description: []
+    };
+  }
+
   mounted() {
     if (this.entity) {
       this.ruleForm = {
@@ -115,18 +120,6 @@ export default class extends Vue {
   }
   selectParent(data: any) {
     this.ruleForm.parent = data;
-  }
-  submitForm(formName: any) {
-    const form: any = this.$refs[formName];
-    form.validate((valid: any) => {
-      if (valid) {
-        const payload = { ...this.ruleForm };
-        this.$emit('saveAction', payload);
-      }
-    });
-  }
-  cancelForm(formName: any) {
-    this.$emit('cancelAction');
   }
 }
 </script>

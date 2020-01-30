@@ -5,8 +5,8 @@ import { dialogSize, drawerSize } from "@/constant/common";
   name: "CollectionMixin"
 })
 export default class extends Vue {
-  public ruleForm = {};
-  public rules = {};
+  public ruleForm: any = {};
+  public rules: any = {};
   submitForm(formName: any) {
     const form: any = this.$refs[formName];
     form.validate((valid: any) => {
