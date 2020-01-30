@@ -16,19 +16,23 @@
         label="上级部门"
         prop="parent"
       >
-        <el-select
-          v-model="ruleForm.parent"
-          placeholder="请选择活动区域"
-        >
-          <el-option
-            label="区域一"
-            value="shanghai"
-          />
-          <el-option
-            label="区域二"
-            value="beijing"
-          />
-        </el-select>
+        <div>
+          <el-popover
+            placement="bottom"
+            width="400"
+            trigger="click"
+          >
+            <el-tree
+              :data="orgs"
+              :props="defaultProps"
+              @node-click="selectParent"
+            />
+            <el-input
+              slot="reference"
+              v-model="ruleForm.parentName"
+            />
+          </el-popover>
+        </div>
       </el-form-item>
       <el-form-item
         label="描述"
@@ -46,7 +50,7 @@
         >
           确定
         </el-button>
-        <el-button @click="resetForm('ruleForm')">
+        <el-button @click="cancelForm('ruleForm')">
           取消
         </el-button>
       </el-form-item>
@@ -55,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue, Watch, Prop } from 'vue-property-decorator';
 import { Route } from 'vue-router';
 import { Form as ElForm, Input } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
@@ -71,35 +75,57 @@ import { getOrganizations } from '@/api/organizations';
   }
 })
 export default class extends Vue {
+  @Prop({ required: true }) private entity!: any;
+  private orgs = [];
   private ruleForm = {
     name: '',
-    parent: '',
+    parentName: '',
+    parent: {},
     description: ''
+  };
+
+  private defaultProps = {
+    children: 'children',
+    label: 'name'
   };
 
   private rules = {
     name: [
-      { required: true, message: '请输入活动名称', trigger: 'blur' },
-      { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+      { required: true, message: '请输入部门名称', trigger: 'blur' },
+      { min: 3, max: 100, message: '长度在 3 到 100 个字符', trigger: 'blur' }
     ],
-    parent: [{ required: true, message: '请选择活动区域', trigger: 'change' }],
+    parent: [],
     description: []
   };
   mounted() {
+    if (this.entity) {
+      this.ruleForm = { ...this.entity };
+      if (this.entity.parent) {
+        this.ruleForm.parentName = this.entity.parent.name;
+      }
+    }
     this.getOrgs();
   }
   private async getOrgs() {
     const { data } = await getOrganizations({});
+    if (data) {
+      this.orgs = data;
+    }
+  }
+  selectParent(data: any) {
+    this.ruleForm.parent = data;
+    this.ruleForm.parentName = data.name;
   }
   submitForm(formName: any) {
     const form: any = this.$refs[formName];
     form.validate((valid: any) => {
       if (valid) {
-        this.$emit('saveAction');
+        const payload = { ...this.ruleForm };
+        this.$emit('saveAction', payload);
       }
     });
   }
-  resetForm(formName: any) {
+  cancelForm(formName: any) {
     this.$emit('cancelAction');
   }
 }

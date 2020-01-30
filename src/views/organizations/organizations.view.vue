@@ -66,6 +66,7 @@
         :width="collectionSize"
       >
         <organizationCollection
+          :entity="entity"
           @saveAction="saveAction"
           @cancelAction="cancelAction"
         />
@@ -84,7 +85,13 @@ import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
 import organizationCollection from '@/views/organizations/organizations-collection.vue';
 import { dialogSize } from '@/constant/common';
-import { getOrganizations } from '@/api/organizations';
+import {
+  getOrganizations,
+  addOrganizations,
+  getOrganizationsDetail,
+  updateOrganizationsDetail,
+  deleteOrganizations
+} from '@/api/organizations';
 
 @Component({
   name: 'organization',
@@ -98,11 +105,13 @@ export default class extends Vue {
 
   private collectionTitle = '新建';
 
-  private collectionSize = dialogSize.md;
+  private collectionSize = dialogSize.sm;
 
   private orgCollectionVisible = false;
 
   private tableData = [];
+
+  private entity: any = null;
 
   mounted() {
     this.getOrgs();
@@ -110,7 +119,22 @@ export default class extends Vue {
 
   private async getOrgs() {
     const { data } = await getOrganizations({});
-    this.tableData = data;
+    if (data) {
+      this.tableData = data;
+    }
+  }
+  private async addOrgs(org: any) {
+    const { data } = await addOrganizations(org);
+    if (data) {
+      this.getOrgs();
+    }
+  }
+
+  private async updateOrgs(org: any) {
+    const { data } = await updateOrganizationsDetail(this.entity.id, org);
+    if (data) {
+      this.getOrgs();
+    }
   }
 
   addAction() {
@@ -118,7 +142,18 @@ export default class extends Vue {
     this.orgCollectionVisible = true;
   }
 
-  saveAction() {
+  saveAction(data: any) {
+    const payload = {
+      name: data.name,
+      parentId: data.parent ? data.parent.id : '',
+      description: data.description
+    };
+    if (this.entity) {
+      this.updateOrgs(payload);
+    } else {
+      this.addOrgs(payload);
+    }
+
     this.orgCollectionVisible = false;
   }
 
@@ -126,22 +161,29 @@ export default class extends Vue {
     this.orgCollectionVisible = false;
   }
 
-  edit(row: any) {
+  async edit(row: any) {
     this.collectionTitle = '编辑';
-    this.orgCollectionVisible = true;
+    const { data } = await getOrganizationsDetail(row.id, {});
+    if (data) {
+      this.entity = data;
+      this.orgCollectionVisible = true;
+    }
   }
 
   remove(row: any) {
-    this.$confirm('此操作将永久删除该部门, 是否继续?', '删除', {
+    this.$confirm('此操作将永久删除该部门及其下级部门, 是否继续?', '删除', {
       confirmButtonText: '确定',
       cancelButtonText: '取消',
       type: 'error'
     })
-      .then(() => {
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
+      .then(async() => {
+        const { data } = await deleteOrganizations(row.id);
+        if (data) {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }
       })
       .catch(() => {});
   }

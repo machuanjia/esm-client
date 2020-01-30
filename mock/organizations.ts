@@ -1,5 +1,53 @@
 import { Response, Request } from "express";
 
+export const addOrganizations = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: {
+      id: id,
+      description: "这个是new" + id,
+      name: "架构部" + id
+    }
+  });
+};
+
+export const getOrganizationsDetail = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: {
+      id: id,
+      description: "这个是detail" + id,
+      name: "架构部detail" + id,
+      parent: {
+        id: 2222,
+        description: "parent",
+        name: "parent"
+      }
+    }
+  });
+};
+
+export const updateOrganizations = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: {
+      id: id,
+      description: "这个是new" + id,
+      name: "架构部" + id
+    }
+  });
+};
+
+export const deleteOrganizations = (req: Request, res: Response) => {
+  return res.json({
+    code: 20000,
+    data: true
+  });
+};
+
 export const getOrganizations = (req: Request, res: Response) => {
   return res.json({
     code: 20000,
