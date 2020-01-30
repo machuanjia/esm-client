@@ -47,31 +47,30 @@ paths:
       responses:
         200:
           description: OK
-
-  /aplications:
+  /applications:
     get:
       operationId: getApplications
       responses:
         200:
           description: OK
     post:
-      operationId: addAplication
+      operationId: addApplication
       responses:
         200:
           description: OK
-  /aplications/{id}:
+  /applications/{id}:
     get:
-      operationId: getAplication
+      operationId: getApplication
       responses:
         200:
           description: OK
     put:
-      operationId: updateAplication
+      operationId: updateApplication
       responses:
         200:
           description: OK
     delete:
-      operationId: deleteAplication
+      operationId: deleteApplication
       responses:
         200:
           description: OK

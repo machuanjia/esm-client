@@ -28,7 +28,7 @@
         >
           确定
         </el-button>
-        <el-button @click="resetForm('ruleForm')">
+        <el-button @click="cancelForm('ruleForm')">
           取消
         </el-button>
       </el-form-item>
@@ -37,13 +37,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue, Watch, Prop } from 'vue-property-decorator';
 import { Route } from 'vue-router';
 import { Form as ElForm, Input } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
+import { mixins } from 'vue-class-component';
+import CollectionMixin from '@/components/Mixin/collection';
 
 @Component({
   name: 'applicationCollection',
@@ -51,30 +53,31 @@ import AppContent from '@/components/Content/index.vue';
     AppContent
   }
 })
-export default class extends Vue {
-  private ruleForm = {
-    name: '',
-    description: ''
-  };
+export default class extends mixins(CollectionMixin) {
+  @Prop({ required: true }) private entity!: any;
 
-  private rules = {
-    name: [
-      { required: true, message: '请输入活动名称', trigger: 'blur' },
-      { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-    ],
-    description: []
-  };
-  mounted() {}
-  submitForm(formName: any) {
-    const form: any = this.$refs[formName];
-    form.validate((valid: any) => {
-      if (valid) {
-        this.$emit('saveAction');
-      }
-    });
+  created() {
+    this.ruleForm = {
+      name: '',
+      description: ''
+    };
+
+    this.rules = {
+      name: [
+        { required: true, message: '请输入应用名称', trigger: 'blur' },
+        { min: 3, max: 100, message: '长度在 3 到 100 个字符', trigger: 'blur' }
+      ],
+      description: []
+    };
   }
-  resetForm(formName: any) {
-    this.$emit('cancelAction');
+
+  mounted() {
+    if (this.entity) {
+      this.ruleForm = {
+        name: this.entity.name,
+        description: this.entity.description
+      };
+    }
   }
 }
 </script>
