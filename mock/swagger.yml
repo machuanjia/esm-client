@@ -74,6 +74,12 @@ paths:
       responses:
         200:
           description: OK
+  /permissions_tree:
+    get:
+      operationId: getApplicationPermissionsTree
+      responses:
+        200:
+          description: OK
   /permissions/{appId}:
     get:
       operationId: getApplicationPermissions
@@ -109,6 +115,12 @@ paths:
           description: OK
     post:
       operationId: addRole
+      responses:
+        200:
+          description: OK
+  /roles/groups:
+    get:
+      operationId: getGroups
       responses:
         200:
           description: OK

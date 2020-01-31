@@ -1,5 +1,65 @@
 import { Response, Request } from "express";
 
+export const getApplicationPermissionsTree = (req: Request, res: Response) => {
+  return res.json({
+    code: 20000,
+    data: [
+      {
+        id: 1,
+        description: "这个是智慧看板",
+        name: "智慧看板",
+        children: [
+          {
+            id: 11,
+            type: 0,
+            description: "这个是管理员",
+            name: "管理员"
+          }
+        ]
+      },
+      {
+        id: 2,
+        description: "这个是日历",
+        name: "日历",
+        children: [
+          {
+            id: 21,
+            type: 0,
+            description: "这个是管理员",
+            name: "管理员"
+          }
+        ]
+      },
+      {
+        id: 31,
+        description: "这个是资源",
+        name: "资源",
+        children: [
+          {
+            id: 31,
+            type: 0,
+            description: "这个是管理员",
+            name: "管理员"
+          }
+        ]
+      },
+      {
+        id: 4,
+        description: "这个是数据统计",
+        name: "数据统计",
+        children: [
+          {
+            id: 41,
+            type: 0,
+            description: "这个是管理员",
+            name: "管理员"
+          }
+        ]
+      }
+    ]
+  });
+};
+
 export const getApplicationPermissions = (req: Request, res: Response) => {
   return res.json({
     code: 20000,

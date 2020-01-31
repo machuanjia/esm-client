@@ -33,6 +33,12 @@ export const deleteRole = (id: number) =>
     method: "delete"
   });
 
+export const getGroups = (params: any) =>
+  request({
+    url: `/roles/groups`,
+    method: "get",
+    params
+  });
 export const getGroup = (id: number, params: any) =>
   request({
     url: `/routes/group/${id}`,

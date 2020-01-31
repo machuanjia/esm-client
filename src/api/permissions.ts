@@ -1,5 +1,11 @@
 import request from "@/utils/request";
 
+export const getApplicationPermissionsTree = (params: any) =>
+  request({
+    url: `/permissions_tree`,
+    method: "get",
+    params
+  });
 export const getApplicationPermissions = (appId: number, params: any) =>
   request({
     url: `/permissions/${appId}`,

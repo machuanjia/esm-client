@@ -115,8 +115,8 @@
       >
         <rolesCollection
           :entity="entity"
-          @saveAction="collectionSaveAction"
-          @cancelAction="collectionCancelAction"
+          @saveAction="saveAction"
+          @cancelAction="cancelAction"
         />
       </el-dialog>
     </template>
@@ -135,7 +135,7 @@ import rolesCollection from '@/views/roles/roles-collection.vue';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
 import rolesDetail from '@/views/roles/roles-detail.vue';
-import { getRoles } from '@/api/roles';
+import { getRoles, getRole, deleteRole } from '@/api/roles';
 
 @Component({
   name: 'roles',
@@ -159,9 +159,31 @@ export default class extends mixins(ViewMixin) {
     this.openCollectionAction();
   }
 
-  async editAction(row: any) {}
+  async editAction(row: any) {
+    const { data } = await getRole(row.id, {});
+    if (data) {
+      this.entity = data;
+      this.openCollectionAction();
+    }
+  }
 
-  removeAction(row: any) {}
+  removeAction(row: any) {
+    this.removeCollectionAction(async(successFn: any) => {
+      const { data } = await deleteRole(row.id);
+      this.getRoles();
+      if (successFn) {
+        successFn();
+      }
+    });
+  }
+
+  saveAction(data: any) {
+    this.closeCollectionaction();
+  }
+
+  cancelAction() {
+    this.closeCollectionaction();
+  }
 
   addGroup() {}
 

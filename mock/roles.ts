@@ -150,6 +150,29 @@ export const deleteRole = (req: Request, res: Response) => {
   });
 };
 
+export const getGroups = (req: Request, res: Response) => {
+  return res.json({
+    code: 20000,
+    data: [
+      {
+        id: 1,
+        description: "华北大区分组",
+        name: "华北大区"
+      },
+      {
+        id: 2,
+        description: "华东大区分组",
+        name: "华东大区"
+      },
+      {
+        id: 3,
+        description: "华中大区分组",
+        name: "华中大区"
+      }
+    ]
+  });
+};
+
 export const getGroup = (req: Request, res: Response) => {
   const id = parseInt((Math.random() * 1000) as any);
   return res.json({
