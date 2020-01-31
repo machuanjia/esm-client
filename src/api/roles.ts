@@ -14,6 +14,13 @@ export const addRole = (data: any) =>
     data
   });
 
+export const getRoleMembers = (id: number, params: any) =>
+  request({
+    url: `/roles/role/${id}/members`,
+    method: "get",
+    params
+  });
+
 export const getRole = (id: number, params: any) =>
   request({
     url: `/roles/role/${id}`,

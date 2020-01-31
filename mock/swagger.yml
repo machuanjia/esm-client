@@ -140,6 +140,12 @@ paths:
       responses:
         200:
           description: OK
+  /roles/role/{id}/members:
+    get:
+      operationId: getRoleMembers
+      responses:
+        200:
+          description: OK
   /roles/group:
     post:
       operationId: addGroup

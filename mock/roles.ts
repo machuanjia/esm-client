@@ -99,6 +99,29 @@ export const addRole = (req: Request, res: Response) => {
   });
 };
 
+export const getRoleMembers = (req: Request, res: Response) => {
+  return res.json({
+    code: 20000,
+    data: [
+      {
+        name: "王小虎",
+        role: "管理员",
+        phone: "18401125500"
+      },
+      {
+        name: "王小虎",
+        role: "普通成员",
+        phone: "18401125500"
+      },
+      {
+        name: "王小虎",
+        role: "只读成员",
+        phone: "18401125500"
+      }
+    ]
+  });
+};
+
 export const getRole = (req: Request, res: Response) => {
   const id = parseInt((Math.random() * 1000) as any);
   return res.json({
