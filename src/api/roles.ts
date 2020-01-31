@@ -41,27 +41,27 @@ export const getGroups = (params: any) =>
   });
 export const getGroup = (id: number, params: any) =>
   request({
-    url: `/routes/group/${id}`,
+    url: `/roles/group/${id}`,
     method: "get",
     params
   });
 
 export const addGroup = (data: any) =>
   request({
-    url: `/routes/group`,
+    url: `/roles/group`,
     method: "post",
     data
   });
 
 export const updateGroup = (id: number, data: any) =>
   request({
-    url: `/routes/group/${id}`,
+    url: `/roles/group/${id}`,
     method: "put",
     data
   });
 
 export const deleteGroup = (id: number) =>
   request({
-    url: `/routes/group/${id}`,
+    url: `/roles/group/${id}`,
     method: "delete"
   });

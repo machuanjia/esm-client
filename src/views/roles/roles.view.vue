@@ -23,7 +23,7 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
-        @click="addGroup"
+        @click="openGroupAction"
       >
         分组
       </el-button>
@@ -119,6 +119,18 @@
           @cancelAction="cancelAction"
         />
       </el-dialog>
+      <el-dialog
+        v-if="collectionGroupVisible"
+        :title="collectionGroupTitle"
+        :visible.sync="collectionGroupVisible"
+        :width="collectionSize"
+      >
+        <rolesGroupCollection
+          :entity="group"
+          @saveAction="saveGroupAction"
+          @cancelAction="cancelGroupAction"
+        />
+      </el-dialog>
     </template>
   </app-content>
 </template>
@@ -135,18 +147,33 @@ import rolesCollection from '@/views/roles/roles-collection.vue';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
 import rolesDetail from '@/views/roles/roles-detail.vue';
-import { getRoles, getRole, deleteRole } from '@/api/roles';
+import {
+  getRoles,
+  getRole,
+  addRole,
+  deleteRole,
+  getGroup,
+  addGroup,
+  updateRole,
+  updateGroup,
+  deleteGroup
+} from '@/api/roles';
+import rolesGroupCollection from '@/views/roles/roles-group-collection.vue';
 
 @Component({
   name: 'roles',
   components: {
     AppContent,
     rolesDetail,
-    rolesCollection
+    rolesCollection,
+    rolesGroupCollection
   }
 })
 export default class extends mixins(ViewMixin) {
   private rolesData = [];
+  private collectionGroupVisible = false;
+  private group: any = null;
+  private collectionGroupTitle = '新建';
 
   created() {
     this.getRoles();
@@ -178,6 +205,11 @@ export default class extends mixins(ViewMixin) {
   }
 
   saveAction(data: any) {
+    if (this.entity) {
+      this.updateRole(this.entity.id, data);
+    } else {
+      this.addRole(data);
+    }
     this.closeCollectionaction();
   }
 
@@ -185,16 +217,85 @@ export default class extends mixins(ViewMixin) {
     this.closeCollectionaction();
   }
 
-  addGroup() {}
+  openGroupAction() {
+    this.collectionGroupTitle = '新建';
+    this.group = null;
+    this.collectionGroupVisible = true;
+  }
 
-  editGroup(row: any) {}
+  async editGroup(row: any) {
+    this.collectionGroupTitle = '编辑';
+    const { data } = await getGroup(row.id, {});
+    if (data) {
+      this.group = data;
+      this.collectionGroupVisible = true;
+    }
+  }
 
-  removeGroup(row: any) {}
+  async removeGroup(row: any) {
+    this.$confirm('此操作将永久删除该数据, 是否继续?', '删除', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'error'
+    })
+      .then(async() => {
+        const { data } = await deleteGroup(row.id);
+        if (data) {
+          this.getRoles();
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }
+      })
+      .catch(() => {});
+  }
+
+  saveGroupAction(data: any) {
+    if (this.group) {
+      this.updateGroup(this.group.id, data);
+    } else {
+      this.addGroup(data);
+    }
+    this.collectionGroupVisible = false;
+  }
+
+  cancelGroupAction() {
+    this.collectionGroupVisible = false;
+  }
 
   private async getRoles() {
     const { data } = await getRoles({});
     if (data) {
       this.rolesData = data;
+    }
+  }
+
+  private async addRole(payload: any) {
+    const { data } = await addRole(payload);
+    if (data) {
+      this.getRoles();
+    }
+  }
+
+  private async updateRole(id: number, payload: any) {
+    const { data } = await updateRole(id, payload);
+    if (data) {
+      this.getRoles();
+    }
+  }
+
+  private async addGroup(payload: any) {
+    const { data } = await addGroup(payload);
+    if (data) {
+      this.getRoles();
+    }
+  }
+
+  private async updateGroup(id: number, payload: any) {
+    const { data } = await updateGroup(id, payload);
+    if (data) {
+      this.getRoles();
     }
   }
 }
