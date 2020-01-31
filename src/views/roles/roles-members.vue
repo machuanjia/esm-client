@@ -17,7 +17,7 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
-        @click="openAction"
+        @click="openMemberAction"
       >
         人员
       </el-button>
@@ -56,6 +56,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <SelectMembersDialog />
     </template>
   </app-content>
 </template>
@@ -69,20 +70,29 @@ import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import { getRoleMembers } from '@/api/roles';
 import AppContent from '@/components/Content/index.vue';
+import SelectMembersDialog from '@/components/SelectMembers/select-members-dialog.vue';
+import { setSelectMemberDialogVisible } from '@/components/SelectMembers/select-members-util';
+import { SelectMembersModule } from '@/store/modules/select-members';
 
 @Component({
   name: 'rolesMembers',
   components: {
-    AppContent
+    AppContent,
+    SelectMembersDialog
   }
 })
 export default class extends Vue {
   @Prop({ required: true }) private entity!: any;
   private tableData: any = [];
+  private searchText = '';
 
   mounted() {
     this.getRoleMembers();
   }
+  openMemberAction() {
+    SelectMembersModule.setSelectMembersDialogVisible(true);
+  }
+
   removeAction(row: any) {}
 
   private async getRoleMembers() {
