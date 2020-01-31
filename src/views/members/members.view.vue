@@ -223,6 +223,9 @@ export default class extends mixins(ViewMixin) {
   height: 100%;
   .splitter-pane-resizer {
     background: none;
+    &.vertical{
+      border: none!important;
+    }
   }
 }
 
