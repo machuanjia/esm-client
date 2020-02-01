@@ -92,12 +92,11 @@
             :visible.sync="collectionVisible"
             :width="collectionSize"
           >
-            ddddd
-            <!-- <rolesCollection
+            <scheduleEventCollection
               :entity="entity"
               @saveAction="saveAction"
               @cancelAction="cancelAction"
-            />-->
+            />
           </el-dialog>
         </template>
       </app-content>
@@ -123,13 +122,14 @@ import {
   addEventCategory,
   deleteEventCategory
 } from '@/api/schedule-setting';
-import scheduleEventCollection from '@/views/calendar-management/calendar-event-categoty-collection.vue'
+import scheduleEventCollection from '@/views/schedule/schedule-management/schedule-event-categoty-collection.vue';
 
 @Component({
   name: 'calendarEventMangement',
   components: {
     AppContent,
-    AppContentFull
+    AppContentFull,
+    scheduleEventCollection
   }
 })
 export default class extends mixins(ViewMixin) {
@@ -140,14 +140,54 @@ export default class extends mixins(ViewMixin) {
   }
   mounted() {}
 
-  editAction(row: any) {}
+  async editAction(row: any) {
+    const { data } = await getEventCategory(row.id, {});
+    if (data) {
+      this.editCollectionAction(data);
+    }
+  }
 
-  removeAction(row: any) {}
+  saveAction(payload: any) {
+    if (this.entity) {
+      this.updateCollection(this.entity.id, payload);
+    } else {
+      this.addEventCategory(payload);
+    }
+    this.closeCollectionaction();
+  }
+
+  cancelAction() {
+    this.closeCollectionaction();
+  }
+
+  removeAction(row: any) {
+    this.removeCollectionAction(async(successFn: any) => {
+      const { data } = await deleteEventCategory(row.id);
+      this.deleteCollection(this.categotyes, row);
+      if (successFn) {
+        successFn();
+      }
+    });
+  }
 
   private async getEventCategorys() {
     const { data } = await getEventCategorys({});
     if (data) {
       this.categotyes = data;
+    }
+  }
+
+  private async addEventCategory(payload: any) {
+    const { data } = await addEventCategory(payload);
+    if (data) {
+      this.pushCollection(this.categotyes, data);
+    }
+  }
+
+  private async updateEventCategory(id: number, payload: any) {
+    const { data } = await updateEventCategory(id, payload);
+    if (data) {
+      this.updateCollection(this.categotyes, data);
     }
   }
 }

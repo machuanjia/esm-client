@@ -13,6 +13,15 @@
         <el-input v-model="ruleForm.name" />
       </el-form-item>
       <el-form-item
+        label="颜色"
+        prop="color"
+      >
+        <el-color-picker
+          v-model="ruleForm.color"
+          :size="'mini'"
+        />
+      </el-form-item>
+      <el-form-item
         label="描述"
         prop="description"
       >
@@ -59,12 +68,13 @@ export default class extends mixins(CollectionMixin) {
   created() {
     this.ruleForm = {
       name: '',
+      color: '#30B08F',
       description: ''
     };
 
     this.rules = {
       name: [
-        { required: true, message: '请输入应用名称', trigger: 'blur' },
+        { required: true, message: '请输入类型名称', trigger: 'blur' },
         { min: 3, max: 100, message: '长度在 3 到 100 个字符', trigger: 'blur' }
       ],
       description: []
@@ -74,8 +84,9 @@ export default class extends mixins(CollectionMixin) {
   mounted() {
     if (this.entity) {
       this.ruleForm = {
-        name: this.entity.name,
-        description: this.entity.description
+        name: this.entity.name || '',
+        color: this.entity.color || '#30B08F',
+        description: this.entity.description || ''
       };
     }
   }
