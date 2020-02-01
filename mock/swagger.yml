@@ -20,6 +20,60 @@ tags:
   - name: users
     description: Users related api.
 paths:
+  /schedule/calender-categoryes:
+    get:
+      operationId: getCalenderCategorys
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addCalenderCategory
+      responses:
+        200:
+          description: OK
+  /schedule/calender-categoryes/{id}:
+    get:
+      operationId: getCalenderCategory
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateCalenderCategory
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteCalenderCategory
+      responses:
+        200:
+          description: OK
+  /schedule/event-categoryes:
+    get:
+      operationId: getEventCategorys
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addEventCategory
+      responses:
+        200:
+          description: OK
+  /schedule/event-categoryes/{id}:
+    get:
+      operationId: getEventCategory
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateEventCategory
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteEventCategory
+      responses:
+        200:
+          description: OK
   /organizations:
     get:
       operationId: getOrganizations

@@ -17,7 +17,7 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
-        @click="openAction"
+        @click="openCollectionAction"
       >
         权限
       </el-button>
@@ -122,16 +122,11 @@ export default class extends mixins(ViewMixin) {
     this.getApplicationPermissions();
   }
 
-  openAction() {
-    this.entity = null;
-    this.openCollectionAction();
-  }
   async editAction(row: any) {
     const { data } = await getApplicationPermission(this.app.id, row.id, {});
     if (data) {
-      this.entity = data;
+      this.editCollectionAction(data)
     }
-    this.openCollectionAction();
   }
 
   removeAction(row: any) {

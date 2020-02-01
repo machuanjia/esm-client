@@ -16,7 +16,7 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
-        @click="openAction"
+        @click="openCollectionAction"
       >
         应用
       </el-button>
@@ -133,11 +133,6 @@ export default class extends mixins(ViewMixin) {
   }
 
   mounted() {}
-
-  openAction() {
-    this.entity = null;
-    this.openCollectionAction();
-  }
 
   async editAction(row: any) {
     const { data } = await getApplication(row.id, {});

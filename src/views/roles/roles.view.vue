@@ -16,7 +16,7 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
-        @click="openAction"
+        @click="openCollectionAction"
       >
         角色
       </el-button>
@@ -181,16 +181,10 @@ export default class extends mixins(ViewMixin) {
 
   mounted() {}
 
-  openAction() {
-    this.entity = null;
-    this.openCollectionAction();
-  }
-
   async editAction(row: any) {
     const { data } = await getRole(row.id, {});
     if (data) {
-      this.entity = data;
-      this.openCollectionAction();
+      this.editCollectionAction(data)
     }
   }
 

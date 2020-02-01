@@ -5,3 +5,4 @@ export * from "./organizations";
 export * from "./applications";
 export * from "./permissions";
 export * from "./roles";
+export * from "./schedule-setting";

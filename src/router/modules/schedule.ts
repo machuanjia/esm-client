@@ -1,5 +1,4 @@
 import { RouteConfig } from "vue-router";
-import Layout from "@/layout/index.vue";
 import LayoutCalendar from "@/layout/calendar.vue";
 
 const scheduleRouter: RouteConfig = {
@@ -16,7 +15,7 @@ const scheduleRouter: RouteConfig = {
       path: "my",
       component: () =>
         import(
-          /* webpackChunkName: "organization" */ "@/views/calendar/calendar-my.view.vue"
+          /* webpackChunkName: "organization" */ "@/views/schedule/calender/calender-my.view.vue"
         ),
       name: "my",
       meta: {
@@ -29,7 +28,7 @@ const scheduleRouter: RouteConfig = {
       path: "team",
       component: () =>
         import(
-          /* webpackChunkName: "members" */ "@/views/calendar/calendar-team.view.vue"
+          /* webpackChunkName: "members" */ "@/views/schedule/calender/calendar-team.view.vue"
         ),
       name: "team",
       meta: {
@@ -42,7 +41,7 @@ const scheduleRouter: RouteConfig = {
       path: "timeline",
       component: () =>
         import(
-          /* webpackChunkName: "roles" */ "@/views/calendar/timeline.view.vue"
+          /* webpackChunkName: "roles" */ "@/views/schedule/timeline/timeline.view.vue"
         ),
       name: "timeline",
       meta: {
@@ -52,9 +51,9 @@ const scheduleRouter: RouteConfig = {
       }
     },
     {
-      path: "calendar-management",
+      path: "schedule-calender-management",
       component: () =>
-        import(/* webpackChunkName: "resource-status" */ "@/views/calendar-management/calendar-management.view.vue"),
+        import(/* webpackChunkName: "resource-status" */ "@/views/schedule/schedule-management/schedule-calender-management.view.vue"),
       name: "calendarManagement",
       meta: {
         title: "calendarManagement",
@@ -63,9 +62,9 @@ const scheduleRouter: RouteConfig = {
       }
     },
     {
-      path: "calendar-event-management",
+      path: "schedule-event-management",
       component: () =>
-        import(/* webpackChunkName: "resource-status" */ "@/views/calendar-management/calendar-event-management.view.vue"),
+        import(/* webpackChunkName: "resource-status" */ "@/views/schedule/schedule-management/schedule-event-management.view.vue"),
       name: "calendarEventManagement",
       meta: {
         title: "calendarEventManagement",
