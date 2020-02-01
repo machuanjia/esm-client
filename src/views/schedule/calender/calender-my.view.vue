@@ -5,6 +5,13 @@
         <svg-icon name="calendar" />
         <span class="ml5">我的日程</span>
       </span>
+      <span class="calendar-full-filter">
+        <el-button
+          icon="el-icon-setting"
+          size="small"
+          @click="calenderSetting"
+        />
+      </span>
       <FullCalendar
         ref="fullCalendar"
         class="app-calendar"
@@ -22,7 +29,30 @@
         :height="'auto'"
         locale="zh-cn"
         @dateClick="handleDateClick"
+        @eventClick="handleEventClick"
       />
+      <el-dialog
+        v-if="collectionVisible"
+        :title="collectionTitle"
+        :visible.sync="collectionVisible"
+        :width="collectionSize"
+      >
+        <eventCollection
+          :entity="entity"
+          @saveAction="saveAction"
+          @cancelAction="cancelAction"
+        />
+      </el-dialog>
+      <el-drawer
+        v-if="settingVisible"
+        title="设置"
+        :modal="false"
+        :size="'260px'"
+        :visible.sync="settingVisible"
+        :direction="'rtl'"
+      >
+        <calenderSetting @filterChange="filterChange" />
+      </el-drawer>
     </template>
   </app-content>
 </template>
@@ -41,15 +71,22 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 // import bootstrapPlugin from "@fullcalendar/bootstrap";
+import eventCollection from '@/views/schedule/event/event-collection.vue';
+import { mixins } from 'vue-class-component';
+import ViewMixin from '@/components/Mixin';
+import calenderSetting from '@/views/schedule/calender/calender-setting.vue';
 
 @Component({
-  name: 'calendar',
+  name: 'myCalendar',
   components: {
     AppContent,
-    FullCalendar
+    FullCalendar,
+    eventCollection,
+    calenderSetting
   }
 })
-export default class extends Vue {
+export default class extends mixins(ViewMixin) {
+  private settingVisible = false;
   private calendarPlugins = [
     // plugins must be defined in the JS
     dayGridPlugin,
@@ -67,8 +104,8 @@ export default class extends Vue {
   private customButtons = {
     createButton: {
       text: '新建',
-      click: function() {
-        alert('clicked the custom button!');
+      click: () => {
+        this.openCollectionAction();
       }
     }
   };
@@ -91,14 +128,24 @@ export default class extends Vue {
   //   calendarApi.gotoDate('2000-01-01') // call a method on the Calendar object
   // }
   handleDateClick(arg: any) {
-    if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
-      // this.calendarEvents.push({ // add new event data
-      //   title: 'New Event',
-      //   start: arg.date,
-      //   allDay: arg.allDay
-      // })
-    }
+    // if (confirm("Would you like to add an event to " + arg.dateStr + " ?")) {
+    // this.calendarEvents.push({ // add new event data
+    //   title: 'New Event',
+    //   start: arg.date,
+    //   allDay: arg.allDay
+    // })
+    // }
   }
+  handleEventClick(calEvent:any, jsEvent:any, view:any) {
+  }
+  saveAction(payload: any) {}
+  cancelAction() {
+    this.closeCollectionaction();
+  }
+  calenderSetting() {
+    this.settingVisible = true;
+  }
+  filterChange(payload: any) {}
 }
 </script>
 
