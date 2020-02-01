@@ -1,84 +1,103 @@
-.calendar-full-title{
+.calendar-full-title {
   position: absolute;
-  top:0px;
-  left:10px;
+  top: 0px;
+  left: 10px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  svg{
+  svg {
     font-size: 16px;
     color: #324157;
   }
-  span{
+  span {
     font-size: 14px;
     color: #97a8be;
   }
 }
 
-
-.app-calendar{
+.app-calendar {
   background: $mainBg;
-  .fc-header-toolbar{
+  .fc-header-toolbar {
     display: flex;
     height: 50px;
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
     background: #fff;
-    .fc-prev-button,.fc-next-button,.fc-today-button{
+    .fc-prev-button,
+    .fc-next-button,
+    .fc-today-button {
       background-color: #fff;
       color: $menuActiveText;
       padding: 0;
       border: none;
       font-size: 0.8em;
       outline: none;
-      &:active,&:hover,&:focus{
+      &:active,
+      &:hover,
+      &:focus {
         outline: none;
       }
     }
-    .fc-today-button{
+    .fc-today-button {
       margin-left: 15px;
       background-color: $menuActiveText;
       color: #fff;
       padding: 3px 5px;
     }
-    .fc-dayGridMonth-button,.fc-timeGridWeek-button,.fc-timeGridDay-button{
-      background-color: #fff;
-      color: $menuActiveText;
-      padding: 0.3em 0.45em;
-      font-size: 0.8em;
-      border-color: $menuActiveText;
-      &.fc-button-active{
-        background-color: $menuActiveText;
-        color: #fff;
-        border-color: $menuActiveText;
-      }
-    }
-    .fc-center{
+    .fc-center {
       flex-grow: 1;
-      h2{
+      h2 {
         color: #414d55;
         font-size: 1.5em;
         margin: 0 1.5em;
       }
-      >div{
+      > div {
         display: flex;
         justify-content: center;
         align-items: center;
       }
-
     }
-    .fc-right{
+    .fc-right {
       padding-right: 20px;
+      .fc-button-group > .fc-button {
+        font-size: 0.8em;
+        padding: 0.3em 0.45em !important;
+        min-width: 50px;
+        background-color: #fff;
+        color: $menuActiveText;
+        border-color: $menuActiveText;
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+        &.fc-button-active {
+          background-color: $menuActiveText;
+          color: #fff;
+          border-color: $menuActiveText;
+        }
+        &:nth-child(2) {
+          border-top-left-radius: 0.25em;
+          border-bottom-left-radius: 0.25em;
+        }
+        &.fc-createButton-button {
+          margin-right: 10px;
+          border-top-right-radius: 0.25em;
+          border-bottom-right-radius: 0.25em;
+          background-color: $menuActiveText;
+          color: #fff;
+          border-color: $menuActiveText;
+        }
+      }
     }
   }
-  .fc-view-container{
+  .fc-view-container {
     padding: 40px;
     height: calc(100vh - 50px);
     overflow: auto;
-    .fc-view{
+    .fc-view {
       background: #fff;
-      .fc-day-header{
+      .fc-day-header {
         height: 40px;
         vertical-align: middle;
         background: #f7f9fb;
@@ -87,40 +106,71 @@
         font-size: 1em;
       }
 
-      .fc-day-number{
+      .fc-day-number {
         color: #414d55;
       }
-
+    }
+  }
+  .fc-list-table {
+    // table-layout: auto;
+    .fc-list-heading {
+      .fc-list-heading-main {
+        padding: 10px;
+        display: inline-block;
+      }
+      .fc-list-heading-alt {
+        padding: 10px;
+        display: inline-block;
+      }
+    }
+    .fc-list-item {
+      .fc-list-item-time {
+        padding: 10px;
+      }
+      .fc-list-item-marker {
+        padding: 10px;
+      }
+      .fc-list-item-title {
+        padding: 10px;
+      }
     }
   }
 }
-.fc-unthemed td.fc-today{
-  background: #f3f7f9!important;
+.fc-unthemed td.fc-today {
+  background: #f3f7f9 !important;
 }
-.fc-unthemed th, .fc-unthemed td, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row, .fc-unthemed .fc-content, .fc-unthemed .fc-popover, .fc-unthemed .fc-list-view, .fc-unthemed .fc-list-heading td{
-  border-color: #e3edf0!important;
+.fc-unthemed th,
+.fc-unthemed td,
+.fc-unthemed thead,
+.fc-unthemed tbody,
+.fc-unthemed .fc-divider,
+.fc-unthemed .fc-row,
+.fc-unthemed .fc-content,
+.fc-unthemed .fc-popover,
+.fc-unthemed .fc-list-view,
+.fc-unthemed .fc-list-heading td {
+  border-color: #e3edf0 !important;
 }
-.fc .fc-axis{
-  padding:10px 4px;
-  font-size: .7em;
+.fc .fc-axis {
+  padding: 10px 4px;
+  font-size: 0.7em;
   color: #414d55;
 }
-.fc-time-grid .fc-slats td{
-  padding:10px 4px;
-  font-size: .7em;
+.fc-time-grid .fc-slats td {
+  padding: 10px 4px;
+  font-size: 0.7em;
   color: #414d55;
 }
-hr.fc-divider{
+hr.fc-divider {
   height: 0;
   margin: 0;
-  padding: 0!important;
-  border-width: 1px 0 0 0!important;
+  padding: 0 !important;
+  border-width: 1px 0 0 0 !important;
 }
 .fc-unthemed {
-  hr{
-    &.fc-divider{
-      border-color:#97a8be!important;
+  hr {
+    &.fc-divider {
+      border-color: #97a8be !important;
     }
   }
 }
-

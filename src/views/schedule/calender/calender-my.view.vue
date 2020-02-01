@@ -2,22 +2,25 @@
   <app-content class="full-app-content">
     <template v-slot:body>
       <span class="calendar-full-title">
-        <svg-icon name="calendar" /> <span class="ml5">我的日程</span>
+        <svg-icon name="calendar" />
+        <span class="ml5">我的日程</span>
       </span>
       <FullCalendar
         ref="fullCalendar"
         class="app-calendar"
         default-view="dayGridMonth"
         :header="{
-          left: 'text',
+          left: 'texts',
           center: 'prev,title,next,today',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+          right: 'createButton,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         }"
+        :custom-buttons="customButtons"
+        :button-text="buttonText"
         :plugins="calendarPlugins"
         :weekends="calendarWeekends"
         :events="calendarEvents"
         :height="'auto'"
-        locale="zh"
+        locale="zh-cn"
         @dateClick="handleDateClick"
       />
     </template>
@@ -36,7 +39,8 @@ import FullCalendar from '@fullcalendar/vue';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import listPlugin from '@fullcalendar/list'
+import listPlugin from '@fullcalendar/list';
+// import bootstrapPlugin from "@fullcalendar/bootstrap";
 
 @Component({
   name: 'calendar',
@@ -50,8 +54,9 @@ export default class extends Vue {
     // plugins must be defined in the JS
     dayGridPlugin,
     timeGridPlugin,
-    interactionPlugin
-    // listPlugin // needed for dateClick
+    interactionPlugin,
+    // bootstrapPlugin
+    listPlugin // needed for dateClick
   ];
   private calendarWeekends = true;
   private calendarEvents = [
@@ -59,10 +64,24 @@ export default class extends Vue {
     { title: 'Event Now', start: new Date() }
   ];
 
-  mounted() {}
+  private customButtons = {
+    createButton: {
+      text: '新建',
+      click: function() {
+        alert('clicked the custom button!');
+      }
+    }
+  };
 
-  edit(row: any) {}
-  remove(row: any) {}
+  private buttonText = {
+    today: '今天',
+    dayGridMonth: '月',
+    timeGridWeek: '周',
+    timeGridDay: '日',
+    listWeek: '列表'
+  };
+
+  mounted() {}
 
   toggleWeekends() {
     this.calendarWeekends = !this.calendarWeekends; // update a property
@@ -87,4 +106,5 @@ export default class extends Vue {
 @import "~@fullcalendar/core/main.css";
 @import "~@fullcalendar/daygrid/main.css";
 @import "~@fullcalendar/timegrid/main.css";
+// @import "~@fullcalendar/bootstrap/main.css";
 </style>
