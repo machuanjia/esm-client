@@ -107,7 +107,7 @@ import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
-import applicationCollection from '@/views/application/application-collection.vue';
+import applicationCollection from '@/views/auth/application/application-collection.vue';
 import {
   getApplications,
   addApplication,

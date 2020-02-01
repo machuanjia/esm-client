@@ -1,8 +1,8 @@
 import { RouteConfig } from "vue-router";
 import Layout from "@/layout/index.vue";
 
-const orgRouter: RouteConfig = {
-  path: "/org",
+const authRouter: RouteConfig = {
+  path: "/auth",
   component: Layout,
   redirect: "noredirect",
   name: "org",
@@ -15,7 +15,7 @@ const orgRouter: RouteConfig = {
       path: "organizations",
       component: () =>
         import(
-          /* webpackChunkName: "organization" */ "@/views/organizations/organizations.view.vue"
+          /* webpackChunkName: "organization" */ "@/views/auth/organizations/organizations.view.vue"
         ),
       name: "Organization",
       meta: {
@@ -28,7 +28,7 @@ const orgRouter: RouteConfig = {
       path: "members",
       component: () =>
         import(
-          /* webpackChunkName: "members" */ "@/views/members/members.view.vue"
+          /* webpackChunkName: "members" */ "@/views/auth/members/members.view.vue"
         ),
       name: "Members",
       meta: {
@@ -40,7 +40,7 @@ const orgRouter: RouteConfig = {
     {
       path: "roles",
       component: () =>
-        import(/* webpackChunkName: "roles" */ "@/views/roles/roles.view.vue"),
+        import(/* webpackChunkName: "roles" */ "@/views/auth/roles/roles.view.vue"),
       name: "Roles",
       meta: {
         title: "roles",
@@ -52,7 +52,7 @@ const orgRouter: RouteConfig = {
       path: "permissions",
       component: () =>
         import(
-          /* webpackChunkName: "roles" */ "@/views/permissions/permissions.view.vue"
+          /* webpackChunkName: "roles" */ "@/views/auth/permissions/permissions.view.vue"
         ),
       name: "Permissions",
       meta: {
@@ -65,7 +65,7 @@ const orgRouter: RouteConfig = {
       path: "application",
       component: () =>
         import(
-          /* webpackChunkName: "roles" */ "@/views/application/application.view.vue"
+          /* webpackChunkName: "roles" */ "@/views/auth/application/application.view.vue"
         ),
       name: "Application",
       meta: {
@@ -77,4 +77,4 @@ const orgRouter: RouteConfig = {
   ]
 };
 
-export default orgRouter;
+export default authRouter;

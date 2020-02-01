@@ -103,8 +103,8 @@ import {
 } from '@/api/permissions';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
-import permissionAppCollection from '@/views/permissions/permissions-app-collection.vue';
-import { updateApplication } from '../../api/applications';
+import permissionAppCollection from '@/views/auth/permissions/permissions-app-collection.vue';
+import { updateApplication } from '@/api/applications';
 
 @Component({
   name: 'permissionsApp',

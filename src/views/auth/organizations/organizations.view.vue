@@ -83,7 +83,7 @@ import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
-import organizationCollection from '@/views/organizations/organizations-collection.vue';
+import organizationCollection from '@/views/auth/organizations/organizations-collection.vue';
 import { dialogSize } from '@/constant/common';
 import {
   getOrganizations,

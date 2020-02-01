@@ -28,7 +28,7 @@ import { Form as ElForm, Input } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
-import permissionsApp from '@/views/permissions/permissions-app.vue';
+import permissionsApp from '@/views/auth/permissions/permissions-app.vue';
 import { getApplications } from '@/api/applications';
 
 @Component({

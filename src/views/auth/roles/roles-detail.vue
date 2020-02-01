@@ -7,27 +7,21 @@
       label="基本信息"
       name="basic"
     >
-      <membersBasic
+      <rolesBasic
         v-if="activeName === 'basic'"
-        :entity="entity"
+        :entity.sync="entity"
       />
     </el-tab-pane>
+    <!-- <el-tab-pane label="权限" name="permissions">
+      <rolesMembers :entity.sync="entity" />
+    </el-tab-pane>-->
     <el-tab-pane
-      label="角色"
-      name="roles"
+      label="人员"
+      name="members"
     >
-      <membersRoles
-        v-if="activeName === 'roles'"
-        :entity="entity"
-      />
-    </el-tab-pane>
-    <el-tab-pane
-      label="权限"
-      name="permissions"
-    >
-      <membersPermissions
-        v-if="activeName === 'permissions'"
-        :entity="entity"
+      <rolesMembers
+        v-if="activeName === 'members'"
+        :entity.sync="entity"
       />
     </el-tab-pane>
   </el-tabs>
@@ -40,16 +34,16 @@ import { Form as ElForm, Input } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
-import membersBasic from '@/views/members/members-basic.vue';
-import membersRoles from '@/views/members/members-roles.vue';
-import membersPermissions from '@/views/members/members-permissions.vue';
+import rolesBasic from '@/views/auth/roles/roles-basic.vue';
+import rolesMembers from '@/views/auth/roles/roles-members.vue';
+import rolesPermissions from '@/views/auth/roles/roles-permissions.vue';
 
 @Component({
-  name: 'membersDetail',
+  name: 'rolesDetail',
   components: {
-    membersBasic,
-    membersRoles,
-    membersPermissions
+    rolesBasic,
+    rolesMembers,
+    rolesPermissions
   }
 })
 export default class extends Vue {

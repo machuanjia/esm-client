@@ -9,8 +9,7 @@ import componentsRouter from "./modules/components";
 import chartsRouter from "./modules/charts";
 import tableRouter from "./modules/table";
 import nestedRouter from "./modules/nested";
-import orgRouter from "./modules/org";
-import applicationRouter from "./modules/application";
+import authRouter from "./modules/auth";
 import accountRouter from "./modules/account";
 import statisticsRouter from "./modules/statistics";
 import scheduleRouter from "./modules/schedule";
@@ -196,7 +195,7 @@ export const asyncRoutes: RouteConfig[] = [
   // nestedRouter,
   // tableRouter,
   statisticsRouter,
-  orgRouter,
+  authRouter,
   accountRouter,
   // {
   //   path: '/example',

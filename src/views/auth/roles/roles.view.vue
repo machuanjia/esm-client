@@ -143,10 +143,10 @@ import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
-import rolesCollection from '@/views/roles/roles-collection.vue';
+import rolesCollection from '@/views/auth/roles/roles-collection.vue';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
-import rolesDetail from '@/views/roles/roles-detail.vue';
+import rolesDetail from '@/views/auth/roles/roles-detail.vue';
 import {
   getRoles,
   getRole,
@@ -158,7 +158,7 @@ import {
   updateGroup,
   deleteGroup
 } from '@/api/roles';
-import rolesGroupCollection from '@/views/roles/roles-group-collection.vue';
+import rolesGroupCollection from '@/views/auth/roles/roles-group-collection.vue';
 
 @Component({
   name: 'roles',
