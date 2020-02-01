@@ -625,7 +625,34 @@ paths:
                           $ref: "#/components/schemas/User"
         401:
           $ref: "#/components/responses/Unauthorized"
-  /users/register:
+    post:
+      operationId: addUser
+      responses:
+        200:
+          description: OK
+  /users/{id}:
+    get:
+      operationId: getUser
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateUser
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteUser
+      responses:
+        200:
+          description: OK
+  /users/{id}/permissions:
+    get:
+      operationId: getUserPermissions
+      responses:
+        200:
+          description: OK
+  /register:
     post:
       tags:
         - users
@@ -650,7 +677,7 @@ paths:
                   code:
                     type: integer
                     format: int32
-  /users/login:
+  /login:
     post:
       tags:
         - users
@@ -700,7 +727,7 @@ paths:
                         example: admin-token
         400:
           $ref: "#/components/responses/InvalidUser"
-  /users/logout:
+  /logout:
     post:
       tags:
         - users
@@ -831,7 +858,7 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         404:
           $ref: "#/components/responses/NotFound"
-  /users/info:
+  /user/info:
     post:
       tags:
         - users

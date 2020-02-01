@@ -80,7 +80,7 @@
                       </span>
                       <i
                         class="el-icon-edit-outline table-icon-action"
-                        @click="editCollectionAction(row)"
+                        @click="editAction(row)"
                       />
                       <i
                         class="el-icon-delete table-icon-action"
@@ -134,6 +134,14 @@ import { dialogSize, drawerSize } from '@/constant/common';
 import membersDetail from '@/views/members/members-detail.vue';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
+import { getOrganizations } from '@/api/organizations';
+import {
+  getUsers,
+  getUser,
+  deleteUser,
+  updateUser,
+  addUser
+} from '@/api/users';
 
 @Component({
   name: 'member',
@@ -145,75 +153,85 @@ import ViewMixin from '@/components/Mixin';
   }
 })
 export default class extends mixins(ViewMixin) {
-  private orgs = [
+  private orgs: any = [
     {
-      label: '北京华阳云正科技有限公司',
-      children: [
-        {
-          label: '研发部',
-          children: [
-            {
-              label: '架构部'
-            },
-            {
-              label: '研发一部'
-            },
-            {
-              label: '研发二部'
-            }
-          ]
-        },
-        {
-          label: '销售部',
-          children: [
-            {
-              label: '北京销售部'
-            },
-            {
-              label: '上海销售部'
-            }
-          ]
-        },
-        {
-          label: '未分组'
-        }
-      ]
+      id: 0,
+      label: '北京华阳云正科技有限公司'
     }
   ];
 
   private orgProps = {
     children: 'children',
-    label: 'label'
+    label: 'name'
   };
 
-  private tableData = [
-    {
-      name: '王小虎',
-      role: '管理员',
-      phone: '18401125500'
-    },
-    {
-      name: '王小虎',
-      role: '普通成员',
-      phone: '18401125500'
-    },
-    {
-      name: '王小虎',
-      role: '只读成员',
-      phone: '18401125500'
-    }
-  ];
+  private tableData = [];
 
   handleNodeClick(node: any) {}
 
+  created() {
+    this.getOrganizations();
+    this.getUsers();
+  }
+
   mounted() {}
 
-  saveAction() {
+  saveAction(data: any) {
+    if (this.entity) {
+      this.updateUser(this.entity.id, data);
+    } else {
+      this.addUser(data);
+    }
     this.closeCollectionaction();
   }
 
   cancelAction() {
     this.closeCollectionaction();
+  }
+  async editAction(row: any) {
+    const { data } = await getUser(row.id, {});
+    if (data) {
+      this.editCollectionAction(data);
+    }
+  }
+  removeAction(row: any) {
+    this.removeCollectionAction(async(successFn: any) => {
+      const { data } = await deleteUser(row.id);
+      this.getUsers();
+      if (successFn) {
+        successFn();
+      }
+    });
+  }
+  private async getOrganizations() {
+    const { data } = await getOrganizations({});
+    if (data) {
+      this.orgs = [
+        {
+          id: 0,
+          name: '北京华阳云正科技有限公司',
+          children: data
+        }
+      ];
+    }
+  }
+  private async getUsers(orgId?: any) {
+    const { data } = await getUsers({ orgId: orgId || '' });
+    if (data) {
+      this.tableData = data;
+    }
+  }
+  private async addUser(payload: any) {
+    const { data } = await addUser(payload);
+    if (data) {
+      this.getUsers();
+    }
+  }
+  private async updateUser(id: number, payload: any) {
+    const { data } = await updateUser(id, payload);
+    if (data) {
+      this.updateCollection(this.tableData, data);
+    }
   }
 }
 </script>
@@ -223,8 +241,8 @@ export default class extends mixins(ViewMixin) {
   height: 100%;
   .splitter-pane-resizer {
     background: none;
-    &.vertical{
-      border: none!important;
+    &.vertical {
+      border: none !important;
     }
   }
 }

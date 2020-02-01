@@ -2,25 +2,33 @@
   <el-tabs
     v-model="activeName"
     class="plr20"
-    @tab-click="handleClick"
   >
     <el-tab-pane
       label="基本信息"
       name="basic"
     >
-      <membersBasic :entity="entity" />
+      <membersBasic
+        v-if="activeName === 'basic'"
+        :entity="entity"
+      />
     </el-tab-pane>
     <el-tab-pane
       label="角色"
       name="roles"
     >
-      <membersRoles :entity="entity" />
+      <membersRoles
+        v-if="activeName === 'roles'"
+        :entity="entity"
+      />
     </el-tab-pane>
     <el-tab-pane
       label="权限"
       name="permissions"
     >
-      <membersPermissions />
+      <membersPermissions
+        v-if="activeName === 'permissions'"
+        :entity="entity"
+      />
     </el-tab-pane>
   </el-tabs>
 </template>
