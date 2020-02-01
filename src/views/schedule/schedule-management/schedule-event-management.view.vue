@@ -66,6 +66,7 @@
                 <el-color-picker
                   v-model="row.color"
                   :size="'mini'"
+                  @change="changeColor(row)"
                 />
               </template>
             </el-table-column>
@@ -167,6 +168,14 @@ export default class extends mixins(ViewMixin) {
       if (successFn) {
         successFn();
       }
+    });
+  }
+
+  changeColor(row: any) {
+    this.updateEventCategory(row.id, {
+      name: row.name,
+      color: row.color,
+      description: row.description
     });
   }
 
