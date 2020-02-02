@@ -28,7 +28,7 @@ const resourceRouter: RouteConfig = {
       path: "resource-status",
       component: () =>
         import(
-          /* webpackChunkName: "resource-status" */ "@/views/resource-status/resource-status.view.vue"
+          /* webpackChunkName: "resource-status" */ "@/views/resource/status/resource-status.view.vue"
         ),
       name: "resourceStatus",
       meta: {
@@ -41,7 +41,7 @@ const resourceRouter: RouteConfig = {
       path: "resource-type",
       component: () =>
         import(
-          /* webpackChunkName: "resource-status" */ "@/views/resource-type/resource-type.view.vue"
+          /* webpackChunkName: "resource-status" */ "@/views/resource/category/resource-category.view.vue"
         ),
       name: "resourceType",
       meta: {

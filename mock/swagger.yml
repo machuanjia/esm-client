@@ -20,6 +20,60 @@ tags:
   - name: users
     description: Users related api.
 paths:
+  /resources/category:
+    get:
+      operationId: getResourceCategorys
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addResourceCategory
+      responses:
+        200:
+          description: OK
+  /resources/category/{id}:
+    get:
+      operationId: getResourceCategory
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateResourceCategory
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteResourceCategory
+      responses:
+        200:
+          description: OK
+  /resources/status:
+    get:
+      operationId: getResourceStatuses
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addResourceStatus
+      responses:
+        200:
+          description: OK
+  /resources/status/{id}:
+    get:
+      operationId: getResourceStatus
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateResourceStatus
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteResourceStatus
+      responses:
+        200:
+          description: OK
   /schedule/calender-categoryes:
     get:
       operationId: getCalenderCategorys
