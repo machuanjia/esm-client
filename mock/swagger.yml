@@ -20,6 +20,33 @@ tags:
   - name: users
     description: Users related api.
 paths:
+  /company-events:
+    get:
+      operationId: getCompanyEvents
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addCompanyEvent
+      responses:
+        200:
+          description: OK
+  /company-events/{id}:
+    get:
+      operationId: getCompanyEvent
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateCompanyEvent
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteCompanyEvent
+      responses:
+        200:
+          description: OK
   /resources:
     get:
       operationId: getResources

@@ -7,3 +7,4 @@ export * from "./permissions";
 export * from "./roles";
 export * from "./schedule-setting";
 export * from "./resource-setting";
+export * from "./inoutboard";

@@ -51,10 +51,10 @@ const statusRouter: RouteConfig = {
       }
     },
     {
-      path: "company-status-event",
+      path: "company-events",
       component: () =>
         import(
-          /* webpackChunkName: "status" */ "@/views/inoutboard/company-status-event/company-status-event.view.vue"
+          /* webpackChunkName: "status" */ "@/views/inoutboard/company-events/company-events.view.vue"
         ),
       name: "companyStatusEvent",
       meta: {
