@@ -12,7 +12,20 @@ const resourceRouter: RouteConfig = {
   },
   children: [
     {
-      path: "index",
+      path: "timeline",
+      component: () =>
+        import(
+          /* webpackChunkName: "history" */ "@/views/resource/timeline/timeline.view.vue"
+        ),
+      name: "resource",
+      meta: {
+        title: "timeline",
+        noCache: true,
+        icon: "timeline"
+      }
+    },
+    {
+      path: "all",
       component: () =>
         import(
           /* webpackChunkName: "history" */ "@/views/resource/resource.view.vue"
@@ -22,6 +35,19 @@ const resourceRouter: RouteConfig = {
         title: "resource",
         noCache: true,
         icon: "resource"
+      }
+    },
+    {
+      path: "resource-type",
+      component: () =>
+        import(
+          /* webpackChunkName: "resource-status" */ "@/views/resource/category/resource-category.view.vue"
+        ),
+      name: "resourceType",
+      meta: {
+        title: "resourceType",
+        noCache: true,
+        icon: "resource-management"
       }
     },
     {
@@ -38,16 +64,16 @@ const resourceRouter: RouteConfig = {
       }
     },
     {
-      path: "resource-type",
+      path: "locations",
       component: () =>
         import(
-          /* webpackChunkName: "resource-status" */ "@/views/resource/category/resource-category.view.vue"
+          /* webpackChunkName: "resource-status" */ "@/views/resource/location/resource-location.view.vue"
         ),
-      name: "resourceType",
+      name: "resourceLocation",
       meta: {
-        title: "resourceType",
+        title: "resourceLocation",
         noCache: true,
-        icon: "resource-management"
+        icon: "resource-2"
       }
     }
   ]

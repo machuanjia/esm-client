@@ -20,7 +20,34 @@ tags:
   - name: users
     description: Users related api.
 paths:
-  /resources/category:
+  /resources:
+    get:
+      operationId: getResources
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addResource
+      responses:
+        200:
+          description: OK
+  /resources/{id}:
+    get:
+      operationId: getResource
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateResource
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteResource
+      responses:
+        200:
+          description: OK
+  /resources_category:
     get:
       operationId: getResourceCategorys
       responses:
@@ -31,7 +58,7 @@ paths:
       responses:
         200:
           description: OK
-  /resources/category/{id}:
+  /resources_category/{id}:
     get:
       operationId: getResourceCategory
       responses:
@@ -47,7 +74,7 @@ paths:
       responses:
         200:
           description: OK
-  /resources/status:
+  /resources_status:
     get:
       operationId: getResourceStatuses
       responses:
@@ -58,7 +85,7 @@ paths:
       responses:
         200:
           description: OK
-  /resources/status/{id}:
+  /resources_status/{id}:
     get:
       operationId: getResourceStatus
       responses:
@@ -71,6 +98,33 @@ paths:
           description: OK
     delete:
       operationId: deleteResourceStatus
+      responses:
+        200:
+          description: OK
+  /resources_locations:
+    get:
+      operationId: getResourceLocations
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addResourceLocation
+      responses:
+        200:
+          description: OK
+  /resources_locations/{id}:
+    get:
+      operationId: getResourceLocation
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateResourceLocation
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteResourceLocation
       responses:
         200:
           description: OK

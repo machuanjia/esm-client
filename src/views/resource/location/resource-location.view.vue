@@ -6,8 +6,8 @@
   >
     <template v-slot:hleft>
       <span class="calendar-full-title">
-        <svg-icon name="resource" />
-        <span class="ml5">资源</span>
+        <svg-icon name="resource-2" />
+        <span class="ml5">Locations</span>
       </span>
     </template>
     <template v-slot:hcenter />
@@ -33,7 +33,7 @@
             icon="el-icon-plus"
             @click="openCollectionAction"
           >
-            资源
+            Location
           </el-button>
         </template>
         <template v-slot:body>
@@ -54,28 +54,28 @@
               width="180"
             />
             <el-table-column
-              label="类型"
+              prop="code"
+              label="编码"
               sortable
               width="180"
-            >
-              <template slot-scope="{row}">
-                {{ row.type.name }}
-              </template>
-            </el-table-column>
+            />
             <el-table-column
-              label="Location"
+              prop="phone"
+              label="phone"
               sortable
               width="180"
-            >
-              <template slot-scope="{row}">
-                {{ row.location.name }}
-              </template>
-            </el-table-column>
+            />
+            <el-table-column
+              prop="fax"
+              label="Fax"
+              sortable
+              width="180"
+            />
             <el-table-column
               prop="description"
               label="描述"
             />
-            <el-table-column
+            <!-- <el-table-column
               label="状态"
               align="center"
               width="100"
@@ -90,7 +90,7 @@
                   @change="changeStatus(row)"
                 />
               </template>
-            </el-table-column>
+            </el-table-column>-->
             <el-table-column
               width="120"
               align="center"
@@ -114,7 +114,7 @@
             :visible.sync="collectionVisible"
             :width="collectionSize"
           >
-            <resourceCollection
+            <resourceLocationCollection
               :entity="entity"
               @saveAction="saveAction"
               @cancelAction="cancelAction"
@@ -137,14 +137,14 @@ import AppContent from '@/components/Content/index.vue';
 import AppContentFull from '@/components/Content/content-full.vue';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
-import resourceCollection from '@/views/resource/resource-collection.vue';
+import resourceLocationCollection from '@/views/resource/location/resource-location-collection.vue';
 
 import {
-  getResources,
-  getResource,
-  addResource,
-  updateResource,
-  deleteResource
+  getResourceLocations,
+  getResourceLocation,
+  addResourceLocation,
+  updateResourceLocation,
+  deleteResourceLocation
 } from '@/api/resource-setting';
 
 @Component({
@@ -152,19 +152,19 @@ import {
   components: {
     AppContent,
     AppContentFull,
-    resourceCollection
+    resourceLocationCollection
   }
 })
 export default class extends mixins(ViewMixin) {
   private categotyes = [];
 
   created() {
-    this.getResources();
+    this.getResourceLocations();
   }
   mounted() {}
 
   async editAction(row: any) {
-    const { data } = await getResource(row.id, {});
+    const { data } = await getResourceLocation(row.id, {});
     if (data) {
       this.editCollectionAction(data);
     }
@@ -172,9 +172,9 @@ export default class extends mixins(ViewMixin) {
 
   saveAction(payload: any) {
     if (this.entity) {
-      this.updateCollection(this.entity.id, payload);
+      this.updateResourceLocation(this.entity.id, payload);
     } else {
-      this.addResource(payload);
+      this.addResourceLocation(payload);
     }
     this.closeCollectionaction();
   }
@@ -185,7 +185,7 @@ export default class extends mixins(ViewMixin) {
 
   removeAction(row: any) {
     this.removeCollectionAction(async(successFn: any) => {
-      const { data } = await deleteResource(row.id);
+      const { data } = await deleteResourceLocation(row.id);
       this.deleteCollection(this.categotyes, row);
       if (successFn) {
         successFn();
@@ -193,30 +193,22 @@ export default class extends mixins(ViewMixin) {
     });
   }
 
-  changeStatus(row: any) {
-    this.updateResource(row.id, {
-      name: row.name,
-      status: row.status,
-      description: row.description
-    });
-  }
-
-  private async getResources() {
-    const { data } = await getResources({});
+  private async getResourceLocations() {
+    const { data } = await getResourceLocations({});
     if (data) {
       this.categotyes = data;
     }
   }
 
-  private async addResource(payload: any) {
-    const { data } = await addResource(payload);
+  private async addResourceLocation(payload: any) {
+    const { data } = await addResourceLocation(payload);
     if (data) {
       this.pushCollection(this.categotyes, data);
     }
   }
 
-  private async updateResource(id: number, payload: any) {
-    const { data } = await updateResource(id, payload);
+  private async updateResourceLocation(id: number, payload: any) {
+    const { data } = await updateResourceLocation(id, payload);
     if (data) {
       this.updateCollection(this.categotyes, data);
     }

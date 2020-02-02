@@ -81,6 +81,7 @@ export default {
     companyStatusEvent: "企业状态设置",
     resourceStatus: "资源状态",
     resourceType: "资源类型",
+    resourceLocation: "Locations",
     calendarManagement: "日历管理",
     calendarEventManagement: "日程类型设置",
     my: "我的日程",
