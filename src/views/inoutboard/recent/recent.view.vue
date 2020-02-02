@@ -16,7 +16,7 @@ import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
 import { Dictionary } from 'vue-router/types/router'
 import AppContent from '@/components/Content/index.vue'
-import RecentCard from '@/views/recent/recent.card.vue'
+import RecentCard from '@/views/inoutboard/recent/recent.card.vue'
 
 @Component({
   name: 'recent',

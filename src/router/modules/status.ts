@@ -15,7 +15,7 @@ const statusRouter: RouteConfig = {
       path: "recent",
       component: () =>
         import(
-          /* webpackChunkName: "roles" */ "@/views/recent/recent.view.vue"
+          /* webpackChunkName: "roles" */ "@/views/inoutboard/recent/recent.view.vue"
         ),
       name: "recent",
       meta: {
@@ -28,7 +28,7 @@ const statusRouter: RouteConfig = {
       path: "history",
       component: () =>
         import(
-          /* webpackChunkName: "history" */ "@/views/history/history.view.vue"
+          /* webpackChunkName: "history" */ "@/views/inoutboard/history/history.view.vue"
         ),
       name: "history",
       meta: {
@@ -41,7 +41,7 @@ const statusRouter: RouteConfig = {
       path: "status",
       component: () =>
         import(
-          /* webpackChunkName: "status" */ "@/views/status/status.view.vue"
+          /* webpackChunkName: "status" */ "@/views/inoutboard/status/status.view.vue"
         ),
       name: "status",
       meta: {
@@ -54,7 +54,7 @@ const statusRouter: RouteConfig = {
       path: "company-status-event",
       component: () =>
         import(
-          /* webpackChunkName: "status" */ "@/views/company-status-event/company-status-event.view.vue"
+          /* webpackChunkName: "status" */ "@/views/inoutboard/company-status-event/company-status-event.view.vue"
         ),
       name: "companyStatusEvent",
       meta: {
