@@ -22,7 +22,7 @@
               3
             </div>
             <div class="timeline-summary-item-desc">
-              Totle Count
+              My Totle Count
             </div>
           </div>
           <div class="timeline-summary-item">
@@ -30,7 +30,7 @@
               10
             </div>
             <div class="timeline-summary-item-desc">
-              Totle Hours
+              My Totle Hours
             </div>
           </div>
         </div>
@@ -202,7 +202,7 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 .no-bg {
   .el-divider__text {
     background: none;

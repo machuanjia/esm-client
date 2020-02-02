@@ -1,9 +1,9 @@
 import { RouteConfig } from "vue-router";
-import Layout from "@/layout/index.vue";
+import FullLayout from "@/layout/full.vue";
 
 const resourceRouter: RouteConfig = {
   path: "/resource",
-  component: Layout,
+  component: FullLayout,
   redirect: "noredirect",
   name: "resource",
   meta: {

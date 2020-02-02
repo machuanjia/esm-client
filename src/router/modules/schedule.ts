@@ -1,9 +1,9 @@
 import { RouteConfig } from "vue-router";
-import LayoutCalendar from "@/layout/calendar.vue";
+import FullLayout from "@/layout/full.vue";
 
 const scheduleRouter: RouteConfig = {
   path: "/schedule",
-  component: LayoutCalendar,
+  component: FullLayout,
   redirect: "noredirect",
   name: "schedule",
   meta: {

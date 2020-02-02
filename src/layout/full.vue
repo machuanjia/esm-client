@@ -35,7 +35,7 @@ import RightPanel from '@/components/RightPanel/index.vue'
 import ResizeMixin from './mixin/resize'
 
 @Component({
-  name: 'Layout',
+  name: 'FullLayout',
   components: {
     AppMain,
     Navbar,
