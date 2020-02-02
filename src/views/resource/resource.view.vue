@@ -46,37 +46,28 @@
         />
       </el-divider>
       <div class="timeline-toc-body">
-        <el-avatar class="ml5 mb5">
+        <el-avatar class="timeline-resource-avatar">
           会
         </el-avatar>
-        <el-avatar class="ml5 mb5">
+        <el-avatar class="timeline-resource-avatar">
           会
         </el-avatar>
-        <el-avatar class="ml5 mb5">
+        <el-avatar class="timeline-resource-avatar">
           会
         </el-avatar>
-        <el-avatar class="ml5 mb5">
+        <el-avatar class="timeline-resource-avatar">
           会
         </el-avatar>
-        <el-avatar class="ml5 mb5">
+        <el-avatar class="timeline-resource-avatar">
           会
         </el-avatar>
-        <el-avatar class="ml5 mb5">
+        <el-avatar class="timeline-resource-avatar">
           会
         </el-avatar>
-        <el-avatar class="ml5 mb5">
+        <el-avatar class="timeline-resource-avatar">
           会
         </el-avatar>
-        <el-avatar class="ml5 mb5">
-          会
-        </el-avatar>
-        <el-avatar class="ml5 mb5">
-          会
-        </el-avatar>
-        <el-avatar class="ml5 mb5">
-          会
-        </el-avatar>
-        <el-avatar class="ml5 mb5">
+        <el-avatar class="timeline-resource-avatar">
           <i class="el-icon-plus" />
         </el-avatar>
       </div>
@@ -246,6 +237,10 @@ export default class extends Vue {
       height: 0;
       overflow-x: hidden;
       overflow-y: auto;
+      .timeline-resource-avatar {
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
     }
     .timeline-toc-footer {
       border-top: 1px $border solid;
