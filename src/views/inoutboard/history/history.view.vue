@@ -77,7 +77,7 @@
     </template>
     <template v-slot:body>
       <el-table
-        :data="categotyes"
+        :data="list"
         style="width: 100%;margin-bottom: 20px;"
         row-key="id"
         border
@@ -155,7 +155,7 @@ import AppContent from '@/components/Content/index.vue';
 import moment from 'moment';
 import { formatJson, parseTime } from '@/utils';
 import { exportJson2Excel } from '@/utils/excel';
-import { getInoutBoardStatuses } from '@/api/inoutboard';
+import { getInoutBoardStatuses, getHistoryes } from '@/api/inoutboard';
 import { getLocations } from '@/api/locations';
 import { getOrganizations } from '@/api/organizations';
 
@@ -271,6 +271,7 @@ export default class extends Vue {
     this.getLocations();
     this.getInoutBoardStatuses();
     this.getOrgs();
+    this.getHistoryes();
   }
 
   mounted() {}
@@ -296,6 +297,12 @@ export default class extends Vue {
     const { data } = await getInoutBoardStatuses({});
     if (data) {
       this.status = data;
+    }
+  }
+  private async getHistoryes() {
+    const { data } = await getHistoryes({});
+    if (data) {
+      this.list = data;
     }
   }
 }

@@ -20,6 +20,30 @@ tags:
   - name: users
     description: Users related api.
 paths:
+  /inoutboard/statistics:
+   get:
+      operationId: getStatistics
+      responses:
+        200:
+          description: OK
+  /inoutboard/myStatistics:
+   get:
+      operationId: myStatistics
+      responses:
+        200:
+          description: OK
+  /inoutboard/historyes:
+   get:
+      operationId: getHistoryes
+      responses:
+        200:
+          description: OK
+  /inoutboard/myHistory:
+   get:
+      operationId: myHistory
+      responses:
+        200:
+          description: OK
   /inoutboard/status:
     get:
       operationId: getInoutBoardStatuses

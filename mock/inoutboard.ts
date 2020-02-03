@@ -216,3 +216,103 @@ export const deleteInoutBoardStatus = (req: Request, res: Response) => {
     data: true
   });
 };
+
+export const myHistory = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: [
+      {
+        id: id,
+        start: 1580646618000,
+        end: 1580646618000,
+        status: { id: 1, name: "In" },
+        hours: 3
+      },
+      {
+        id: id,
+        start: 1580646618000,
+        end: 1580646618000,
+        status: { id: 1, name: "Out" },
+        hours: 3
+      }
+    ]
+  });
+};
+
+export const getHistoryes = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: [
+      {
+        id: id,
+        member: { id: 1, name: "Mcj" },
+        start: 1580646618000,
+        end: 1580646618000,
+        status: { id: 1, name: "In" },
+        hours: 3,
+        changed: { id: 2, name: "Dayyoung" },
+        ip: "192.168.98.10"
+      },
+      {
+        id: id,
+        member: { id: 1, name: "Mcj" },
+        start: 1580646618000,
+        end: 1580646618000,
+        status: { id: 1, name: "In" },
+        hours: 3,
+        changed: { id: 2, name: "Dayyoung" },
+        ip: "192.168.98.10"
+      }
+    ]
+  });
+};
+
+export const myStatistics = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: [
+      {
+        id: id,
+        date: 1580646618000,
+        status: { 1: 10, 2: 20 }
+      },
+      {
+        id: id,
+        date: 1580646618000,
+        status: { 1: 10, 2: 20 }
+      },
+      {
+        id: 'Total',
+        date: 'Total',
+        status: { 1: 20, 2: 40 }
+      }
+    ]
+  });
+};
+
+export const getStatistics = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: [
+      {
+        id: id,
+        member: { id: 1, name: "Mcj" },
+        status: { 1: 10, 2: 20 }
+      },
+      {
+        id: id,
+        member: { id: 1, name: "Mcj" },
+        status: { 1: 10, 2: 20 }
+      },
+      {
+        id: 'Total',
+        member: 'Total',
+        status: { 1: 20, 2: 40 }
+      }
+    ]
+  });
+};

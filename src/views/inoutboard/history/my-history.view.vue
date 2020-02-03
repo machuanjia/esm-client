@@ -28,7 +28,7 @@
     </template>
     <template v-slot:body>
       <el-table
-        :data="categotyes"
+        :data="list"
         style="width: 100%;margin-bottom: 20px;"
         row-key="id"
         border
@@ -85,6 +85,7 @@ import AppContent from '@/components/Content/index.vue';
 import moment from 'moment';
 import { formatJson, parseTime } from '@/utils';
 import { exportJson2Excel } from '@/utils/excel';
+import { getMyHistory } from '@/api/inoutboard';
 
 @Component({
   name: 'myHistory',
@@ -177,7 +178,18 @@ export default class extends Vue {
     this.downloadLoading = false;
   }
 
+  created() {
+    this.getMyHistory();
+  }
+
   mounted() {}
+
+  private async getMyHistory() {
+    const { data } = await getMyHistory({});
+    if (data) {
+      this.list = data;
+    }
+  }
 }
 </script>
 

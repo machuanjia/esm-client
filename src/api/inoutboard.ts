@@ -74,3 +74,28 @@ export const getStatus = (params: any) =>
     method: "get",
     params
   });
+
+export const getMyHistory = (params: any) =>
+  request({
+    url: "/inoutboard/myHistory",
+    method: "get",
+    params
+  });
+export const getHistoryes = (params: any) =>
+  request({
+    url: "/inoutboard/historyes",
+    method: "get",
+    params
+  });
+export const getMyStatistics = (params: any) =>
+  request({
+    url: "/inoutboard/myStatistics",
+    method: "get",
+    params
+  });
+export const getStatistics = (params: any) =>
+  request({
+    url: "/inoutboard/statistics",
+    method: "get",
+    params
+  });
