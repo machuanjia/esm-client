@@ -51,7 +51,25 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
+.app-content-full-title {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    font-size: 16px;
+    color: #324157;
+  }
+  span {
+    font-size: 14px;
+    color: #97a8be;
+  }
+}
 .app-content-full-wrap {
   height: 100vh;
   .app-content-full-header {

@@ -1,147 +1,164 @@
 <template>
-  <app-content
-    :is-flex-header="true"
+  <app-content-full
+    :is-hleft="true"
     :is-hright="true"
     :is-hcenter="true"
   >
-    <template v-slot:hcenter>
-      <el-date-picker
-        v-model="value"
-        class="mr5 mb5"
-        type="datetimerange"
-        :picker-options="pickerOptions"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        align="right"
-        :value-format="'timestamp'"
-        @change="durationChange"
-      />
-      <el-select
-        v-model="searchStatus"
-        placeholder="请选择状态"
-        class="mr5 mb5"
-      >
-        <el-option
-          v-for="item in status"
-          :key="item.id"
-          :label="item.name"
-          :value="item.id"
-        />
-      </el-select>
-      <el-select
-        v-model="searchLocation"
-        placeholder="请选择Locations"
-        class="mr5 mb5"
-      >
-        <el-option
-          v-for="item in locations"
-          :key="item.id"
-          :label="item.name"
-          :value="item.id"
-        />
-      </el-select>
-      <el-popover
-        placement="bottom"
-        trigger="click"
-      >
-        <el-tree
-          class="org-tree"
-          :data="orgs"
-          :props="defaultProps"
-          @node-click="selectParent"
-        />
-        <el-input
-          slot="reference"
-          v-model="searchOrg.name"
-          class="mr5 mb5"
-          style="width:200px"
-        />
-      </el-popover>
-      <el-button
-        type="primary"
-        class="mb5"
-        icon="el-icon-search"
-      >
-        搜索
-      </el-button>
+    <template v-slot:hleft>
+      <span class="app-content-full-title">
+        <svg-icon name="history" />
+        <span class="ml5">{{ $t('route.history') }}</span>
+      </span>
     </template>
-    <template v-slot:hright>
-      <el-button
-        type="primary"
-        icon="el-icon-document"
-        @click="exportExcel"
-      >
-        Excel
-      </el-button>
-    </template>
+    <template v-slot:hcenter />
+    <template v-slot:hright />
+
     <template v-slot:body>
-      <el-table
-        :data="list"
-        style="width: 100%;margin-bottom: 20px;"
-        row-key="id"
-        border
-        default-expand-all
-        fit
-        highlight-current-row
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      <app-content
+        :is-flex-header="true"
+        :is-hright="true"
+        :is-hcenter="true"
       >
-        <el-table-column
-          label="成员"
-          width="150"
-        >
-          <template slot-scope="{row}">
-            {{ row.member.name }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="开始"
-          width="240"
-        >
-          <template slot-scope="{row}">
-            {{ row.start | dateFull }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="结束"
-          width="240"
-        >
-          <template slot-scope="{row}">
-            {{ row.end | dateFull }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="状态"
-          width="240"
-        >
-          <template slot-scope="{row}">
-            {{ row.status.name }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="Count"
-          sortable
-        >
-          <template slot-scope="{row}">
-            {{ row.hours }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="Changed By"
-          width="160"
-        >
-          <template slot-scope="{row}">
-            {{ row.member.name }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="IP"
-          width="160"
-          prop="ip"
-        />
-      </el-table>
+        <template v-slot:hcenter>
+          <el-date-picker
+            v-model="value"
+            class="mr5 mb5"
+            type="datetimerange"
+            :picker-options="pickerOptions"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            align="right"
+            :value-format="'timestamp'"
+            @change="durationChange"
+          />
+          <el-select
+            v-model="searchStatus"
+            placeholder="请选择状态"
+            class="mr5 mb5"
+          >
+            <el-option
+              v-for="item in status"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
+          </el-select>
+          <el-select
+            v-model="searchLocation"
+            placeholder="请选择Locations"
+            class="mr5 mb5"
+          >
+            <el-option
+              v-for="item in locations"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
+          </el-select>
+          <el-popover
+            placement="bottom"
+            trigger="click"
+          >
+            <el-tree
+              class="org-tree"
+              :data="orgs"
+              :props="defaultProps"
+              @node-click="selectParent"
+            />
+            <el-input
+              slot="reference"
+              v-model="searchOrg.name"
+              class="mr5 mb5"
+              style="width:200px"
+            />
+          </el-popover>
+          <el-button
+            type="primary"
+            class="mb5"
+            icon="el-icon-search"
+          >
+            搜索
+          </el-button>
+        </template>
+        <template v-slot:hright>
+          <el-button
+            type="primary"
+            icon="el-icon-document"
+            @click="exportExcel"
+          >
+            Excel
+          </el-button>
+        </template>
+        <template v-slot:body>
+          <el-table
+            :data="list"
+            style="width: 100%;margin-bottom: 20px;"
+            row-key="id"
+            border
+            default-expand-all
+            fit
+            highlight-current-row
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+          >
+            <el-table-column
+              label="成员"
+              width="150"
+            >
+              <template slot-scope="{row}">
+                {{ row.member.name }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="开始"
+              width="240"
+            >
+              <template slot-scope="{row}">
+                {{ row.start | dateFull }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="结束"
+              width="240"
+            >
+              <template slot-scope="{row}">
+                {{ row.end | dateFull }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="状态"
+              width="240"
+            >
+              <template slot-scope="{row}">
+                {{ row.status.name }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="Count"
+              sortable
+            >
+              <template slot-scope="{row}">
+                {{ row.hours }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="Changed By"
+              width="160"
+            >
+              <template slot-scope="{row}">
+                {{ row.member.name }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="IP"
+              width="160"
+              prop="ip"
+            />
+          </el-table>
+        </template>
+      </app-content>
     </template>
-  </app-content>
+  </app-content-full>
 </template>
 
 <script lang="ts">
@@ -152,6 +169,7 @@ import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
+import AppContentFull from '@/components/Content/content-full.vue';
 import moment from 'moment';
 import { formatJson, parseTime } from '@/utils';
 import { exportJson2Excel } from '@/utils/excel';
@@ -162,7 +180,8 @@ import { getOrganizations } from '@/api/organizations';
 @Component({
   name: 'history',
   components: {
-    AppContent
+    AppContent,
+    AppContentFull
   }
 })
 export default class extends Vue {

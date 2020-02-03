@@ -5,7 +5,7 @@
     :is-hcenter="true"
   >
     <template v-slot:hleft>
-      <span class="calendar-full-title">
+      <span class="app-content-full-title">
         <svg-icon name="calendar-event" />
         <span class="ml5">日历类型</span>
       </span>

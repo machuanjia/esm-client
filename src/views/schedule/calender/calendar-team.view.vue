@@ -1,7 +1,7 @@
 <template>
   <app-content class="full-app-content">
     <template v-slot:body>
-      <span class="calendar-full-title">
+      <span class="app-content-full-title">
         <svg-icon name="team-calendar" />
         <span class="ml5">团队日程</span>
       </span>

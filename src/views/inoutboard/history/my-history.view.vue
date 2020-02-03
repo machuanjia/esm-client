@@ -1,77 +1,94 @@
 <template>
-  <app-content
-    :is-flex-header="true"
+  <app-content-full
+    :is-hleft="true"
     :is-hright="true"
     :is-hcenter="true"
   >
-    <template v-slot:hcenter>
-      <el-date-picker
-        v-model="value"
-        type="datetimerange"
-        :picker-options="pickerOptions"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        align="right"
-        :value-format="'timestamp'"
-        @change="durationChange"
-      />
+    <template v-slot:hleft>
+      <span class="app-content-full-title">
+        <svg-icon name="my-history" />
+        <span class="ml5">{{ $t('route.myHistory') }}</span>
+      </span>
     </template>
-    <template v-slot:hright>
-      <el-button
-        type="primary"
-        icon="el-icon-document"
-        @click="exportExcel"
-      >
-        Excel
-      </el-button>
-    </template>
+    <template v-slot:hcenter />
+    <template v-slot:hright />
+
     <template v-slot:body>
-      <el-table
-        :data="list"
-        style="width: 100%;margin-bottom: 20px;"
-        row-key="id"
-        border
-        default-expand-all
-        fit
-        highlight-current-row
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      <app-content
+        :is-flex-header="true"
+        :is-hright="true"
+        :is-hcenter="true"
       >
-        <el-table-column
-          label="开始"
-          width="240"
-        >
-          <template slot-scope="{row}">
-            {{ row.start | dateFull }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="结束"
-          width="240"
-        >
-          <template slot-scope="{row}">
-            {{ row.end | dateFull }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="状态"
-          width="240"
-        >
-          <template slot-scope="{row}">
-            {{ row.status.name }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="Count"
-          sortable
-        >
-          <template slot-scope="{row}">
-            {{ row.hours }}
-          </template>
-        </el-table-column>
-      </el-table>
+        <template v-slot:hcenter>
+          <el-date-picker
+            v-model="value"
+            type="datetimerange"
+            :picker-options="pickerOptions"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            align="right"
+            :value-format="'timestamp'"
+            @change="durationChange"
+          />
+        </template>
+        <template v-slot:hright>
+          <el-button
+            type="primary"
+            icon="el-icon-document"
+            @click="exportExcel"
+          >
+            Excel
+          </el-button>
+        </template>
+        <template v-slot:body>
+          <el-table
+            :data="list"
+            style="width: 100%;margin-bottom: 20px;"
+            row-key="id"
+            border
+            default-expand-all
+            fit
+            highlight-current-row
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+          >
+            <el-table-column
+              label="开始"
+              width="240"
+            >
+              <template slot-scope="{row}">
+                {{ row.start | dateFull }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="结束"
+              width="240"
+            >
+              <template slot-scope="{row}">
+                {{ row.end | dateFull }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="状态"
+              width="240"
+            >
+              <template slot-scope="{row}">
+                {{ row.status.name }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="Count"
+              sortable
+            >
+              <template slot-scope="{row}">
+                {{ row.hours }}
+              </template>
+            </el-table-column>
+          </el-table>
+        </template>
+      </app-content>
     </template>
-  </app-content>
+  </app-content-full>
 </template>
 
 <script lang="ts">
@@ -81,6 +98,7 @@ import { Form as ElForm, Input } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
+import AppContentFull from '@/components/Content/content-full.vue';
 import AppContent from '@/components/Content/index.vue';
 import moment from 'moment';
 import { formatJson, parseTime } from '@/utils';
@@ -90,7 +108,8 @@ import { getMyHistory } from '@/api/inoutboard';
 @Component({
   name: 'myHistory',
   components: {
-    AppContent
+    AppContent,
+    AppContentFull
   }
 })
 export default class extends Vue {

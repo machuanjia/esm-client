@@ -1,9 +1,9 @@
 import { RouteConfig } from "vue-router";
-import Layout from "@/layout/index.vue";
+import FullLayout from "@/layout/full.vue";
 
 const inoutboardRouter: RouteConfig = {
   path: "/inoutboard",
-  component: Layout,
+  component: FullLayout,
   redirect: "noredirect",
   name: "status",
   meta: {

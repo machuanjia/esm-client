@@ -1,63 +1,80 @@
 <template>
-  <app-content
-    :is-flex-header="true"
+  <app-content-full
+    :is-hleft="true"
     :is-hright="true"
     :is-hcenter="true"
   >
-    <template v-slot:hcenter>
-      <el-date-picker
-        v-model="value"
-        type="datetimerange"
-        :picker-options="pickerOptions"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        align="right"
-        :value-format="'timestamp'"
-        @change="durationChange"
-      />
+    <template v-slot:hleft>
+      <span class="app-content-full-title">
+        <svg-icon name="my-statistics" />
+        <span class="ml5">{{ $t('route.myStatistics') }}</span>
+      </span>
     </template>
-    <template v-slot:hright>
-      <el-button
-        type="primary"
-        icon="el-icon-document"
-        @click="exportExcel"
-      >
-        Excel
-      </el-button>
-    </template>
+    <template v-slot:hcenter />
+    <template v-slot:hright />
+
     <template v-slot:body>
-      <el-table
-        :data="list"
-        style="width: 100%;margin-bottom: 20px;"
-        row-key="id"
-        border
-        default-expand-all
-        fit
-        highlight-current-row
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      <app-content
+        :is-flex-header="true"
+        :is-hright="true"
+        :is-hcenter="true"
       >
-        <el-table-column label="时间">
-          <template slot-scope="{row}">
-            <div :class="{'text-right': row.date === 'Total'}">
-              <span v-if="row.date === 'Total'">{{ row.date }}</span>
-              <span v-if="row.date && row.date !== 'Total'">{{ row.date | dateFull }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column
-          v-for="item of status"
-          :key="item.id"
-          :label="item.name"
-          width="240"
-        >
-          <template slot-scope="{row}">
-            <span v-if="row.status && row.status[item.id]">{{ row.status[item.id] }}</span>
-          </template>
-        </el-table-column>
-      </el-table>
+        <template v-slot:hcenter>
+          <el-date-picker
+            v-model="value"
+            type="datetimerange"
+            :picker-options="pickerOptions"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            align="right"
+            :value-format="'timestamp'"
+            @change="durationChange"
+          />
+        </template>
+        <template v-slot:hright>
+          <el-button
+            type="primary"
+            icon="el-icon-document"
+            @click="exportExcel"
+          >
+            Excel
+          </el-button>
+        </template>
+        <template v-slot:body>
+          <el-table
+            :data="list"
+            style="width: 100%;margin-bottom: 20px;"
+            row-key="id"
+            border
+            default-expand-all
+            fit
+            highlight-current-row
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+          >
+            <el-table-column label="时间">
+              <template slot-scope="{row}">
+                <div :class="{'text-right': row.date === 'Total'}">
+                  <span v-if="row.date === 'Total'">{{ row.date }}</span>
+                  <span v-if="row.date && row.date !== 'Total'">{{ row.date | dateFull }}</span>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column
+              v-for="item of status"
+              :key="item.id"
+              :label="item.name"
+              width="240"
+            >
+              <template slot-scope="{row}">
+                <span v-if="row.status && row.status[item.id]">{{ row.status[item.id] }}</span>
+              </template>
+            </el-table-column>
+          </el-table>
+        </template>
+      </app-content>
     </template>
-  </app-content>
+  </app-content-full>
 </template>
 
 <script lang="ts">
@@ -68,6 +85,7 @@ import { UserModule } from '@/store/modules/user';
 import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
+import AppContentFull from '@/components/Content/content-full.vue';
 import moment from 'moment';
 import { formatJson, parseTime } from '@/utils';
 import { exportJson2Excel } from '@/utils/excel';
@@ -76,7 +94,8 @@ import { getInoutBoardStatuses, getMyStatistics } from '@/api/inoutboard';
 @Component({
   name: 'myStatistics',
   components: {
-    AppContent
+    AppContent,
+    AppContentFull
   }
 })
 export default class extends Vue {

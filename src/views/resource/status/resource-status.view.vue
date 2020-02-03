@@ -5,7 +5,7 @@
     :is-hcenter="true"
   >
     <template v-slot:hleft>
-      <span class="calendar-full-title">
+      <span class="app-content-full-title">
         <svg-icon name="resource-status" />
         <span class="ml5">资源状态</span>
       </span>
