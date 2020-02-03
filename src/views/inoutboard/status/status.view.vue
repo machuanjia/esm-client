@@ -16,18 +16,21 @@
       <el-button
         type="primary"
         icon="el-icon-plus"
+        @click="openCollectionAction"
       >
-        状态
+        成员状态
       </el-button>
     </template>
     <template v-slot:body>
       <el-table
-        :data="rolesData"
+        :data="categotyes"
         style="width: 100%;margin-bottom: 20px;"
         row-key="id"
         border
+        default-expand-all
         fit
         highlight-current-row
+        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
       >
         <el-table-column
           prop="name"
@@ -48,6 +51,7 @@
             <el-color-picker
               v-model="row.color"
               :size="'mini'"
+              @change="changeColor(row)"
             />
           </template>
         </el-table-column>
@@ -59,58 +63,124 @@
           <template slot-scope="{row}">
             <i
               class="el-icon-edit-outline table-icon-action"
-              @click="edit(row)"
+              @click="editAction(row)"
             />
             <i
               class="el-icon-delete table-icon-action"
-              @click="remove(row)"
+              @click="removeAction(row)"
             />
           </template>
         </el-table-column>
       </el-table>
+      <el-dialog
+        v-if="collectionVisible"
+        :title="collectionTitle"
+        :visible.sync="collectionVisible"
+        :width="collectionSize"
+      >
+        <statusCollection
+          :entity="entity"
+          @saveAction="saveAction"
+          @cancelAction="cancelAction"
+        />
+      </el-dialog>
     </template>
   </app-content>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Route } from 'vue-router'
-import { Form as ElForm, Input } from 'element-ui'
-import { UserModule } from '@/store/modules/user'
-import { isValidUsername } from '@/utils/validate'
-import { Dictionary } from 'vue-router/types/router'
-import AppContent from '@/components/Content/index.vue'
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Route } from 'vue-router';
+import { Form as ElForm, Input } from 'element-ui';
+import { UserModule } from '@/store/modules/user';
+import { isValidUsername } from '@/utils/validate';
+import { Dictionary } from 'vue-router/types/router';
+import AppContent from '@/components/Content/index.vue';
+import AppContentFull from '@/components/Content/content-full.vue';
+import { mixins } from 'vue-class-component';
+import ViewMixin from '@/components/Mixin';
+import {
+  getInoutBoardStatuses,
+  getInoutBoardStatus,
+  addInoutBoardStatus,
+  updateInoutBoardStatus,
+  deleteInoutBoardStatus
+} from '@/api/inoutboard';
+import statusCollection from '@/views/inoutboard/status/status-collection.vue';
 
 @Component({
   name: 'status',
   components: {
-    AppContent
+    AppContent,
+    AppContentFull,
+    statusCollection
   }
 })
-export default class extends Vue {
-  private searchText = ''
+export default class extends mixins(ViewMixin) {
+  private categotyes = [];
 
-  private rolesData = [{
-    id: 1,
-    color: '#f00',
-    description: '办公区域内',
-    name: '正常'
-  }, {
-    id: 2,
-    color: '#f00',
-    description: '外出公干',
-    name: '外出'
-  }]
+  created() {
+    this.getInoutBoardStatuses();
+  }
+  mounted() {}
 
-  mounted() {
-
+  async editAction(row: any) {
+    const { data } = await getInoutBoardStatus(row.id, {});
+    if (data) {
+      this.editCollectionAction(data);
+    }
   }
 
-  edit(row:any) {
-
+  saveAction(payload: any) {
+    if (this.entity) {
+      this.updateInoutBoardStatus(this.entity.id, payload);
+    } else {
+      this.addInoutBoardStatus(payload);
+    }
+    this.closeCollectionaction();
   }
-  remove(row:any) {
 
+  cancelAction() {
+    this.closeCollectionaction();
+  }
+
+  removeAction(row: any) {
+    this.removeCollectionAction(async(successFn: any) => {
+      const { data } = await deleteInoutBoardStatus(row.id);
+      this.deleteCollection(this.categotyes, row);
+      if (successFn) {
+        successFn();
+      }
+    });
+  }
+
+  changeColor(row: any) {
+    this.updateInoutBoardStatus(row.id, {
+      name: row.name,
+      color: row.color,
+      description: row.description
+    });
+  }
+
+  private async getInoutBoardStatuses() {
+    const { data } = await getInoutBoardStatuses({});
+    if (data) {
+      this.categotyes = data;
+    }
+  }
+
+  private async addInoutBoardStatus(payload: any) {
+    const { data } = await addInoutBoardStatus(payload);
+    if (data) {
+      this.pushCollection(this.categotyes, data);
+    }
+  }
+
+  private async updateInoutBoardStatus(id: number, payload: any) {
+    const { data } = await updateInoutBoardStatus(id, payload);
+    if (data) {
+      this.updateCollection(this.categotyes, data);
+    }
   }
 }
 </script>

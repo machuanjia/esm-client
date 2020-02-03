@@ -150,3 +150,69 @@ export const deleteCompanyEvent = (req: Request, res: Response) => {
     data: true
   });
 };
+
+export const getInoutBoardStatuses = (req: Request, res: Response) => {
+  return res.json({
+    code: 20000,
+    data: [
+      {
+        id: 1,
+        color: "#f00",
+        description: "办公区域内",
+        name: "正常"
+      },
+      {
+        id: 2,
+        color: "#f00",
+        description: "外出公干",
+        name: "外出"
+      }
+    ]
+  });
+};
+
+export const addInoutBoardStatus = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: {
+      id: id,
+      color: "#f00",
+      description: "外出公干",
+      name: "外出"
+    }
+  });
+};
+
+export const getInoutBoardStatus = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: {
+      id: id,
+      color: "#f00",
+      description: "外出公干",
+      name: "外出"
+    }
+  });
+};
+
+export const updateInoutBoardStatus = (req: Request, res: Response) => {
+  const id = parseInt((Math.random() * 1000) as any);
+  return res.json({
+    code: 20000,
+    data: {
+      id: id,
+      color: "#f00",
+      description: "外出公干",
+      name: "外出"
+    }
+  });
+};
+
+export const deleteInoutBoardStatus = (req: Request, res: Response) => {
+  return res.json({
+    code: 20000,
+    data: true
+  });
+};

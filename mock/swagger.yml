@@ -20,7 +20,34 @@ tags:
   - name: users
     description: Users related api.
 paths:
-  /company-events:
+  /inoutboard/status:
+    get:
+      operationId: getInoutBoardStatuses
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: addInoutBoardStatus
+      responses:
+        200:
+          description: OK
+  /inoutboard/status/{id}:
+    get:
+      operationId: getInoutBoardStatus
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateInoutBoardStatus
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteInoutBoardStatus
+      responses:
+        200:
+          description: OK
+  /inoutboard/company-events:
     get:
       operationId: getCompanyEvents
       responses:
@@ -31,7 +58,7 @@ paths:
       responses:
         200:
           description: OK
-  /company-events/{id}:
+  /inoutboard/company-events/{id}:
     get:
       operationId: getCompanyEvent
       responses:

@@ -45,7 +45,10 @@ export default class extends Vue {
 
   deleteCollection(list: any, entity: any) {
     if (list && entity) {
-      _.remove(list, { id: entity.id });
+      const index = _.findIndex(list, { id: entity.id });
+      if (index > -1) {
+        list.splice(index, 1);
+      }
     }
   }
 
