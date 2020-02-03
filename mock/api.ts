@@ -8,3 +8,4 @@ export * from "./roles";
 export * from "./schedule-setting";
 export * from "./resource-setting";
 export * from "./inoutboard";
+export * from "./locations";

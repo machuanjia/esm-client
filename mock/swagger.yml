@@ -155,30 +155,30 @@ paths:
       responses:
         200:
           description: OK
-  /resources_locations:
+  /locations:
     get:
-      operationId: getResourceLocations
+      operationId: getLocations
       responses:
         200:
           description: OK
     post:
-      operationId: addResourceLocation
+      operationId: addLocation
       responses:
         200:
           description: OK
-  /resources_locations/{id}:
+  /locations/{id}:
     get:
-      operationId: getResourceLocation
+      operationId: getLocation
       responses:
         200:
           description: OK
     put:
-      operationId: updateResourceLocation
+      operationId: updateLocation
       responses:
         200:
           description: OK
     delete:
-      operationId: deleteResourceLocation
+      operationId: deleteLocation
       responses:
         200:
           description: OK

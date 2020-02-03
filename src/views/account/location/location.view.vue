@@ -123,12 +123,12 @@ import ViewMixin from '@/components/Mixin';
 import locationCollection from '@/views/account/location/location-collection.vue';
 
 import {
-  getResourceLocations,
-  getResourceLocation,
-  addResourceLocation,
-  updateResourceLocation,
-  deleteResourceLocation
-} from '@/api/resource-setting';
+  getLocations,
+  getLocation,
+  addLocation,
+  updateLocation,
+  deleteLocation
+} from '@/api/locations';
 
 @Component({
   name: 'resourceCategory',
@@ -142,12 +142,12 @@ export default class extends mixins(ViewMixin) {
   private categotyes = [];
 
   created() {
-    this.getResourceLocations();
+    this.getLocations();
   }
   mounted() {}
 
   async editAction(row: any) {
-    const { data } = await getResourceLocation(row.id, {});
+    const { data } = await getLocation(row.id, {});
     if (data) {
       this.editCollectionAction(data);
     }
@@ -155,9 +155,9 @@ export default class extends mixins(ViewMixin) {
 
   saveAction(payload: any) {
     if (this.entity) {
-      this.updateResourceLocation(this.entity.id, payload);
+      this.updateLocation(this.entity.id, payload);
     } else {
-      this.addResourceLocation(payload);
+      this.addLocation(payload);
     }
     this.closeCollectionaction();
   }
@@ -168,7 +168,7 @@ export default class extends mixins(ViewMixin) {
 
   removeAction(row: any) {
     this.removeCollectionAction(async(successFn: any) => {
-      const { data } = await deleteResourceLocation(row.id);
+      const { data } = await deleteLocation(row.id);
       this.deleteCollection(this.categotyes, row);
       if (successFn) {
         successFn();
@@ -176,22 +176,22 @@ export default class extends mixins(ViewMixin) {
     });
   }
 
-  private async getResourceLocations() {
-    const { data } = await getResourceLocations({});
+  private async getLocations() {
+    const { data } = await getLocations({});
     if (data) {
       this.categotyes = data;
     }
   }
 
-  private async addResourceLocation(payload: any) {
-    const { data } = await addResourceLocation(payload);
+  private async addLocation(payload: any) {
+    const { data } = await addLocation(payload);
     if (data) {
       this.pushCollection(this.categotyes, data);
     }
   }
 
-  private async updateResourceLocation(id: number, payload: any) {
-    const { data } = await updateResourceLocation(id, payload);
+  private async updateLocation(id: number, payload: any) {
+    const { data } = await updateLocation(id, payload);
     if (data) {
       this.updateCollection(this.categotyes, data);
     }

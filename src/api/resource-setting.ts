@@ -101,37 +101,3 @@ export const deleteResourceStatus = (id: number) =>
     url: `/resources_status/${id}`,
     method: "delete"
   });
-
-export const getResourceLocations = (params: any) =>
-  request({
-    url: "/resources_locations",
-    method: "get",
-    params
-  });
-
-export const addResourceLocation = (data: any) =>
-  request({
-    url: "/resources_locations",
-    method: "post",
-    data
-  });
-
-export const getResourceLocation = (id: number, params: any) =>
-  request({
-    url: `/resources_locations/${id}`,
-    method: "get",
-    params
-  });
-
-export const updateResourceLocation = (id: number, data: any) =>
-  request({
-    url: `/resources_locations/${id}`,
-    method: "put",
-    data
-  });
-
-export const deleteResourceLocation = (id: number) =>
-  request({
-    url: `/resources_locations/${id}`,
-    method: "delete"
-  });
