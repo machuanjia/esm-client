@@ -8,7 +8,7 @@ export const getCompanyEvents = (req: Request, res: Response) => {
         id: 1,
         name: "春节放假",
         location: { id: 1, name: "东达物业" },
-        start: 1580646618,
+        start: 1580646618000,
         statusCategory: {
           id: 1,
           name: "放假",
@@ -31,7 +31,7 @@ export const getCompanyEvents = (req: Request, res: Response) => {
         id: 2,
         name: "疫情办公",
         location: { id: 1, name: "东达物业" },
-        start: 1580646618,
+        start: 1580646618000,
         statusCategory: {
           id: 1,
           name: "远程在线",
@@ -62,7 +62,7 @@ export const addCompanyEvent = (req: Request, res: Response) => {
       id: id,
       name: "春节放假",
       location: { id: 1, name: "东达物业" },
-      start: 1580646618,
+      start: 1580646618000,
       statusCategory: {
         id: 1,
         name: "放假",
@@ -92,7 +92,7 @@ export const getCompanyEvent = (req: Request, res: Response) => {
       id: id,
       name: "春节放假",
       location: { id: 1, name: "东达物业" },
-      start: 1580646618,
+      start: 1580646618000,
       statusCategory: {
         id: 1,
         name: "放假",
@@ -122,7 +122,7 @@ export const updateCompanyEvent = (req: Request, res: Response) => {
       id: id,
       name: "春节放假",
       location: { id: 1, name: "东达物业" },
-      start: 1580646618,
+      start: 1580646618000,
       statusCategory: {
         id: 1,
         name: "放假",
