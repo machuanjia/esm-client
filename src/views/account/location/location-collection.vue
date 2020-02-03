@@ -90,7 +90,7 @@ import { mixins } from 'vue-class-component';
 import CollectionMixin from '@/components/Mixin/collection';
 
 @Component({
-  name: 'resourceLocationCollection',
+  name: 'locationCollection',
   components: {
     AppContent
   }

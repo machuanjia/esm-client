@@ -14,7 +14,7 @@ const accountRouter: RouteConfig = {
     {
       path: "bills",
       component: () =>
-        import(/* webpackChunkName: "bills" */ "@/views/bills/bills.view.vue"),
+        import(/* webpackChunkName: "bills" */ "@/views/account/bills/bills.view.vue"),
       name: "bills",
       meta: {
         title: "bills",
@@ -31,6 +31,19 @@ const accountRouter: RouteConfig = {
         title: "account",
         noCache: true,
         icon: "setting"
+      }
+    },
+    {
+      path: "locations",
+      component: () =>
+        import(
+          /* webpackChunkName: "resource-status" */ "@/views/account/location/location.view.vue"
+        ),
+      name: "resourceLocation",
+      meta: {
+        title: "resourceLocation",
+        noCache: true,
+        icon: "resource-2"
       }
     }
   ]

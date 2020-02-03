@@ -62,20 +62,20 @@ const resourceRouter: RouteConfig = {
         noCache: true,
         icon: "resource-status"
       }
-    },
-    {
-      path: "locations",
-      component: () =>
-        import(
-          /* webpackChunkName: "resource-status" */ "@/views/resource/location/resource-location.view.vue"
-        ),
-      name: "resourceLocation",
-      meta: {
-        title: "resourceLocation",
-        noCache: true,
-        icon: "resource-2"
-      }
     }
+    // {
+    //   path: "locations",
+    //   component: () =>
+    //     import(
+    //       /* webpackChunkName: "resource-status" */ "@/views/resource/location/resource-location.view.vue"
+    //     ),
+    //   name: "resourceLocation",
+    //   meta: {
+    //     title: "resourceLocation",
+    //     noCache: true,
+    //     icon: "resource-2"
+    //   }
+    // }
   ]
 };
 
