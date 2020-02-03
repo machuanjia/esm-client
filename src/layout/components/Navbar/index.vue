@@ -14,8 +14,8 @@
       <template v-if="device!=='mobile'">
         <!-- <header-search class="right-menu-item" /> -->
         <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
-        <RecentToolbar v-if="currentRouter.name === 'recent'" />
-        <screenfull class="right-menu-item hover-effect" />
+        <!-- <RecentToolbar v-if="currentRouter.name === 'recent'" /> -->
+        <!-- <screenfull class="right-menu-item hover-effect" /> -->
         <!-- <el-tooltip
           :content="$t('navbar.size')"
           effect="dark"

@@ -2,7 +2,7 @@
   <el-radio-group
     v-model="recentView"
     size="mini"
-    class="right-menu-item right-menu-item-actions"
+    class="recent-toolbar"
   >
     <el-radio-button label="0">
       卡片
@@ -17,18 +17,21 @@
 </template>
 
 <script lang="ts">
-import pathToRegexp from 'path-to-regexp'
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { RouteRecord, Route } from 'vue-router'
+import pathToRegexp from 'path-to-regexp';
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import { RouteRecord, Route } from 'vue-router';
 
 @Component({
   name: 'RecentToolbar'
 })
 export default class extends Vue {
-    private recentView = '0'
+  private recentView = '0';
 }
 </script>
 
 <style lang="scss" scoped>
-
+.recent-toolbar {
+  margin-top: -3px;
+  margin-right: 10px;
+}
 </style>
