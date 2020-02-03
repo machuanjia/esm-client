@@ -14,7 +14,7 @@ import accountRouter from "./modules/account";
 import statisticsRouter from "./modules/statistics";
 import scheduleRouter from "./modules/schedule";
 import resourceRouter from "./modules/resource";
-import statusRouter from "./modules/status";
+import inoutboardRouter from "./modules/inoutboard";
 
 Vue.use(Router);
 
@@ -170,7 +170,7 @@ export const constantRoutes: RouteConfig[] = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes: RouteConfig[] = [
-  statusRouter,
+  inoutboardRouter,
   scheduleRouter,
   resourceRouter,
   {

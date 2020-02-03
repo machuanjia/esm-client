@@ -1,8 +1,8 @@
 import { RouteConfig } from "vue-router";
 import Layout from "@/layout/index.vue";
 
-const statusRouter: RouteConfig = {
-  path: "/status",
+const inoutboardRouter: RouteConfig = {
+  path: "/inoutboard",
   component: Layout,
   redirect: "noredirect",
   name: "status",
@@ -25,6 +25,19 @@ const statusRouter: RouteConfig = {
       }
     },
     {
+      path: "my-history",
+      component: () =>
+        import(
+          /* webpackChunkName: "history" */ "@/views/inoutboard/history/my-history.view.vue"
+        ),
+      name: "myHistory",
+      meta: {
+        title: "myHistory",
+        noCache: true,
+        icon: "my-history"
+      }
+    },
+    {
       path: "history",
       component: () =>
         import(
@@ -35,6 +48,32 @@ const statusRouter: RouteConfig = {
         title: "history",
         noCache: true,
         icon: "history"
+      }
+    },
+    {
+      path: "my-statistics",
+      component: () =>
+        import(
+          /* webpackChunkName: "history" */ "@/views/inoutboard/statistics/my-statistics.view.vue"
+        ),
+      name: "myStatistics",
+      meta: {
+        title: "myStatistics",
+        noCache: true,
+        icon: "my-statistics"
+      }
+    },
+    {
+      path: "statistics",
+      component: () =>
+        import(
+          /* webpackChunkName: "history" */ "@/views/inoutboard/statistics/statistics.view.vue"
+        ),
+      name: "statistics",
+      meta: {
+        title: "statistics",
+        noCache: true,
+        icon: "statistics"
       }
     },
     {
@@ -66,4 +105,4 @@ const statusRouter: RouteConfig = {
   ]
 };
 
-export default statusRouter;
+export default inoutboardRouter;
