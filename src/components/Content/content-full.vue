@@ -53,13 +53,16 @@ export default class extends Vue {
 
 <style lang="scss">
 .app-content-full-title {
-  position: absolute;
-  top: 0px;
-  left: 10px;
-  height: 50px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  &.app-content-full-title-absolute {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    height: 50px;
+  }
 
   svg {
     font-size: 16px;
@@ -72,6 +75,8 @@ export default class extends Vue {
 }
 .app-content-full-wrap {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   .app-content-full-header {
     display: flex;
     flex-direction: row;
@@ -90,7 +95,9 @@ export default class extends Vue {
     }
   }
   .app-content-full-body {
-    padding: 10px;
+    flex-grow: 1;
+    overflow: auto;
+    height: 0;
     &.app-content-body-transparent {
       background: transparent;
     }

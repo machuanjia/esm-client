@@ -14,7 +14,6 @@
       <template v-if="device!=='mobile'">
         <!-- <header-search class="right-menu-item" /> -->
         <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
-        <!-- <RecentToolbar v-if="currentRouter.name === 'recent'" /> -->
         <!-- <screenfull class="right-menu-item hover-effect" /> -->
         <!-- <el-tooltip
           :content="$t('navbar.size')"
@@ -40,7 +39,6 @@ import HeaderSearch from '@/components/HeaderSearch/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 import SizeSelect from '@/components/SizeSelect/index.vue'
-import RecentToolbar from '@/components/RecentToolbar/index.vue'
 
 @Component({
   name: 'Navbar',
@@ -51,8 +49,7 @@ import RecentToolbar from '@/components/RecentToolbar/index.vue'
     HeaderSearch,
     LangSelect,
     Screenfull,
-    SizeSelect,
-    RecentToolbar
+    SizeSelect
   }
 })
 export default class extends Vue {
