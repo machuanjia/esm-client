@@ -8,23 +8,51 @@
         <router-view :key="key" />
       </keep-alive>
     </transition>
+    <el-drawer
+      v-if="isMessageVisible"
+      :with-header="false"
+      :modal="false"
+      :size="'980px'"
+      :visible.sync="isMessageVisible"
+      :direction="'rtl'"
+      :append-to-body="true"
+      @close="closeMessage"
+    >
+      <message />
+    </el-drawer>
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import { TagsViewModule } from '@/store/modules/tags-view'
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import { TagsViewModule } from '@/store/modules/tags-view';
+import { AppModule } from '@/store/modules/app';
+import message from '@/views/message/message.view.vue';
 
 @Component({
-  name: 'AppMain'
+  name: 'AppMain',
+  components: {
+    message
+  }
 })
 export default class extends Vue {
+  private isMessageVisible = false;
   get cachedViews() {
-    return TagsViewModule.cachedViews
+    return TagsViewModule.cachedViews;
   }
 
   get key() {
-    return this.$route.path
+    return this.$route.path;
+  }
+  get isMessage() {
+    return AppModule.isMessageVisible;
+  }
+  @Watch('isMessage')
+  private onIsMessageChange(value: boolean) {
+    this.isMessageVisible = value;
+  }
+  closeMessage() {
+    AppModule.SetMessageVisible(false);
   }
 }
 </script>
@@ -39,7 +67,7 @@ export default class extends Vue {
   background: $mainBg;
 }
 
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
   height: 100vh;
   overflow: auto;
@@ -51,7 +79,7 @@ export default class extends Vue {
     min-height: calc(100vh - 84px);
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 84px;
   }
 }

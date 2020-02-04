@@ -87,25 +87,25 @@ export const constantRoutes: RouteConfig[] = [
       import(/* webpackChunkName: "401" */ "@/views/error-page/401.vue"),
     meta: { hidden: true }
   },
-  {
-    path: "/message",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "dashboard" */ "@/views/message/message.view.vue"
-          ),
-        name: "message",
-        meta: {
-          title: "message",
-          icon: "wechat",
-          affix: true
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/message",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () =>
+  //         import(
+  //           /* webpackChunkName: "dashboard" */ "@/views/message/message.view.vue"
+  //         ),
+  //       name: "message",
+  //       meta: {
+  //         title: "message",
+  //         icon: "wechat",
+  //         affix: true
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/",
     component: Layout,

@@ -6,6 +6,12 @@
     />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <!-- :background-color="variables.menuBg" -->
+      <div
+        class="wechat-wrap"
+        @click="showMessage"
+      >
+        <svg-icon name="wechat" />
+      </div>
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
@@ -66,14 +72,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { AppModule } from '@/store/modules/app'
-import { PermissionModule } from '@/store/modules/permission'
-import { SettingsModule } from '@/store/modules/settings'
-import SidebarItem from './SidebarItem.vue'
-import SidebarLogo from './SidebarLogo.vue'
-import variables from '@/styles/_variables.scss'
-import { UserModule } from '@/store/modules/user'
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { AppModule } from '@/store/modules/app';
+import { PermissionModule } from '@/store/modules/permission';
+import { SettingsModule } from '@/store/modules/settings';
+import SidebarItem from './SidebarItem.vue';
+import SidebarLogo from './SidebarLogo.vue';
+import variables from '@/styles/_variables.scss';
+import { UserModule } from '@/store/modules/user';
 
 @Component({
   name: 'SideBar',
@@ -84,48 +90,52 @@ import { UserModule } from '@/store/modules/user'
 })
 export default class extends Vue {
   get sidebar() {
-    return AppModule.sidebar
+    return AppModule.sidebar;
   }
 
   get routes() {
-    return PermissionModule.routes
+    return PermissionModule.routes;
   }
 
   get showLogo() {
-    return SettingsModule.showSidebarLogo
+    return SettingsModule.showSidebarLogo;
   }
 
   get menuActiveTextColor() {
     if (SettingsModule.sidebarTextTheme) {
-      return SettingsModule.theme
+      return SettingsModule.theme;
     } else {
-      return variables.menuActiveText
+      return variables.menuActiveText;
     }
   }
 
   get variables() {
-    return variables
+    return variables;
   }
 
   get activeMenu() {
-    const route = this.$route
-    const { meta, path } = route
+    const route = this.$route;
+    const { meta, path } = route;
     // if set path, the sidebar will highlight the path you set
     if (meta.activeMenu) {
-      return meta.activeMenu
+      return meta.activeMenu;
     }
-    return path
+    return path;
   }
 
   get isCollapse() {
-    return !this.sidebar.opened
+    return !this.sidebar.opened;
   }
   private preference() {
-    AppModule.setRightPanel(true)
+    AppModule.setRightPanel(true);
   }
   private async logout() {
-    await UserModule.LogOut()
-    this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    await UserModule.LogOut();
+    this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+  }
+
+  showMessage() {
+    AppModule.SetMessageVisible(true);
   }
 }
 </script>
@@ -135,7 +145,8 @@ export default class extends Vue {
   // reset element-ui css
   border-right: 1px $lightGray solid;
   .horizontal-collapse-transition {
-    transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    transition: 0s width ease-in-out, 0s padding-left ease-in-out,
+      0s padding-right ease-in-out;
   }
 
   .scrollbar-wrapper {
@@ -143,7 +154,7 @@ export default class extends Vue {
   }
 
   .el-scrollbar__view {
-    height: 100%
+    height: 100%;
   }
 
   .el-scrollbar__bar {
@@ -156,7 +167,7 @@ export default class extends Vue {
     }
   }
 
-  .sidebar-avatar{
+  .sidebar-avatar {
     // background: rgb(48, 65, 86);//#2b2f3a;
     display: flex;
     justify-content: center;
@@ -169,7 +180,7 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 .el-scrollbar {
-  height: 100%
+  height: 100%;
 }
 
 .has-logo {
@@ -182,5 +193,21 @@ export default class extends Vue {
   border: none;
   height: 100%;
   width: 100% !important;
+}
+.wechat-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  color: $darkGray;
+  border-radius: 50%;
+  // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin: 10px auto;
+  &:hover {
+    color: $subMenuActiveText;
+    border: 1px $border solid;
+  }
 }
 </style>
