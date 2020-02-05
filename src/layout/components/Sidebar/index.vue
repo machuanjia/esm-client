@@ -204,7 +204,8 @@ export default class extends Vue {
   border-radius: 50%;
   // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  margin: 10px auto;
+  margin: 10px 0 10px 12px;
+
   &:hover {
     color: $subMenuActiveText;
     border: 1px $border solid;
