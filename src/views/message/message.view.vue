@@ -111,7 +111,7 @@ export default class extends Vue {
         }
         &.active {
           border-left: 2px #fff solid;
-          background: #6cb5ff;
+          background: $activeBg;
         }
       }
     }
@@ -146,6 +146,10 @@ export default class extends Vue {
     .message-nav-header {
       border-bottom: 1px $border solid;
       height: 54px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding:10px;
     }
   }
   .message-content {
