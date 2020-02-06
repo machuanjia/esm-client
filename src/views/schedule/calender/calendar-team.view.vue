@@ -1,5 +1,5 @@
 <template>
-  <app-content class="full-app-content">
+  <app-content-full :is-header="false">
     <template v-slot:body>
       <span class="app-content-full-title app-content-full-title-absolute">
         <svg-icon name="team-calendar" />
@@ -54,7 +54,7 @@
         <calenderSetting @filterChange="filterChange" />
       </el-drawer>
     </template>
-  </app-content>
+  </app-content-full>
 </template>
 
 <script lang="ts">
@@ -75,11 +75,13 @@ import eventCollection from '@/views/schedule/event/event-collection.vue';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
 import calenderSetting from '@/views/schedule/calender/calender-setting.vue';
+import AppContentFull from '@/components/Content/content-full.vue';
 
 @Component({
   name: 'teamCalendar',
   components: {
     AppContent,
+    AppContentFull,
     FullCalendar,
     eventCollection,
     calenderSetting

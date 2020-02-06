@@ -1,6 +1,9 @@
 <template>
   <div class="app-content-full-wrap">
-    <header class="app-content-full-header">
+    <header
+      v-if="isHeader"
+      class="app-content-full-header"
+    >
       <div
         v-if="isHleft"
         class="hleft"
@@ -42,6 +45,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   name: 'AppContentFull'
 })
 export default class extends Vue {
+  @Prop({ default: true }) private isHeader!: boolean;
   @Prop({ default: false }) private isHleft!: boolean;
   @Prop({ default: false }) private isHcenter!: boolean;
   @Prop({ default: false }) private isHright!: boolean;

@@ -12,7 +12,7 @@
       v-if="isMessageVisible"
       :with-header="false"
       :modal="false"
-      :size="'980px'"
+      :size="'1050px'"
       :visible.sync="isMessageVisible"
       :direction="'rtl'"
       :append-to-body="true"

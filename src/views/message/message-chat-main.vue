@@ -5,28 +5,32 @@
         马传佳
       </div>
     </div>
-    <div class="message-content-body">
-      <div class="position-box">
-        <VueBetterScroll
-          ref="scroll"
-          class="wrapper"
-          :scrollbar="scrollbarObj"
-          :pull-down-refresh="pullDownRefreshObj"
-          :pull-up-load="pullUpLoadObj"
-          :start-y="parseInt(startY)"
-          @pulling-down="onPullingDown"
-          @pulling-up="onPullingUp"
+    <div
+      ref="scroll"
+      class="message-content-body"
+      @scroll="scrollAction"
+    >
+      <div
+        v-if="loading"
+        class="message-content-body-loading"
+      >
+        <i class="el-icon-loading" />
+      </div>
+      <div class="message-content-list">
+        <div
+          v-for="item in items"
+          :key="item.id"
+          class="message-content-list-item"
+          :class="{'message-content-list-item-me': item.id === 1}"
         >
-          <div class="message-content-list">
-            <div
-              v-for="item in items"
-              :key="item"
-              class="message-content-list-item"
-            >
-              {{ item }}
-            </div>
+          <div class="message-content-list-item-aside">
+            <el-avatar icon="el-icon-user-solid" />
           </div>
-        </VueBetterScroll>
+          <div class="message-content-list-item-content">
+            <div class="arrow" />
+            {{ item.message }}
+          </div>
+        </div>
       </div>
     </div>
     <div class="message-content-footer">
@@ -83,81 +87,72 @@ export default class extends Vue {
 
   private message = '';
 
-  private scrollbarObj = {
-    fade: true
-  };
-  // 这个配置用于做下拉刷新功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启下拉刷新，可以配置顶部下拉的距离（threshold） 来决定刷新时机以及回弹停留的距离（stop）
-  private pullDownRefreshObj = {
-    threshold: 90,
-    stop: 40,
-    txt: '加载更多'
-  };
-  // 这个配置用于做上拉加载功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启上拉加载，可以配置离底部距离阈值（threshold）来决定开始加载的时机
-  private pullUpLoadObj = false;
-  // {
-  //   threshold: 0,
-  //   txt: {
-  //     more: "加载更多",
-  //     noMore: "没有更多数据了"
-  //   }
-  // };
-  private startY = 0; // 纵轴方向初始化位置
-  private scrollToX = 0;
-  private scrollToY = 0;
-  private scrollToTime = 700;
   private items: any = [];
 
   private count = 1;
 
+  private loading = false;
+
   mounted() {
     this.getData().then((res: any) => {
       this.items = [...res, ...this.items];
-      console.log(this.items);
-      const scroll: any = this.$refs.scroll;
-      scroll.forceUpdate(true);
+      setTimeout(() => {
+        this.scrollToBottom();
+      });
     });
   }
-  // 滚动到页面顶部
-  scrollTo() {
-    const scroll: any = this.$refs.scroll;
-    scroll.scrollTo(this.scrollToX, this.scrollToY, this.scrollToTime);
+  scrollAction(event: any) {
+    if (event.target.scrollTop < 30) {
+      this.loading = true;
+      this.onPullingDown();
+    }
   }
-  // 模拟数据请求
+  scrollToBottom() {
+    const scroll: any = this.$refs.scroll;
+    scroll.scrollTop = scroll.scrollHeight;
+  }
+  scrollToTop() {
+    const scroll: any = this.$refs.scroll;
+    scroll.scrollTop = 30;
+  }
   getData() {
     return new Promise(resolve => {
       setTimeout(() => {
         const arr: any = [];
         for (let i = 0; i < 10; i++) {
-          arr.unshift(this.count++);
+          arr.unshift(
+            {
+              id: this.count++,
+              member: {
+                id: 1,
+                name: '马传佳'
+              },
+              message:
+                '新华社北京2月4日电（记者吴雨）记者4日从网联清算有限公司获悉，春节假期1月24日至1月30日期间，网联平台处理资金类网络支付交易49.19亿笔、金额27307.11亿元，同比去年春节假期分别上涨11.25%、5.76%。'
+            },
+            {
+              id: this.count++,
+              member: {
+                id: 2,
+                name: '韩冬佑'
+              },
+              message:
+                '网联方面介绍，春节期间，网联平台发挥网络支付行业枢纽作用，协同银行及支付机构，应对高并发支付交易需求，圆满保障春节假期和疫情期间的网络支付体系平稳运行。除夕跨年夜，网联平台交易处理峰值达5.2万笔/秒，系统成功率达100%。'
+            }
+          );
         }
         resolve(arr);
       }, 1000);
     });
   }
   onPullingDown() {
-    console.log('下拉加载');
     this.getData().then((res: any) => {
-      console.log(res);
       this.items = [...res, ...this.items];
-      console.log(this.items);
-      const scroll: any = this.$refs.scroll;
-      scroll.forceUpdate(true);
+      this.loading = false;
+      setTimeout(() => {
+        this.scrollToTop();
+      });
     });
-  }
-  onPullingUp() {
-    // 模拟上拉 加载更多数据
-    // debugger
-    // console.log("上拉加载");
-    // this.getData().then((res: any) => {
-    //   this.items = { ...res, ...this.items };
-    //   const scroll: any = this.$refs.scroll;
-    //   scroll.forceUpdate(true);
-    //   // if (this.count < 30) {
-    //   //   scroll.forceUpdate(true);
-    //   // } else {
-    //   //   scroll.forceUpdate(false);
-    //   // }
-    // });
   }
 
   submit(event: any) {
@@ -199,17 +194,77 @@ export default class extends Vue {
     flex-grow: 1;
     height: 0;
     overflow: auto;
-    position: relative;
-    .position-box {
-      position: absolute;
-      top: 0px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      .message-content-list {
-        .message-content-list-item {
-          height: 50px;
-          margin: 20px;
+    .message-content-body-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      i {
+        font-size: 30px;
+      }
+    }
+    .message-content-list {
+      padding: 10px;
+      margin-top: 30px;
+      .message-content-list-item {
+        margin: 10px 10px 20px 10px;
+        display: flex;
+        flex-direction: row;
+        &.message-content-list-item-me {
+          flex-direction: row-reverse;
+          .message-content-list-item-aside {
+            margin-left: 10px;
+            margin-right: 0;
+          }
+          .message-content-list-item-content {
+            .arrow {
+              right: -6px;
+              left: auto;
+              transform: rotate(180deg);
+            }
+          }
+        }
+        .message-content-list-item-aside {
+          margin-right: 10px;
+        }
+        .message-content-list-item-content {
+          max-width: 60%;
+          flex-grow: 1;
+          width: 1;
+          background: #fff;
+          border-radius: 5px;
+          font-size: 14px;
+          padding: 7px;
+          line-height: 24px;
+          position: relative;
+          color: $mainText;
+          .arrow {
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            left: -6px;
+            top: 18px;
+            margin-bottom: 3px;
+            border-right-color: #ebeef5;
+            border-left-width: 0;
+            &::after {
+              position: absolute;
+              display: block;
+              width: 0;
+              height: 0;
+              border-color: transparent;
+              border-style: solid;
+              content: " ";
+              border-width: 6px;
+              bottom: -6px;
+              left: 1px;
+              border-right-color: #fff;
+              border-left-width: 0;
+            }
+          }
         }
       }
     }

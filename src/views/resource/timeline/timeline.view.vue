@@ -45,7 +45,7 @@
           :size="'mini'"
         />
       </el-divider>
-      <div class="timeline-toc-body">
+      <div class="timeline-toc-body timeline-toc-body-wrap">
         <el-avatar class="timeline-resource-avatar">
           会
         </el-avatar>
@@ -237,7 +237,10 @@ export default class extends Vue {
       height: 0;
       overflow-x: hidden;
       overflow-y: auto;
-      display: flex-wrap;
+      &.timeline-toc-body-wrap {
+        display: block;
+      }
+
       .timeline-resource-avatar {
         margin-right: 10px;
         margin-bottom: 10px;
