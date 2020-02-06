@@ -237,6 +237,7 @@ export default class extends Vue {
       height: 0;
       overflow-x: hidden;
       overflow-y: auto;
+      display: flex-wrap;
       .timeline-resource-avatar {
         margin-right: 10px;
         margin-bottom: 10px;
