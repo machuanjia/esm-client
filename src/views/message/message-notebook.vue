@@ -1,11 +1,7 @@
 <template>
   <section class="message-main-body">
-    <div class="message-nav">
-      <div class="message-nav-header" />
-    </div>
-    <div class="message-content">
-      <div class="message-content-header" />
-    </div>
+    <messageNotebookNav />
+    <messageNotebookMain :entity="entity" />
   </section>
 </template>
 
@@ -18,18 +14,22 @@ import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
 import { AppModule } from '@/store/modules/app';
+import messageNotebookNav from '@/views/message/message-notebook-nav.vue';
+import messageNotebookMain from '@/views/message/message-notebook-main.vue';
 
 @Component({
   name: 'messageNotebook',
   components: {
-    AppContent
+    AppContent,
+    messageNotebookNav,
+    messageNotebookMain
   }
 })
 export default class extends Vue {
+  private entity: any = null;
   mounted() {}
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>
