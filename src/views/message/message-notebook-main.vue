@@ -16,7 +16,7 @@
           class="message-content-notebook-assistent-action"
           type="success"
         >
-          成功按钮
+          查看历史
         </el-button>
       </div>
     </div>
