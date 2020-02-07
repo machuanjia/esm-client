@@ -1,48 +1,68 @@
 <template>
-  <div class="p20">
-    <el-popover
-      placement="bottom"
-      trigger="click"
-      :width="200"
+  <div class="recent-setting-wrap">
+    <el-form
+      :label-position="'top'"
+      label-width="80px"
     >
-      <el-tree
-        class="org-tree"
-        :data="orgs"
-        :props="defaultProps"
-        @node-click="selectParent"
-      />
-      <el-input
-        slot="reference"
-        v-model="searchOrg.name"
-        placeholder="请选择部门"
-        class="mr5 mb5"
-        style="width:200px"
-      />
-    </el-popover>
-    <el-select
-      v-model="searchStatus"
-      placeholder="请选择状态"
-      class="mr5 mb5"
-    >
-      <el-option
-        v-for="item in status"
-        :key="item.id"
-        :label="item.name"
-        :value="item.id"
-      />
-    </el-select>
-    <el-select
-      v-model="searchLocation"
-      placeholder="请选择Locations"
-      class="mr5 mb5"
-    >
-      <el-option
-        v-for="item in locations"
-        :key="item.id"
-        :label="item.name"
-        :value="item.id"
-      />
-    </el-select>
+      <el-form-item label="部门">
+        <el-popover
+          placement="bottom"
+          trigger="click"
+          :width="200"
+        >
+          <el-tree
+            class="org-tree"
+            :data="orgs"
+            :props="defaultProps"
+            @node-click="selectParent"
+          />
+          <el-input
+            slot="reference"
+            v-model="searchOrg.name"
+            placeholder="请选择部门"
+            class="mr5 mb5"
+            style="width:200px"
+          />
+        </el-popover>
+      </el-form-item>
+      <el-form-item label="状态">
+        <el-select
+          v-model="searchStatus"
+          placeholder="请选择状态"
+          class="mr5 mb5"
+        >
+          <el-option
+            v-for="item in status"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="Locations">
+        <el-select
+          v-model="searchLocation"
+          placeholder="请选择Locations"
+          class="mr5 mb5"
+        >
+          <el-option
+            v-for="item in locations"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          type="primary"
+          @click="onSubmit"
+        >
+          确定
+        </el-button>
+        <el-button>重置</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -94,6 +114,8 @@ export default class extends mixins(CollectionMixin) {
 
   mounted() {}
 
+  onSubmit() {}
+
   selectParent(data: any) {
     this.searchOrg = data;
   }
@@ -119,5 +141,8 @@ export default class extends mixins(CollectionMixin) {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.recent-setting-wrap {
+  padding: 0 20px;
+}
 </style>

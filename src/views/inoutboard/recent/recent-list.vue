@@ -31,9 +31,10 @@
         </el-divider>
         <div class="rencent-list-row">
           <div class="rencent-list-cell rencent-list-cell-column rencent-list-cell-name">
-            <el-avatar class="rencent-list-cell-avatar">
-              user
-            </el-avatar>
+            <el-avatar
+              class="rencent-list-cell-avatar"
+              icon="el-icon-user-solid"
+            />
             <div class="rencent-list-cell-title">
               马传佳
             </div>
@@ -60,7 +61,7 @@
               circle
             />
             <div class="rencent-list-cell-main">
-              2019-10-10 10:20:33
+              今天家里有事，请假半天
             </div>
           </div>
           <div class="rencent-list-cell rencent-list-cell-update">
@@ -70,9 +71,10 @@
 
         <div class="rencent-list-row active">
           <div class="rencent-list-cell rencent-list-cell-column rencent-list-cell-name">
-            <el-avatar class="rencent-list-cell-avatar">
-              user
-            </el-avatar>
+            <el-avatar
+              class="rencent-list-cell-avatar"
+              icon="el-icon-user-solid"
+            />
             <div class="rencent-list-cell-title">
               马传佳
             </div>
@@ -99,7 +101,7 @@
               circle
             />
             <div class="rencent-list-cell-main">
-              2019-10-10 10:20:33
+              今天家里有事，请假半天
             </div>
           </div>
           <div class="rencent-list-cell rencent-list-cell-update">
@@ -109,9 +111,10 @@
 
         <div class="rencent-list-row">
           <div class="rencent-list-cell rencent-list-cell-column rencent-list-cell-name">
-            <el-avatar class="rencent-list-cell-avatar">
-              user
-            </el-avatar>
+            <el-avatar
+              class="rencent-list-cell-avatar"
+              icon="el-icon-user-solid"
+            />
             <div class="rencent-list-cell-title">
               马传佳
             </div>
@@ -138,7 +141,7 @@
               circle
             />
             <div class="rencent-list-cell-main">
-              2019-10-10 10:20:33
+              今天家里有事，请假半天
             </div>
           </div>
           <div class="rencent-list-cell rencent-list-cell-update">
@@ -148,9 +151,10 @@
 
         <div class="rencent-list-row">
           <div class="rencent-list-cell rencent-list-cell-column rencent-list-cell-name">
-            <el-avatar class="rencent-list-cell-avatar">
-              user
-            </el-avatar>
+            <el-avatar
+              class="rencent-list-cell-avatar"
+              icon="el-icon-user-solid"
+            />
             <div class="rencent-list-cell-title">
               马传佳
             </div>
@@ -177,7 +181,7 @@
               circle
             />
             <div class="rencent-list-cell-main">
-              2019-10-10 10:20:33
+              今天家里有事，请假半天
             </div>
           </div>
           <div class="rencent-list-cell rencent-list-cell-update">
@@ -249,20 +253,20 @@ export default class extends Vue {
     align-items: center;
     border-radius: 3px;
     width: calc(100vw - 140px) !important;
-    &:hover{
+    &:hover {
       box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     }
-    &.active{
-       background-image: linear-gradient(to right, #2f80e2 , #48c0f4);
-       border:1px #fff solid;
-       .rencent-list-cell{
-         color: #fff;
-         &.rencent-list-cell-name{
-          .rencent-list-cell-desc{
+    &.active {
+      background-image: linear-gradient(to right, #2f80e2, #48c0f4);
+      border: 1px #fff solid;
+      .rencent-list-cell {
+        color: #fff;
+        &.rencent-list-cell-name {
+          .rencent-list-cell-desc {
             color: #fff;
           }
-         }
-       }
+        }
+      }
     }
     &.rencent-list-row-header {
       background: #fff;
@@ -309,6 +313,7 @@ export default class extends Vue {
         .rencent-list-cell-avatar {
           margin-top: -30px;
           box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+          background: $activeBg;
         }
         .rencent-list-cell-title {
           padding: 5px;

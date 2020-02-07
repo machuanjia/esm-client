@@ -4,22 +4,36 @@
       :key="1"
       :list="list1"
       :group="group"
-      class="kanban todo"
-      header-text="Todo"
+      class="kanban success"
+      header-text="在岗"
     />
     <draggable-kanban
       :key="2"
       :list="list2"
       :group="group"
-      class="kanban working"
-      header-text="Working"
+      class="kanban success"
+      header-text="外出"
     />
     <draggable-kanban
       :key="3"
       :list="list3"
       :group="group"
-      class="kanban done"
-      header-text="Done"
+      class="kanban info"
+      header-text="请假"
+    />
+    <draggable-kanban
+      :key="3"
+      :list="list3"
+      :group="group"
+      class="kanban warning"
+      header-text="旷工"
+    />
+    <draggable-kanban
+      :key="3"
+      :list="list3"
+      :group="group"
+      class="kanban danger"
+      header-text="早退"
     />
   </div>
 </template>
@@ -79,37 +93,55 @@ export default class extends Vue {
 .kanban {
   margin-right: 20px;
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
-  border:1px #fff solid;
+  border: 1px #fff solid;
   .board-column-content {
     height: calc(100vh - 200px) !important;
     overflow: auto !important;
     padding-right: 10px;
-    border-right-width: 0px!important;
+    border-right-width: 0px !important;
     background: $mainBg;
     .board-item {
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1)!important;
-      &:hover{
-         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2)!important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1) !important;
+      &:hover {
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
       }
     }
   }
-  &.todo {
+  &.info {
     .board-column-header {
-      background: #4a9ff9;
+      background: $subMenuActiveText;
     }
   }
 
-  &.working {
+  &.warning {
     .board-column-header {
-      background: #f9944a;
+      background: $yellow;
     }
   }
 
-  &.done {
+  &.success {
     .board-column-header {
-      background: #2ac06d;
+      background: $green;
     }
   }
+
+  &.danger {
+    .board-column-header {
+      background: $red;
+    }
+  }
+
+   &.disabled {
+    .board-column-header {
+      background: $darkGray;
+    }
+  }
+
+  // { type: '', label: '标签一' },
+  //       { type: 'success', label: '标签二' },
+  //       { type: 'info', label: '标签三' },
+  //       { type: 'danger', label: '标签四' },
+  //       { type: 'warning', label: '标签五' }
 }
 </style>
 
