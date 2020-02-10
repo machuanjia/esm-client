@@ -6,8 +6,8 @@
   >
     <template v-slot:hleft>
       <span class="app-content-full-title">
-        <svg-icon name="tab" />
-        <span class="ml5">{{ $t('route.boards') }}</span>
+        <svg-icon name="story" />
+        <span class="ml5">{{ $t('route.story') }}</span>
       </span>
     </template>
     <template v-slot:hcenter />
@@ -32,7 +32,7 @@
             type="primary"
             icon="el-icon-plus"
           >
-            看板
+            故事版
           </el-button>
         </template>
         <template v-slot:body>

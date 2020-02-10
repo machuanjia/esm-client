@@ -75,6 +75,7 @@ export default {
     statistics: "统计查询",
     boards: "Boards",
     widgets: "Widgets",
+    story: "Story",
     tags: "Tags",
     bills: "Billes",
     account: "Account setting",

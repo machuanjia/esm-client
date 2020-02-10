@@ -1,9 +1,10 @@
 import { RouteConfig } from "vue-router";
 import Layout from "@/layout/index.vue";
+import FullLayout from "@/layout/full.vue";
 
 const statisticsRouter: RouteConfig = {
   path: "/statistics",
-  component: Layout,
+  component: FullLayout,
   redirect: "noredirect",
   name: "statistics",
   meta: {
@@ -11,7 +12,19 @@ const statisticsRouter: RouteConfig = {
     icon: "statistics"
   },
   children: [
-
+    {
+      path: "story",
+      component: () =>
+        import(
+          /* webpackChunkName: "icons" */ "@/views/statistics/story/story.view.vue"
+        ),
+      name: "story",
+      meta: {
+        title: "story",
+        icon: "story",
+        noCache: true
+      }
+    },
     {
       path: "boards",
       component: () =>
@@ -38,17 +51,7 @@ const statisticsRouter: RouteConfig = {
         noCache: true
       }
     },
-    {
-      path: "tags",
-      component: () =>
-        import(/* webpackChunkName: "icons" */ "@/views/statistics/tags/tags.view.vue"),
-      name: "tags",
-      meta: {
-        title: "tags",
-        icon: "nested",
-        noCache: true
-      }
-    },
+
     {
       path: "datasource",
       component: () =>
@@ -60,6 +63,19 @@ const statisticsRouter: RouteConfig = {
         title: "datasource",
         noCache: true,
         icon: "data"
+      }
+    },
+    {
+      path: "tags",
+      component: () =>
+        import(
+          /* webpackChunkName: "icons" */ "@/views/statistics/tags/tags.view.vue"
+        ),
+      name: "tags",
+      meta: {
+        title: "tags",
+        icon: "nested",
+        noCache: true
       }
     }
   ]

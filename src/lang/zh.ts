@@ -75,6 +75,7 @@ export default {
     statistics: "统计查询",
     boards: "看板",
     widgets: "部件",
+    story: "故事版",
     tags: "标签",
     bills: "账单",
     account: "企业设置",
