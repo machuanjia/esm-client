@@ -38,6 +38,7 @@
         </template>
         <template v-slot:body>
           <el-table
+            ref="draggableTable"
             :data="categotyes"
             style="width: 100%;margin-bottom: 20px;"
             row-key="id"
@@ -127,6 +128,7 @@ import {
   updateCalenderCategory,
   deleteCalenderCategory
 } from '@/api/schedule-setting';
+import SortableMixin from '@/components/Mixin/sortable';
 
 @Component({
   name: 'calendarMangement',
@@ -136,7 +138,7 @@ import {
     scheduleCalenderCollection
   }
 })
-export default class extends mixins(ViewMixin) {
+export default class extends mixins(ViewMixin, SortableMixin) {
   private categotyes = [];
 
   created() {
@@ -186,6 +188,10 @@ export default class extends mixins(ViewMixin) {
     const { data } = await getCalenderCategorys({});
     if (data) {
       this.categotyes = data;
+      this.$nextTick(() => {
+        this.setSort(this.categotyes, () => {
+        });
+      });
     }
   }
 

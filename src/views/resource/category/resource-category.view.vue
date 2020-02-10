@@ -38,6 +38,7 @@
         </template>
         <template v-slot:body>
           <el-table
+            ref="draggableTable"
             :data="categotyes"
             style="width: 100%;margin-bottom: 20px;"
             row-key="id"
@@ -120,6 +121,7 @@ import AppContentFull from '@/components/Content/content-full.vue';
 import { mixins } from 'vue-class-component';
 import ViewMixin from '@/components/Mixin';
 import resourceCategoryCollection from '@/views/resource/category/resource-categoty-collection.vue';
+import SortableMixin from '@/components/Mixin/sortable';
 
 import {
   getResourceCategorys,
@@ -137,7 +139,7 @@ import {
     resourceCategoryCollection
   }
 })
-export default class extends mixins(ViewMixin) {
+export default class extends mixins(ViewMixin, SortableMixin) {
   private categotyes = [];
 
   created() {
@@ -187,8 +189,15 @@ export default class extends mixins(ViewMixin) {
     const { data } = await getResourceCategorys({});
     if (data) {
       this.categotyes = data;
+      this.$nextTick(() => {
+        this.setSort(this.categotyes, () => {
+          this.sortCategory();
+        });
+      });
     }
   }
+
+  private async sortCategory() {}
 
   private async addResourceCategory(payload: any) {
     const { data } = await addResourceCategory(payload);
@@ -205,6 +214,3 @@ export default class extends mixins(ViewMixin) {
   }
 }
 </script>
-
-<style lang="scss">
-</style>

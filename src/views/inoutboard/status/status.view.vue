@@ -38,6 +38,7 @@
         </template>
         <template v-slot:body>
           <el-table
+            ref="draggableTable"
             :data="categotyes"
             style="width: 100%;margin-bottom: 20px;"
             row-key="id"
@@ -124,6 +125,7 @@ import {
   deleteInoutBoardStatus
 } from '@/api/inoutboard';
 import statusCollection from '@/views/inoutboard/status/status-collection.vue';
+import SortableMixin from '@/components/Mixin/sortable';
 
 @Component({
   name: 'status',
@@ -133,7 +135,7 @@ import statusCollection from '@/views/inoutboard/status/status-collection.vue';
     statusCollection
   }
 })
-export default class extends mixins(ViewMixin) {
+export default class extends mixins(ViewMixin, SortableMixin) {
   private categotyes = [];
 
   created() {
@@ -183,6 +185,10 @@ export default class extends mixins(ViewMixin) {
     const { data } = await getInoutBoardStatuses({});
     if (data) {
       this.categotyes = data;
+      this.$nextTick(() => {
+        this.setSort(this.categotyes, () => {
+        });
+      });
     }
   }
 
