@@ -190,8 +190,8 @@ export const asyncRoutes: RouteConfig[] = [
       }
     ]
   },
-  componentsRouter,
-  chartsRouter,
+  // componentsRouter,
+  // chartsRouter,
   // nestedRouter,
   // tableRouter,
   statisticsRouter,

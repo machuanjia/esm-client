@@ -16,7 +16,7 @@ const statisticsRouter: RouteConfig = {
       path: "boards",
       component: () =>
         import(
-          /* webpackChunkName: "icons" */ "@/views/boards/boards.view.vue"
+          /* webpackChunkName: "icons" */ "@/views/statistics/boards/boards.view.vue"
         ),
       name: "boards",
       meta: {
@@ -29,7 +29,7 @@ const statisticsRouter: RouteConfig = {
       path: "widgets",
       component: () =>
         import(
-          /* webpackChunkName: "icons" */ "@/views/widgets/widgets.view.vue"
+          /* webpackChunkName: "icons" */ "@/views/statistics/widgets/widgets.view.vue"
         ),
       name: "widgets",
       meta: {
@@ -41,7 +41,7 @@ const statisticsRouter: RouteConfig = {
     {
       path: "tags",
       component: () =>
-        import(/* webpackChunkName: "icons" */ "@/views/tags/tags.view.vue"),
+        import(/* webpackChunkName: "icons" */ "@/views/statistics/tags/tags.view.vue"),
       name: "tags",
       meta: {
         title: "tags",
@@ -53,7 +53,7 @@ const statisticsRouter: RouteConfig = {
       path: "datasource",
       component: () =>
         import(
-          /* webpackChunkName: "icons" */ "@/views/data-source/data-source.view.vue"
+          /* webpackChunkName: "icons" */ "@/views/statistics/data-source/data-source.view.vue"
         ),
       name: "datasource",
       meta: {
