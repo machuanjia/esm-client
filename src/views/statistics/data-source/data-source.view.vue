@@ -7,7 +7,7 @@
     <template v-slot:hleft>
       <span class="app-content-full-title">
         <svg-icon name="data" />
-        <span class="ml5">资源</span>
+        <span class="ml5">{{ $t('route.datasource') }}</span>
       </span>
     </template>
     <template v-slot:hcenter />
@@ -31,13 +31,15 @@
           <el-button
             type="primary"
             icon="el-icon-plus"
+            @click="openCollectionAction"
           >
             数据源
           </el-button>
         </template>
         <template v-slot:body>
           <el-table
-            :data="rolesData"
+            ref="draggableTable"
+            :data="list"
             style="width: 100%;margin-bottom: 20px;"
             row-key="id"
             border
@@ -61,7 +63,7 @@
               label="类型"
             >
               <template slot-scope="{row}">
-                {{ row.type | dataSourceType }}
+                {{ row.type.name }}
               </template>
             </el-table-column>
             <el-table-column
@@ -88,16 +90,28 @@
                 <i
                   v-if="row.type"
                   class="el-icon-edit-outline table-icon-action"
-                  @click="edit(row)"
+                  @click="editAction(row)"
                 />
                 <i
                   v-if="row.type"
                   class="el-icon-delete table-icon-action"
-                  @click="remove(row)"
+                  @click="removeAction(row)"
                 />
               </template>
             </el-table-column>
           </el-table>
+          <el-dialog
+            v-if="collectionVisible"
+            :title="collectionTitle"
+            :visible.sync="collectionVisible"
+            :width="collectionSize"
+          >
+            <dataSourceCollection
+              :entity="entity"
+              @saveAction="saveAction"
+              @cancelAction="cancelAction"
+            />
+          </el-dialog>
         </template>
       </app-content>
     </template>
@@ -113,45 +127,93 @@ import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
 import AppContentFull from '@/components/Content/content-full.vue';
+import { mixins } from 'vue-class-component';
+import ViewMixin from '@/components/Mixin';
+import dataSourceCollection from '@/views/statistics/data-source/data-source-collection.vue';
+import SortableMixin from '@/components/Mixin/sortable';
+import {
+  getDataSources,
+  getDataSource,
+  addDataSource,
+  updateDataSource,
+  deleteDataSource
+} from '@/api/statistics';
 
 @Component({
   name: 'datasource',
   components: {
     AppContent,
-    AppContentFull
+    AppContentFull,
+    dataSourceCollection
   }
 })
-export default class extends Vue {
-  private searchText = '';
-
-  private rolesData = [
-    {
-      id: 1,
-      type: 0,
-      status: '1',
-      description: '这个是成员在线状态',
-      name: '成员在线状态'
-    },
-    {
-      id: 2,
-      type: 0,
-      status: '1',
-      description: '这个是历史状态查看',
-      name: '历史状态'
-    },
-    {
-      id: 3,
-      type: 1,
-      status: '1',
-      description: '这个是xxx考勤机',
-      name: 'xxx考勤机'
-    }
-  ];
+export default class extends mixins(ViewMixin, SortableMixin) {
+  private list: any = [];
+  created() {
+    this.getDataSources();
+  }
 
   mounted() {}
 
-  edit(row: any) {}
-  remove(row: any) {}
+  async editAction(row: any) {
+    const { data } = await getDataSource(row.id, {});
+    if (data) {
+      this.editCollectionAction(data);
+    }
+  }
+
+  saveAction(payload: any) {
+    if (this.entity) {
+      this.updateDataSource(this.entity.id, payload);
+    } else {
+      this.addDataSource(payload);
+    }
+    this.closeCollectionaction();
+  }
+
+  cancelAction() {
+    this.closeCollectionaction();
+  }
+
+  removeAction(row: any) {
+    this.removeCollectionAction(async(successFn: any) => {
+      const { data } = await deleteDataSource(row.id);
+      this.deleteCollection(this.list, row);
+      if (successFn) {
+        successFn();
+      }
+    });
+  }
+
+  changeStatus(row: any) {
+    this.updateDataSource(row.id, {
+      name: row.name,
+      status: row.status,
+      description: row.description
+    });
+  }
+
+  private async getDataSources() {
+    const { data } = await getDataSources({});
+    if (data) {
+      this.list = data;
+      this.setSort(this.list, () => {});
+    }
+  }
+
+  private async addDataSource(payload: any) {
+    const { data } = await addDataSource(payload);
+    if (data) {
+      this.pushCollection(this.list, data);
+    }
+  }
+
+  private async updateDataSource(id: number, payload: any) {
+    const { data } = await updateDataSource(id, payload);
+    if (data) {
+      this.updateCollection(this.list, data);
+    }
+  }
 }
 </script>
 

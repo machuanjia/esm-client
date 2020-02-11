@@ -64,20 +64,20 @@ const statisticsRouter: RouteConfig = {
         noCache: true,
         icon: "data"
       }
-    },
-    {
-      path: "tags",
-      component: () =>
-        import(
-          /* webpackChunkName: "icons" */ "@/views/statistics/tags/tags.view.vue"
-        ),
-      name: "tags",
-      meta: {
-        title: "tags",
-        icon: "nested",
-        noCache: true
-      }
     }
+    // {
+    //   path: "tags",
+    //   component: () =>
+    //     import(
+    //       /* webpackChunkName: "icons" */ "@/views/statistics/tags/tags.view.vue"
+    //     ),
+    //   name: "tags",
+    //   meta: {
+    //     title: "tags",
+    //     icon: "nested",
+    //     noCache: true
+    //   }
+    // }
   ]
 };
 

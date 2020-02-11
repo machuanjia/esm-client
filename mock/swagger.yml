@@ -20,6 +20,33 @@ tags:
   - name: users
     description: Users related api.
 paths:
+  /statistics/data-sources:
+   get:
+      operationId: getDataSources
+      responses:
+        200:
+          description: OK
+   post:
+      operationId: addDataSource
+      responses:
+        200:
+          description: OK
+  /statistics/data-sources/{id}:
+    get:
+      operationId: getDataSource
+      responses:
+        200:
+          description: OK
+    put:
+      operationId: updateDataSource
+      responses:
+        200:
+          description: OK
+    delete:
+      operationId: deleteDataSource
+      responses:
+        200:
+          description: OK
   /inoutboard/statistics:
    get:
       operationId: getStatistics
