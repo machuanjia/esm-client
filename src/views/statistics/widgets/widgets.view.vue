@@ -115,72 +115,28 @@
         </el-dropdown>
       </div>
       <div class="widget-data-source-fields">
-        <div class="widget-data-source-field">
-          <el-avatar
-            class="avatar-default"
-            :size="'small'"
+        <draggable
+          class="dragArea list-group"
+          :list="list"
+          :group="{name: 'people', pull: 'clone', put: false}"
+          :clone="cloneDog"
+        >
+          <div
+            v-for="element in list"
+            :key="element.name"
+            class="widget-data-source-field list-group-item"
           >
-            #
-          </el-avatar>
-          <div class="widget-data-source-field-name">
-            日期
+            <el-avatar
+              class="avatar-default"
+              :size="'small'"
+            >
+              #
+            </el-avatar>
+            <div class="widget-data-source-field-name">
+              {{ element.name }}
+            </div>
           </div>
-        </div>
-        <div class="widget-data-source-field">
-          <el-avatar
-            class="avatar-default"
-            :size="'small'"
-          >
-            T
-          </el-avatar>
-          <div class="widget-data-source-field-name">
-            地区
-          </div>
-        </div>
-        <div class="widget-data-source-field">
-          <el-avatar
-            class="avatar-default"
-            :size="'small'"
-          >
-            #
-          </el-avatar>
-          <div class="widget-data-source-field-name">
-            日期
-          </div>
-        </div>
-        <div class="widget-data-source-field">
-          <el-avatar
-            class="avatar-default"
-            :size="'small'"
-          >
-            T
-          </el-avatar>
-          <div class="widget-data-source-field-name">
-            地区
-          </div>
-        </div>
-        <div class="widget-data-source-field">
-          <el-avatar
-            class="avatar-default"
-            :size="'small'"
-          >
-            #
-          </el-avatar>
-          <div class="widget-data-source-field-name">
-            日期
-          </div>
-        </div>
-        <div class="widget-data-source-field">
-          <el-avatar
-            class="avatar-default"
-            :size="'small'"
-          >
-            T
-          </el-avatar>
-          <div class="widget-data-source-field-name">
-            地区
-          </div>
-        </div>
+        </draggable>
       </div>
     </div>
     <div class="toc-layout-main flex-c">
@@ -189,13 +145,51 @@
           <div class="widgets-main-header-row-left">
             <svg-icon name="list" />列
           </div>
-          <div class="widgets-main-header-row-right" />
+          <div class="widgets-main-header-row-right">
+            <draggable
+              class="dragArea list-group"
+              :ghost-class="'tag-ghost-class'"
+              :list="listCol"
+              group="people"
+              @change="log"
+            >
+              <el-tag
+                v-for="element in listCol"
+                :key="element.id"
+                effect="plain"
+                class="ml5"
+                :size="'small'"
+                closable
+              >
+                {{ element.name }}
+              </el-tag>
+            </draggable>
+          </div>
         </div>
         <div class="widgets-main-header-row">
           <div class="widgets-main-header-row-left">
             <svg-icon name="list" />行
           </div>
-          <div class="widgets-main-header-row-right" />
+          <div class="widgets-main-header-row-right">
+            <draggable
+              class="dragArea list-group"
+              :ghost-class="'tag-ghost-class'"
+              :list="listRow"
+              group="people"
+              @change="log"
+            >
+              <el-tag
+                v-for="element in listRow"
+                :key="element.id"
+                effect="plain"
+                class="ml5"
+                :size="'small'"
+                closable
+              >
+                {{ element.name }}
+              </el-tag>
+            </draggable>
+          </div>
         </div>
       </div>
       <div class="widgets-main-body flex-grow" />
@@ -253,7 +247,7 @@ import { isValidUsername } from '@/utils/validate';
 import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
 import AppContentFull from '@/components/Content/content-full.vue';
-
+import Draggable from 'vuedraggable';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
 
 @Component({
@@ -262,7 +256,8 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper';
     AppContent,
     AppContentFull,
     swiper,
-    swiperSlide
+    swiperSlide,
+    Draggable
   }
 })
 export default class extends Vue {
@@ -270,10 +265,29 @@ export default class extends Vue {
 
   private activeNames = ['1', '2', '3', '4'];
 
+  private list = [
+    { name: 'John', id: 1 },
+    { name: 'Joao', id: 2 },
+    { name: 'Jean', id: 3 },
+    { name: 'Gerard', id: 4 }
+  ];
+
+  private listCol = [];
+
+  private listRow = [];
+
+  private idGlobal = 1;
+
   @Watch('filterText')
   private onFilterChange(val: any) {}
 
   mounted() {}
+  cloneDog(item: any) {
+    return {
+      id: this.idGlobal++,
+      name: item.name
+    };
+  }
 }
 </script>
 
@@ -407,6 +421,14 @@ export default class extends Vue {
         margin-left: 5px;
       }
     }
+    .widgets-main-header-row-right {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      .list-group {
+        flex-grow: 1;
+      }
+    }
   }
 }
 .widgets-main-body {
@@ -421,6 +443,26 @@ export default class extends Vue {
   }
   .el-collapse-item__content {
     padding: 10px;
+  }
+}
+.tag-ghost-class {
+  display: inline-block;
+  margin-left: 5px;
+  height: 24px;
+  padding: 0 8px;
+  line-height: 22px;
+  background-color: white;
+  border-color: #a3d3ff;
+  color: #fff !important;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  background: $green;
+  .el-avatar {
+    display: none !important;
   }
 }
 </style>
