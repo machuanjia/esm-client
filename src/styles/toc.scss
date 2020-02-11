@@ -8,12 +8,17 @@
     display: flex;
     flex-direction: column;
     .toc-layout-toc-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-bottom: 1px $border solid;
       .toc-layout-title {
+        flex-grow: 1;
+        width: 0;
         padding: 10px;
         height: 50px;
         display: flex;
         align-items: center;
-        border-bottom: 1px $border solid;
         svg {
           font-size: 16px;
           color: #324157;
@@ -23,6 +28,9 @@
           color: #97a8be;
           margin-left: 10px;
         }
+      }
+      .toc-layout-action{
+        padding: 10px;
       }
     }
     .toc-layout-toc-body {
@@ -43,5 +51,11 @@
   .toc-layout-main {
     width: 0;
     flex-grow: 1;
+  }
+  .toc-layout-aside{
+    width: 240px;
+    border-left: 1px $border solid;
+    display: flex;
+    flex-direction: column;
   }
 }

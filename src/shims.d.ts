@@ -33,3 +33,5 @@ declare module "@fullcalendar/list";
 declare module "vue-gantt-schedule-timeline-calendar";
 
 declare module "vue2-better-scroll";
+
+declare module "vue-awesome-swiper";
