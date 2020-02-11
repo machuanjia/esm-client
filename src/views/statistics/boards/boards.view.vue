@@ -7,6 +7,83 @@
           <span>{{ $t('route.boards') }}</span>
         </div>
       </div>
+      <div class="toc-layout-toc-search">
+        <el-input
+          v-model="filterText"
+          placeholder="输入关键字进行过滤"
+        />
+      </div>
+      <div class="toc-layout-toc-body toc-layout-toc-body-no-padding">
+        <div class="toc-list-item">
+          <div class="toc-list-item-header">
+            <div class="toc-list-item-header-avatar">
+              <el-avatar
+                icon="el-icon-document"
+                class="avatar-default"
+                :size="'small'"
+              />
+              <div class="toc-list-item-header-name">
+                输入关键字进行过滤输入关键字进行过滤
+              </div>
+            </div>
+            <div class="toc-list-item-header-actions">
+              <i class="el-icon-delete" />
+            </div>
+          </div>
+          <div class="toc-list-item-body">
+            输入关键字进行过滤输入关键字进行过滤输入关键字进行过滤输入关键字进行过滤
+          </div>
+          <div class="toc-list-item-footer">
+            2019-10-20
+          </div>
+        </div>
+        <div class="toc-list-item">
+          <div class="toc-list-item-header">
+            <div class="toc-list-item-header-avatar">
+              <el-avatar
+                icon="el-icon-document"
+                class="avatar-default"
+                :size="'small'"
+              />
+              <div class="toc-list-item-header-name">
+                输入关键字进行过滤输入关键字进行过滤
+              </div>
+            </div>
+            <div class="toc-list-item-header-actions">
+              <i class="el-icon-delete" />
+            </div>
+          </div>
+          <div class="toc-list-item-body">
+            输入关键字进行过滤输入关键字进行过滤输入关键字进行过滤输入关键字进行过滤
+          </div>
+          <div class="toc-list-item-footer">
+            2019-10-20
+          </div>
+        </div>
+        <div class="toc-list-item">
+          <div class="toc-list-item-header">
+            <div class="toc-list-item-header-avatar">
+              <el-avatar
+                icon="el-icon-document"
+                class="avatar-default"
+                :size="'small'"
+              />
+              <div class="toc-list-item-header-name">
+                输入关键字进行过滤输入关键字进行过滤
+              </div>
+            </div>
+            <div class="toc-list-item-header-actions">
+              <i class="el-icon-delete" />
+            </div>
+          </div>
+          <div class="toc-list-item-body">
+            输入关键字进行过滤输入关键字进行过滤输入关键字进行过滤输入关键字进行过滤
+          </div>
+          <div class="toc-list-item-footer">
+            2019-10-20
+          </div>
+        </div>
+      </div>
     </div>
     <div class="toc-layout-main">
       ss
