@@ -2,3 +2,8 @@
   background: $menuActiveText;
   color: #fff;
 }
+.avatar-reverse {
+  background: #fff;
+  border:1px  $menuActiveText solid;
+  color: $menuActiveText;
+}

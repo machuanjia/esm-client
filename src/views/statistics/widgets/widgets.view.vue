@@ -97,7 +97,7 @@
         <el-dropdown>
           <div class="widget-data-source-item">
             <el-avatar
-              class="avatar-default"
+              class="avatar-reverse"
               :size="'small'"
             >
               <svg-icon name="data" />
@@ -186,17 +186,61 @@
     <div class="toc-layout-main flex-c">
       <div class="widgets-main-header">
         <div class="widgets-main-header-row">
-          <div class="widgets-main-header-row-left" />
+          <div class="widgets-main-header-row-left">
+            <svg-icon name="list" />列
+          </div>
           <div class="widgets-main-header-row-right" />
         </div>
         <div class="widgets-main-header-row">
-          <div class="widgets-main-header-row-left" />
+          <div class="widgets-main-header-row-left">
+            <svg-icon name="list" />行
+          </div>
           <div class="widgets-main-header-row-right" />
         </div>
       </div>
       <div class="widgets-main-body flex-grow" />
     </div>
-    <div class="toc-layout-aside" />
+    <div class="toc-layout-aside">
+      <div class="widgets-aside">
+        <el-collapse v-model="activeNames">
+          <el-collapse-item name="1">
+            <template slot="title">
+              标题
+            </template>
+            <el-input
+              v-model="input"
+              placeholder="请输入内容"
+            />
+          </el-collapse-item>
+          <el-collapse-item
+            title="图表类型"
+            name="2"
+          >
+            <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+            <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+          </el-collapse-item>
+          <el-collapse-item
+            title="过滤"
+            name="3"
+          >
+            <div>简化流程：设计简洁直观的操作流程；</div>
+            <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+            <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+          </el-collapse-item>
+          <el-collapse-item
+            title="描述"
+            name="4"
+          >
+            <el-input
+              v-model="textarea"
+              type="textarea"
+              :rows="2"
+              placeholder="请输入内容"
+            />
+          </el-collapse-item>
+        </el-collapse>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -223,6 +267,8 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper';
 })
 export default class extends Vue {
   private filterText = '';
+
+  private activeNames = ['1', '2', '3', '4'];
 
   @Watch('filterText')
   private onFilterChange(val: any) {}
@@ -304,16 +350,17 @@ export default class extends Vue {
     justify-content: center;
     font-size: 20px;
     box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
-    background: #fff;
+    background: $activeBg;
     padding: 5px;
     border-radius: 3px;
     .widget-data-source-name {
       flex-grow: 1;
       margin: 0 10px;
-      color: $mainText;
+      color: #fff;
     }
     i {
       font-size: 16px;
+      color: #fff;
     }
   }
 }
@@ -324,38 +371,56 @@ export default class extends Vue {
     background: #fff;
     flex-direction: row;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
     margin: 5px;
 
     .widget-data-source-field-name {
       flex-grow: 1;
       width: 0;
       margin-left: 5px;
-      color:$mainText;
+      color: $mainText;
     }
   }
 }
-.widgets-main-header{
+.widgets-main-header {
   padding: 10px;
-  .widgets-main-header-row{
-    border:1px $border solid;
+  .widgets-main-header-row {
+    border: 1px $border solid;
     margin-bottom: 10px;
     height: 30px;
     background: #fff;
     display: flex;
     flex-direction: row;
-    &:last-child{
+    &:last-child {
       margin-bottom: 0;
     }
-    .widgets-main-header-row-left{
+    .widgets-main-header-row-left {
       border-right: 1px $border solid;
-      width: 150px;
+      width: 120px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      color: $mainText;
+      svg {
+        font-size: 12px;
+        margin-right: 5px;
+        margin-left: 5px;
+      }
     }
   }
 }
-.widgets-main-body{
- margin: 0 10px 10px 10px;
+.widgets-main-body {
+  margin: 0 10px 10px 10px;
   box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
   background: #fff;
+}
+.widgets-aside {
+  // padding: 10px;
+  .el-collapse-item__header {
+    padding: 10px;
+  }
+  .el-collapse-item__content {
+    padding: 10px;
+  }
 }
 </style>
