@@ -33,12 +33,19 @@
         padding: 10px;
       }
     }
+    .toc-layout-toc-search{
+      padding: 10px;
+      border-bottom: 1px $border solid;
+    }
     .toc-layout-toc-body {
       padding: 10px;
       flex-grow: 1;
       height: 0;
       overflow-x: hidden;
       overflow-y: auto;
+      &.toc-layout-toc-body-no-padding{
+        padding: 0;
+      }
     }
     .toc-layout-toc-footer {
       border-top: 1px $border solid;

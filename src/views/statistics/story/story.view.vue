@@ -211,7 +211,7 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .story-tree {
   background: none;
   .el-tree-node__content {
