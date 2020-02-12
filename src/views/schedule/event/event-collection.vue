@@ -77,7 +77,7 @@
         />
       </div>
     </div>
-    <div class="collection-row flex-a-center">
+    <div class="collection-row flex-a-center last">
       <div class="collection-row-label collection-row-label-top">
         <svg-icon name="description" />备注
       </div>
@@ -95,20 +95,38 @@
       <div class="collection-row-label mb10">
         参与人
       </div>
-      <div class="collection-row-content">
-        <el-avatar
-          icon="el-icon-user-solid"
-          :size="'small'"
+      <div>
+        <SelectMembersDetail
+          :members="members"
+          @selectMembers="selectMembers"
         />
-        <el-avatar
-          icon="el-icon-user-solid"
-          :size="'small'"
-        />
-        <el-button
-          icon="el-icon-plus"
-          circle
-          :size="'small'"
-        />
+      </div>
+    </div>
+    <el-divider
+      content-position="right"
+      class="mtb15"
+    />
+    <div class="collection-row flex-a-center last">
+      <div
+        v-if="model === 'public'"
+        class="collection-row-label collection-row-label-model cursor"
+        @click="changeModelAction('private')"
+      >
+        <i class="el-icon-unlock" />公开模式
+        <div>所有人可见</div>
+      </div>
+      <div
+        v-if="model === 'private'"
+        class="collection-row-label collection-row-label-model cursor"
+        @click="changeModelAction('public')"
+      >
+        <i class="el-icon-lock" />私有模式
+        <div>参与人可见</div>
+      </div>
+      <div class="collection-row-content flex-r-right">
+        <el-button type="primary">
+          创建
+        </el-button>
       </div>
     </div>
   </div>
@@ -124,11 +142,13 @@ import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
 import { mixins } from 'vue-class-component';
 import CollectionMixin from '@/components/Mixin/collection';
+import SelectMembersDetail from '@/components/SelectMembers/select-members-pop.vue';
 
 @Component({
   name: 'eventCollection',
   components: {
-    AppContent
+    AppContent,
+    SelectMembersDetail
   }
 })
 export default class extends mixins(CollectionMixin) {
@@ -136,7 +156,8 @@ export default class extends mixins(CollectionMixin) {
   private allDay = false;
   private duration: any = '';
   private description: any = '';
-
+  private members: any = [];
+  private model = 'public';
   private props = { multiple: true };
   private options = [
     {
@@ -203,6 +224,14 @@ export default class extends mixins(CollectionMixin) {
     const start = new Date();
     end.setTime(start.getTime() + 3600 * 1000 * 1 * 1);
     this.duration = [start, end];
+  }
+
+  changeModelAction(model: any) {
+    this.model = model;
+  }
+
+  selectMembers(members: any) {
+    debugger;
   }
 }
 </script>

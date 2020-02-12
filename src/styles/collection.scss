@@ -1,5 +1,8 @@
 .collection-row{
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  &.last{
+    margin-bottom: 0;
+  }
   .collection-row-label{
     width: 100px;
     color: $darkGray;
@@ -8,6 +11,19 @@
     }
     &.collection-row-label-top{
      height: 54px;
+    }
+    &.collection-row-label-model{
+      flex-grow: 1;
+      color: $darkText;
+      i{
+        margin-right: 5px;
+      }
+      div{
+        padding-left: 20px;
+        margin-top: 5px;
+        font-size: 12px;
+        color: $darkGray;
+      }
     }
   }
   .collection-row-content{
