@@ -142,7 +142,7 @@ import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
 import { mixins } from 'vue-class-component';
 import CollectionMixin from '@/components/Mixin/collection';
-import SelectMembersDetail from '@/components/SelectMembers/select-members-pop.vue';
+import SelectMembersDetail from '@/components/SelectMembers/select-members-detail.vue';
 
 @Component({
   name: 'eventCollection',

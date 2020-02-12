@@ -156,7 +156,7 @@ export default class extends mixins(ViewMixin) {
   private orgs: any = [
     {
       id: 0,
-      label: '北京华阳云正科技有限公司'
+      name: '北京华阳云正科技有限公司'
     }
   ];
 
