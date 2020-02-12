@@ -1,38 +1,116 @@
 <template>
   <div>
-    <el-form
-      ref="ruleForm"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="100px"
-    >
-      <el-form-item
-        label="名称"
-        prop="name"
+    <div class="collection-row">
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          <svg-icon
+            name="calendar"
+            class="mr5"
+          />我的日历
+          <i class="el-icon-arrow-down el-icon--right" />
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>研发日历</el-dropdown-item>
+          <el-dropdown-item>销售日历</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+    <div class="collection-row">
+      <el-input
+        v-model="eventName"
+        type="textarea"
+        :rows="2"
+        placeholder="日程标题"
+      />
+    </div>
+    <div class="flex-a-center">
+      <el-checkbox
+        v-model="allDay"
+        class="mr5"
       >
-        <el-input v-model="ruleForm.name" />
-      </el-form-item>
-      <el-form-item
-        label="描述"
-        prop="description"
-      >
-        <el-input
-          v-model="ruleForm.description"
-          type="textarea"
+        全天
+      </el-checkbox>
+      <el-date-picker
+        v-model="duration"
+        type="datetimerange"
+        :clearable="false"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        class="duration-wrap"
+      />
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          <svg-icon name="recent" />
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>不重复</el-dropdown-item>
+          <el-dropdown-item>销售日历</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+    <el-divider content-position="right" />
+    <div class="collection-row flex-a-center">
+      <div class="collection-row-label">
+        <svg-icon name="reminder" />提醒
+      </div>
+      <div class="collection-row-content">
+        <el-dropdown>
+          <span class="el-dropdown-link">提前15分钟</span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>黄金糕</el-dropdown-item>
+            <el-dropdown-item>狮子头</el-dropdown-item>
+            <el-dropdown-item>螺蛳粉</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </div>
+    <div class="collection-row flex-a-center">
+      <div class="collection-row-label">
+        <svg-icon name="location" />资源
+      </div>
+      <div class="collection-row-content">
+        <el-cascader
+          :options="options"
+          :props="props"
+          clearable
         />
-      </el-form-item>
-      <el-form-item>
+      </div>
+    </div>
+    <div class="collection-row flex-a-center">
+      <div class="collection-row-label collection-row-label-top">
+        <svg-icon name="description" />备注
+      </div>
+      <div class="collection-row-content">
+        <el-input
+          v-model="description"
+          type="textarea"
+          :rows="2"
+          placeholder="请输入备注"
+        />
+      </div>
+    </div>
+    <el-divider content-position="right" />
+    <div class="collection-row">
+      <div class="collection-row-label mb10">
+        参与人
+      </div>
+      <div class="collection-row-content">
+        <el-avatar
+          icon="el-icon-user-solid"
+          :size="'small'"
+        />
+        <el-avatar
+          icon="el-icon-user-solid"
+          :size="'small'"
+        />
         <el-button
-          type="primary"
-          @click="submitForm('ruleForm')"
-        >
-          确定
-        </el-button>
-        <el-button @click="cancelForm('ruleForm')">
-          取消
-        </el-button>
-      </el-form-item>
-    </el-form>
+          icon="el-icon-plus"
+          circle
+          :size="'small'"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -54,33 +132,100 @@ import CollectionMixin from '@/components/Mixin/collection';
   }
 })
 export default class extends mixins(CollectionMixin) {
-  @Prop({ required: true }) private entity!: any;
+  private eventName: any = '';
+  private allDay = false;
+  private duration: any = '';
+  private description: any = '';
 
-  created() {
-    this.ruleForm = {
-      name: '',
-      description: ''
-    };
+  private props = { multiple: true };
+  private options = [
+    {
+      value: 1,
+      label: '东南',
+      children: [
+        {
+          value: 2,
+          label: '上海',
+          children: [
+            { value: 3, label: '普陀' },
+            { value: 4, label: '黄埔' },
+            { value: 5, label: '徐汇' }
+          ]
+        },
+        {
+          value: 7,
+          label: '江苏',
+          children: [
+            { value: 8, label: '南京' },
+            { value: 9, label: '苏州' },
+            { value: 10, label: '无锡' }
+          ]
+        },
+        {
+          value: 12,
+          label: '浙江',
+          children: [
+            { value: 13, label: '杭州' },
+            { value: 14, label: '宁波' },
+            { value: 15, label: '嘉兴' }
+          ]
+        }
+      ]
+    },
+    {
+      value: 17,
+      label: '西北',
+      children: [
+        {
+          value: 18,
+          label: '陕西',
+          children: [
+            { value: 19, label: '西安' },
+            { value: 20, label: '延安' }
+          ]
+        },
+        {
+          value: 21,
+          label: '新疆维吾尔族自治区',
+          children: [
+            { value: 22, label: '乌鲁木齐' },
+            { value: 23, label: '克拉玛依' }
+          ]
+        }
+      ]
+    }
+  ];
 
-    this.rules = {
-      name: [
-        { required: true, message: '请输入应用名称', trigger: 'blur' },
-        { min: 3, max: 100, message: '长度在 3 到 100 个字符', trigger: 'blur' }
-      ],
-      description: []
-    };
-  }
+  created() {}
 
   mounted() {
-    if (this.entity) {
-      this.ruleForm = {
-        name: this.entity.name,
-        description: this.entity.description
-      };
-    }
+    const end = new Date();
+    const start = new Date();
+    end.setTime(start.getTime() + 3600 * 1000 * 1 * 1);
+    this.duration = [start, end];
   }
 }
 </script>
 
 <style lang="scss">
+.duration-wrap {
+  margin-left: 10px;
+  border: none;
+  width: auto !important;
+  .el-range-input {
+    width: auto !important;
+  }
+  .el-input__icon {
+    line-height: 33px !important;
+    font-size: 16px !important;
+    width: 16px !important;
+  }
+  .el-range-separator {
+    line-height: 33px !important;
+    width: 20px;
+  }
+  .el-range__close-icon {
+    display: none;
+  }
+}
 </style>

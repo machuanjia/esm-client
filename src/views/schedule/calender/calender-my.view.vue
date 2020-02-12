@@ -35,7 +35,7 @@
         v-if="collectionVisible"
         :title="collectionTitle"
         :visible.sync="collectionVisible"
-        :width="collectionSize"
+        :width="'660px'"
       >
         <eventCollection
           :entity="entity"

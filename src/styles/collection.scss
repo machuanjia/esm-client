@@ -1,0 +1,17 @@
+.collection-row{
+  margin-bottom: 10px;
+  .collection-row-label{
+    width: 100px;
+    color: $darkGray;
+    svg{
+      margin-right: 10px;
+    }
+    &.collection-row-label-top{
+     height: 54px;
+    }
+  }
+  .collection-row-content{
+    flex-grow: 1;
+    width: 0;
+  }
+}

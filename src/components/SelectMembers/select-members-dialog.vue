@@ -89,10 +89,6 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { dialogSize, drawerSize } from '@/constant/common';
-import {
-  getSelectMemberDialogVisible,
-  setSelectMemberDialogVisible
-} from './select-members-util';
 import { SelectMembersModule } from '@/store/modules/select-members';
 import SplitPane from 'vue-splitpane';
 import AppContent from '@/components/Content/index.vue';
