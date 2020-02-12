@@ -35,3 +35,5 @@ declare module "vue-gantt-schedule-timeline-calendar";
 declare module "vue2-better-scroll";
 
 declare module "vue-awesome-swiper";
+
+declare module "vue-grid-layout";

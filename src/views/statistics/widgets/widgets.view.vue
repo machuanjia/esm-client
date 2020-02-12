@@ -292,52 +292,7 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
-.toc-list-item {
-  border-bottom: 1px $border solid;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  cursor: pointer;
-  &:hover {
-    background: $hoverBg;
-  }
-  .toc-list-item-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .toc-list-item-header-avatar {
-      flex-grow: 1;
-      width: 0;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      .toc-list-item-header-avatar {
-      }
-      .toc-list-item-header-name {
-        flex-grow: 1;
-        width: 0;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        margin-left: 10px;
-        color: $mainText;
-      }
-    }
-    .toc-list-item-header-actions {
-    }
-  }
-  .toc-list-item-body {
-    font-size: 12px;
-    color: $darkGray;
-    line-height: 20px;
-    padding-top: 10px;
-  }
-  .toc-list-item-footer {
-    font-size: 12px;
-    color: $darkGray;
-    margin-top: 5px;
-  }
-}
+
 .toc-layout-border-right {
   border-right: 1px $border solid !important;
   border-left: none !important;
