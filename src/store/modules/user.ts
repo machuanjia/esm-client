@@ -52,7 +52,7 @@ class User extends VuexModule implements IUserState {
   }
 
   @Mutation
-  private SET_PERMISSIONS(permissions: string[]){
+  private SET_PERMISSIONS(permissions: any) {
     this.permissions = permissions
   }
 
@@ -128,6 +128,7 @@ class User extends VuexModule implements IUserState {
     TagsViewModule.delAllViews()
     this.SET_TOKEN('')
     this.SET_ROLES([])
+    this.SET_PERMISSIONS(null)
   }
 }
 

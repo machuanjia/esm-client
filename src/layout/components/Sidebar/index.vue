@@ -62,6 +62,15 @@
           </el-menu-item>
         </el-menu>
         <el-avatar
+          v-if="userName"
+          slot="reference"
+          class="avatar-default"
+          :size="30"
+        >
+          {{ userName }}
+        </el-avatar>
+        <el-avatar
+          v-if="!userName"
           slot="reference"
           icon="el-icon-user-solid"
           :size="30"
@@ -126,6 +135,14 @@ export default class extends Vue {
   get isCollapse() {
     return !this.sidebar.opened;
   }
+
+  get userName() {
+    if (UserModule.name && UserModule.name.length > 2) {
+      return UserModule.name.substring(0, 2);
+    }
+    return UserModule.name
+  }
+
   private preference() {
     AppModule.setRightPanel(true);
   }
