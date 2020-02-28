@@ -8,7 +8,8 @@ const inoutboardRouter: RouteConfig = {
   name: "status",
   meta: {
     title: "status",
-    icon: "recent"
+    icon: "recent",
+    key: "inoutboard*"
   },
   children: [
     {
@@ -21,7 +22,8 @@ const inoutboardRouter: RouteConfig = {
       meta: {
         title: "recent",
         noCache: true,
-        icon: "recent"
+        icon: "recent",
+        key: "inoutboard.recent"
       }
     },
     {
@@ -34,7 +36,8 @@ const inoutboardRouter: RouteConfig = {
       meta: {
         title: "myHistory",
         noCache: true,
-        icon: "my-history"
+        icon: "my-history",
+        key: "inoutboard.myHistory"
       }
     },
     {
@@ -47,7 +50,8 @@ const inoutboardRouter: RouteConfig = {
       meta: {
         title: "history",
         noCache: true,
-        icon: "history"
+        icon: "history",
+        key: "inoutboard.history"
       }
     },
     {
@@ -60,7 +64,8 @@ const inoutboardRouter: RouteConfig = {
       meta: {
         title: "myStatistics",
         noCache: true,
-        icon: "my-statistics"
+        icon: "my-statistics",
+        key: "inoutboard.myStatistics"
       }
     },
     {
@@ -73,7 +78,8 @@ const inoutboardRouter: RouteConfig = {
       meta: {
         title: "statistics",
         noCache: true,
-        icon: "statistics"
+        icon: "statistics",
+        key: "inoutboard.statistics"
       }
     },
     {
@@ -86,7 +92,8 @@ const inoutboardRouter: RouteConfig = {
       meta: {
         title: "status",
         noCache: true,
-        icon: "status"
+        icon: "status",
+        key: "inoutboard.status"
       }
     },
     {
@@ -99,7 +106,8 @@ const inoutboardRouter: RouteConfig = {
       meta: {
         title: "companyStatusEvent",
         noCache: true,
-        icon: "company"
+        icon: "company",
+        key: "inoutboard.companyEvent"
       }
     }
   ]

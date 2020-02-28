@@ -8,7 +8,8 @@ const scheduleRouter: RouteConfig = {
   name: "schedule",
   meta: {
     title: "schedule",
-    icon: "calendar"
+    icon: "calendar",
+    key: "schedule*"
   },
   children: [
     {
@@ -21,7 +22,8 @@ const scheduleRouter: RouteConfig = {
       meta: {
         title: "my",
         noCache: true,
-        icon: "calendar"
+        icon: "calendar",
+        key: "schedule.my"
       }
     },
     {
@@ -34,7 +36,8 @@ const scheduleRouter: RouteConfig = {
       meta: {
         title: "team",
         noCache: true,
-        icon: "team-calendar"
+        icon: "team-calendar",
+        key: "schedule.team"
       }
     },
     {
@@ -47,7 +50,8 @@ const scheduleRouter: RouteConfig = {
       meta: {
         title: "timeline",
         noCache: true,
-        icon: "timeline"
+        icon: "timeline",
+        key: "schedule.timeline"
       }
     },
     {
@@ -58,7 +62,8 @@ const scheduleRouter: RouteConfig = {
       meta: {
         title: "calendarManagement",
         noCache: true,
-        icon: "calendar"
+        icon: "calendar",
+        key: "schedule.calendar"
       }
     },
     {
@@ -69,7 +74,8 @@ const scheduleRouter: RouteConfig = {
       meta: {
         title: "calendarEventManagement",
         noCache: true,
-        icon: "calendar-event"
+        icon: "calendar-event",
+        key: "schedule.calendarEventManagement"
       }
     }
   ]

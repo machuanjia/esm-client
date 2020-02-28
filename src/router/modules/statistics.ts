@@ -9,7 +9,8 @@ const statisticsRouter: RouteConfig = {
   name: "statistics",
   meta: {
     title: "statistics",
-    icon: "statistics"
+    icon: "statistics",
+    key: "statistics*"
   },
   children: [
     {
@@ -22,7 +23,8 @@ const statisticsRouter: RouteConfig = {
       meta: {
         title: "story",
         icon: "story",
-        noCache: true
+        noCache: true,
+        key: "statistics.story"
       }
     },
     {
@@ -35,7 +37,8 @@ const statisticsRouter: RouteConfig = {
       meta: {
         title: "boards",
         icon: "tab",
-        noCache: true
+        noCache: true,
+        key: "statistics.boards"
       }
     },
     {
@@ -48,7 +51,8 @@ const statisticsRouter: RouteConfig = {
       meta: {
         title: "widgets",
         icon: "component",
-        noCache: true
+        noCache: true,
+        key: "statistics.widgets"
       }
     },
 
@@ -62,7 +66,8 @@ const statisticsRouter: RouteConfig = {
       meta: {
         title: "datasource",
         noCache: true,
-        icon: "data"
+        icon: "data",
+        key: "statistics.datasource"
       }
     }
     // {

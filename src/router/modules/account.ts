@@ -8,7 +8,8 @@ const accountRouter: RouteConfig = {
   name: "account",
   meta: {
     title: "account",
-    icon: "setting"
+    icon: "setting",
+    key: "account*"
   },
   children: [
     {
@@ -19,7 +20,8 @@ const accountRouter: RouteConfig = {
       meta: {
         title: "bills",
         noCache: true,
-        icon: "money"
+        icon: "money",
+        key: "account.bills"
       }
     },
     {
@@ -30,7 +32,8 @@ const accountRouter: RouteConfig = {
       meta: {
         title: "account",
         noCache: true,
-        icon: "setting"
+        icon: "setting",
+        key: "account.account"
       }
     },
     {
@@ -43,7 +46,8 @@ const accountRouter: RouteConfig = {
       meta: {
         title: "resourceLocation",
         noCache: true,
-        icon: "resource-2"
+        icon: "resource-2",
+        key: "account.resourceLocation"
       }
     }
   ]

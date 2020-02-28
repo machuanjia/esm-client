@@ -8,7 +8,8 @@ const authRouter: RouteConfig = {
   name: "org",
   meta: {
     title: "org",
-    icon: "tree-table"
+    icon: "tree-table",
+    key: "auth*"
   },
   children: [
     {
@@ -21,7 +22,8 @@ const authRouter: RouteConfig = {
       meta: {
         title: "organization",
         noCache: true,
-        icon: "tree"
+        icon: "tree",
+        key: "auth.organization"
       }
     },
     {
@@ -34,7 +36,8 @@ const authRouter: RouteConfig = {
       meta: {
         title: "members",
         noCache: true,
-        icon: "peoples"
+        icon: "peoples",
+        key: "auth.members"
       }
     },
     {
@@ -45,7 +48,8 @@ const authRouter: RouteConfig = {
       meta: {
         title: "roles",
         noCache: true,
-        icon: "user"
+        icon: "user",
+        key: "auth.roles"
       }
     },
     {
@@ -58,7 +62,8 @@ const authRouter: RouteConfig = {
       meta: {
         title: "permissions",
         noCache: true,
-        icon: "education"
+        icon: "education",
+        key: "auth.permissions"
       }
     },
     {
@@ -71,7 +76,8 @@ const authRouter: RouteConfig = {
       meta: {
         title: "application",
         noCache: true,
-        icon: "component"
+        icon: "component",
+        key: "auth.application"
       }
     }
   ]

@@ -8,7 +8,8 @@ const resourceRouter: RouteConfig = {
   name: "resource",
   meta: {
     title: "resource",
-    icon: "resource"
+    icon: "resource",
+    key: "resource*"
   },
   children: [
     {
@@ -21,7 +22,8 @@ const resourceRouter: RouteConfig = {
       meta: {
         title: "timeline",
         noCache: true,
-        icon: "timeline"
+        icon: "timeline",
+        key: "resource.timeline"
       }
     },
     {
@@ -34,7 +36,8 @@ const resourceRouter: RouteConfig = {
       meta: {
         title: "resource",
         noCache: true,
-        icon: "resource"
+        icon: "resource",
+        key: "resource.all"
       }
     },
     {
@@ -47,7 +50,8 @@ const resourceRouter: RouteConfig = {
       meta: {
         title: "resourceType",
         noCache: true,
-        icon: "resource-management"
+        icon: "resource-management",
+        key: "resource.resourceType"
       }
     },
     {
@@ -60,7 +64,8 @@ const resourceRouter: RouteConfig = {
       meta: {
         title: "resourceStatus",
         noCache: true,
-        icon: "resource-status"
+        icon: "resource-status",
+        key: "resource.resourceStatus"
       }
     }
     // {

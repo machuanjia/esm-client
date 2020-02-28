@@ -14,38 +14,60 @@ const userList: IUserData[] = [
     email: "admin@test.com",
     phone: "1234567890",
     roles: ["admin"],
-    permissions: ["*"]
-  },
-  {
-    id: 1,
-    username: "editor",
-    password: "any",
-    name: "Normal Editor",
-    avatar:
-      "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
-    introduction: "I am an editor",
-    email: "editor@test.com",
-    phone: "1234567890",
-    roles: ["editor"],
-    permissions: ["*"]
+    permissions: [
+      "inoutboard*",
+      "inoutboard.recent",
+      "inoutboard.myHistory",
+      "inoutboard.history",
+      "inoutboard.myStatistics",
+      "inoutboard.statistics",
+      "inoutboard.status",
+      "inoutboard.companyEvent",
+      "schedule*",
+      "schedule.my",
+      "schedule.team",
+      "schedule.timeline",
+      "schedule.calendar",
+      "schedule.calendarEventManagement",
+      "resource*",
+      "resource.timeline",
+      "resource.all",
+      "resource.resourceType",
+      "resource.resourceStatus",
+      "statistics*",
+      "statistics.story",
+      "statistics.boards",
+      "statistics.widgets",
+      "statistics.datasource",
+      "account*",
+      "account.bills",
+      "account.account",
+      "account.resourceLocation",
+      "auth*",
+      "auth.organization",
+      "auth.members",
+      "auth.roles",
+      "auth.permissions",
+      "auth.application"
+    ]
   }
 ];
 const userCount = 100;
 
-for (let i = 2; i < userCount; i++) {
-  userList.push({
-    id: i,
-    username: "user_" + faker.random.alphaNumeric(9),
-    password: faker.random.alphaNumeric(20),
-    name: faker.name.findName(),
-    avatar: faker.image.imageUrl(),
-    introduction: faker.lorem.sentence(20),
-    email: faker.internet.email(),
-    phone: faker.phone.phoneNumber(),
-    roles: ["visitor"],
-    permissions: ["*"]
-  });
-}
+// for (let i = 2; i < userCount; i++) {
+//   userList.push({
+//     id: i,
+//     username: "user_" + faker.random.alphaNumeric(9),
+//     password: faker.random.alphaNumeric(20),
+//     name: faker.name.findName(),
+//     avatar: faker.image.imageUrl(),
+//     introduction: faker.lorem.sentence(20),
+//     email: faker.internet.email(),
+//     phone: faker.phone.phoneNumber(),
+//     roles: ["visitor"],
+//     permissions: ["*"]
+//   });
+// }
 
 export const register = (req: Request, res: Response) => {
   return res.json({
@@ -55,19 +77,11 @@ export const register = (req: Request, res: Response) => {
 
 export const login = (req: Request, res: Response) => {
   const { username } = req.body;
-  for (const user of userList) {
-    if (user.username === username) {
-      return res.json({
-        code: 20000,
-        data: {
-          accessToken: username + "-token"
-        }
-      });
+  return res.json({
+    code: 20000,
+    data: {
+      accessToken: Math.random()
     }
-  }
-  return res.status(400).json({
-    code: 50004,
-    messaege: "Invalid User"
   });
 };
 
@@ -104,10 +118,7 @@ export const getUserInfo = (req: Request, res: Response) => {
   return res.json({
     code: 20000,
     data: {
-      user:
-        req.header("X-Access-Token") === "admin-token"
-          ? userList[0]
-          : userList[1]
+      user: userList[0]
     }
   });
 };
