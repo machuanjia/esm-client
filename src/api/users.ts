@@ -58,6 +58,13 @@ export const login = (data: any) =>
     data
   });
 
+export const registe = (data: any) =>
+  request({
+    url: "/user",
+    method: "post",
+    data
+  });
+
 export const logout = (data:any) =>
   request({
     url: "/auth/logout",

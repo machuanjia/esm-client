@@ -68,6 +68,12 @@ export const constantRoutes: RouteConfig[] = [
     meta: { hidden: true }
   },
   {
+    path: "/registe",
+    component: () =>
+      import(/* webpackChunkName: "registe" */ "@/views/registe/index.vue"),
+    meta: { hidden: true }
+  },
+  {
     path: "/auth-redirect",
     component: () =>
       import(
