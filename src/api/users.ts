@@ -9,8 +9,8 @@ export const getUsers = (params: any) =>
 
 export const getUserInfo = (data: any) =>
   request({
-    url: "/user/info",
-    method: "post",
+    url: "/auth/info",
+    method: "get",
     data
   });
 
@@ -53,15 +53,16 @@ export const deleteUser = (username: string) =>
 
 export const login = (data: any) =>
   request({
-    url: "/login",
+    url: "/auth/login",
     method: "post",
     data
   });
 
-export const logout = () =>
+export const logout = (data:any) =>
   request({
-    url: "/logout",
-    method: "post"
+    url: "/auth/logout",
+    method: "post",
+    data: data || {}
   });
 
 export const register = (data: any) =>

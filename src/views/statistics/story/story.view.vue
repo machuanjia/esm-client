@@ -205,7 +205,7 @@ export default class extends Vue {
   remove(node: any, data: any) {
     const parent = node.parent;
     const children = parent.data.children || parent.data;
-    const index = children.findIndex(d => d.id === data.id);
+    const index = children.findIndex((d:any) => d.id === data.id);
     children.splice(index, 1);
   }
 }

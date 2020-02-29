@@ -225,7 +225,7 @@ export default class extends Vue {
     padding-top: 40px;
     padding-left: 40px;
     z-index: 2;
-    width: calc(100wh - 140px);
+    width: calc(100vw - 140px);
     .rencent-list-row {
       height: 50px;
     }

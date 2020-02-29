@@ -71,7 +71,6 @@ import { Dictionary } from 'vue-router/types/router';
 import { getRoleMembers } from '@/api/roles';
 import AppContent from '@/components/Content/index.vue';
 import SelectMembersDialog from '@/components/SelectMembers/select-members-dialog.vue';
-import { setSelectMemberDialogVisible } from '@/components/SelectMembers/select-members-util';
 import { SelectMembersModule } from '@/store/modules/select-members';
 
 @Component({

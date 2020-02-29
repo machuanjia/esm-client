@@ -121,7 +121,7 @@ import { Dictionary } from 'vue-router/types/router';
 import AppContent from '@/components/Content/index.vue';
 import { mixins } from 'vue-class-component';
 import CollectionMixin from '@/components/Mixin/collection';
-import { getResourceLocations } from '@/api/resource-setting';
+import { getLocations } from '@/api/locations';
 import { getStatus } from '@/api/inoutboard';
 
 @Component({
@@ -172,7 +172,7 @@ export default class extends mixins(CollectionMixin) {
   }
 
   private async getResourceLocations() {
-    const { data } = await getResourceLocations({});
+    const { data } = await getLocations({});
     if (data) {
       this.locations = data;
     }
