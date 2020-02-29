@@ -407,6 +407,7 @@ export const asyncRoutes: RouteConfig[] = [
 
 const createRouter = () =>
   new Router({
+    mode: 'hash',
     // mode: 'history',  // Disabled due to Github Pages doesn't support this, enable this if you need.
     scrollBehavior: (to, from, savedPosition) => {
       if (savedPosition) {
