@@ -1,0 +1,33 @@
+.article-dialog{
+  .el-dialog__header{
+    display: none;
+  }
+  .el-dialog__body{
+    padding: 0;
+  }
+  .article-header{
+    // border-bottom: 1px $border solid;
+    display: flex;
+    flex-direction: row;
+    .article-header-left{
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      input{
+        text-align: center;
+        border: none;
+        font-size: 20px;
+        height: 50px;
+        margin-top: 10px;
+      }
+    }
+    .article-header-right{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .article-body{
+  }
+}

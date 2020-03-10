@@ -46,6 +46,7 @@ export default {
     createArticle: "Crear artículo",
     editArticle: "Editar artículo",
     articleList: "Listado de artículos",
+    articleCategoryList: "Category",
     errorPages: "Páginas de error",
     page401: "401",
     page404: "404",

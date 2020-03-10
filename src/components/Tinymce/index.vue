@@ -10,11 +10,11 @@
       :init="initOptions"
     />
     <div class="editor-custom-btn-container">
-      <editor-image-upload
+      <!-- <editor-image-upload
         :color="uploadButtonColor"
         class="editor-upload-btn"
         @successCBK="imageSuccessCBK"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -123,7 +123,7 @@ export default class extends Vue {
       height: this.height,
       body_class: 'panel-body ',
       object_resizing: false,
-      toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
+      toolbar: false, // this.toolbar.length > 0 ? this.toolbar : toolbar,
       menubar: this.menubar,
       plugins: plugins,
       language: this.language,

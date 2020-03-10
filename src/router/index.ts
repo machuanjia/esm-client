@@ -15,6 +15,7 @@ import statisticsRouter from "./modules/statistics";
 import scheduleRouter from "./modules/schedule";
 import resourceRouter from "./modules/resource";
 import inoutboardRouter from "./modules/inoutboard";
+import articleRouter from "./modules/articles"
 
 Vue.use(Router);
 
@@ -156,9 +157,9 @@ export const constantRoutes: RouteConfig[] = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes: RouteConfig[] = [
-  inoutboardRouter,
-  scheduleRouter,
-  resourceRouter,
+  // inoutboardRouter,
+  // scheduleRouter,
+  // resourceRouter,
   // {
   //   path: "/icon",
   //   component: Layout,
@@ -176,13 +177,48 @@ export const asyncRoutes: RouteConfig[] = [
   //     }
   //   ]
   // },
+  // articleRouter,
   // componentsRouter,
   // chartsRouter,
   // nestedRouter,
   // tableRouter,
-  statisticsRouter,
-  authRouter,
-  accountRouter,
+  // statisticsRouter,
+  // authRouter,
+  // accountRouter,
+  {
+    path: "/articles",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(/* webpackChunkName: "icons" */ "@/views/articles/articles.view.vue"),
+        name: "Icons",
+        meta: {
+          title: 'articleList',
+          icon: 'list',
+          noCache: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/articles/category",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(/* webpackChunkName: "icons" */ "@/views/articles/category/articles-category.view.vue"),
+        name: "Icons",
+        meta: {
+          title: 'articleCategoryList',
+          icon: 'resource-2',
+          noCache: true
+        }
+      }
+    ]
+  },
   // {
   //   path: '/example',
   //   component: Layout,

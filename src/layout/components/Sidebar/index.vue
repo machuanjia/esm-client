@@ -6,11 +6,17 @@
     />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <!-- :background-color="variables.menuBg" -->
-      <div
+      <!-- <div
         class="wechat-wrap"
         @click="showMessage"
       >
         <svg-icon name="wechat" />
+      </div> -->
+      <div
+        class="wechat-wrap"
+        @click="showMessage"
+      >
+        <i class="el-icon-plus" />
       </div>
       <el-menu
         :default-active="activeMenu"
@@ -222,6 +228,9 @@ export default class extends Vue {
   // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin: 10px 0 10px 12px;
+  i{
+    font-size: 18px;
+  }
 
   &:hover {
     color: $subMenuActiveText;

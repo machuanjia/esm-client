@@ -46,6 +46,7 @@ export default {
     createArticle: "投稿作成",
     editArticle: "投稿編集",
     articleList: "投稿リスト",
+    articleCategoryList: "类型",
     errorPages: "エラーページ",
     page401: "401",
     page404: "404",
